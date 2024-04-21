@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: WC1C\n"
-"POT-Creation-Date: 2024-04-18 05:40+0300\n"
+"POT-Creation-Date: 2024-04-21 23:52+0300\n"
 "PO-Revision-Date: 2022-12-16 23:34+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -37,48 +37,48 @@ msgstr ""
 msgid "Go to setting."
 msgstr ""
 
-#: src/Admin.php:103 src/Admin.php:104 views/header.php:3
+#: src/Admin.php:109 src/Admin.php:110 views/header.php:3
 msgid "Integration with 1C"
 msgstr ""
 
-#: src/Admin.php:121 src/Admin/Settings/LogsForm.php:152
+#: src/Admin.php:127 src/Admin/Settings/LogsForm.php:152
 #: src/Admin/Settings/MainForm.php:43
 msgid "Configurations"
 msgstr ""
 
-#: src/Admin.php:128 src/Admin/Settings/LogsForm.php:108
+#: src/Admin.php:134 src/Admin/Settings/LogsForm.php:108
 msgid "Tools"
 msgstr ""
 
-#: src/Admin.php:137 src/Admin/Configurations/Update.php:35
+#: src/Admin.php:143 src/Admin/Configurations/Update.php:35
 msgid "Settings"
 msgstr ""
 
-#: src/Admin.php:147 views/helps/features.php:34
+#: src/Admin.php:153 views/helps/features.php:34
 msgid "Extensions"
 msgstr ""
 
-#: src/Admin.php:157 src/Admin/Settings.php:55
+#: src/Admin.php:163 src/Admin/Settings.php:55
 msgid "Activation"
 msgstr ""
 
-#: src/Admin.php:282
+#: src/Admin.php:302
 msgid "Dashboard"
 msgstr ""
 
-#: src/Admin.php:310 src/Admin/Settings/ActivationForm.php:229
+#: src/Admin.php:330 src/Admin/Settings/ActivationForm.php:229
 msgid "never"
 msgstr ""
 
-#: src/Admin.php:311
+#: src/Admin.php:331
 msgid "no deadline"
 msgstr ""
 
-#: src/Admin.php:316
+#: src/Admin.php:336
 msgid "to:"
 msgstr ""
 
-#: src/Admin.php:323
+#: src/Admin.php:343
 msgid "not activated"
 msgstr ""
 
@@ -502,6 +502,10 @@ msgstr ""
 
 #: src/Admin/Helps/Init.php:58 views/helps/features.php:3
 msgid "Not a feature?"
+msgstr ""
+
+#: src/Admin/Promo/Dashboard.php:21
+msgid "Activation WC1C"
 msgstr ""
 
 #: src/Admin/Settings.php:48
@@ -5771,17 +5775,17 @@ msgstr ""
 msgid "Documentation"
 msgstr ""
 
-#: views/promo/activation.php:8
+#: views/promo/activation.php:8 views/promo/dashboard.php:8
 msgid "Your copy of the free software has not been activated."
 msgstr ""
 
-#: views/promo/activation.php:9
+#: views/promo/activation.php:9 views/promo/dashboard.php:9
 msgid ""
 "We recommend that you activate your copy of the free software for stable "
 "updates and better performance."
 msgstr ""
 
-#: views/promo/activation.php:10
+#: views/promo/activation.php:10 views/promo/dashboard.php:10
 msgid ""
 "After activation, this section will disappear and will no longer be shown."
 msgstr ""
