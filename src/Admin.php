@@ -45,6 +45,7 @@ final class Admin
 		}
 
 		add_action('admin_menu', [$this, 'addMenu'], 30);
+        add_action('admin_enqueue_scripts', [$this, 'initGlobalStyles']);
 
 		if(isset($_GET['page']) && 'wc1c' === $_GET['page'] && wc1c()->context()->isAdmin())
 		{
@@ -62,6 +63,11 @@ final class Admin
 		}
 
 		add_filter('plugin_action_links_' . wc1c()->environment()->get('plugin_basename'), [$this, 'linksLeft']);
+
+        if(!wc1c()->tecodes()->is_valid())
+        {
+            add_action( 'wp_dashboard_setup', [Admin\Promo\Dashboard::class, 'instance']);
+        }
 
 		// hook
 		do_action(wc1c()->context()->getSlug() . '_admin_after_loading');
@@ -181,6 +187,20 @@ final class Admin
 			wc1c()->environment()->get('wc1c_version')
 		);
 	}
+
+    /**
+     * Global styles
+     */
+    public function initGlobalStyles()
+    {
+        wp_enqueue_style
+        (
+            'wc1c_admin_global',
+            wc1c()->environment()->get('plugin_directory_url') . 'assets/css/global.min.css',
+            [],
+            wc1c()->environment()->get('wc1c_version')
+        );
+    }
 
 	/**
 	 * Scripts
