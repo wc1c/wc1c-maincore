@@ -1,5 +1,10 @@
 .woocommerce_page_wc1c
 {
+  table.wp-list-table .column-name
+  {
+    width: inherit!important;
+  }
+
   .wp-header-end
   {
     margin-bottom: 15px;
