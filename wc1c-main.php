@@ -7,7 +7,7 @@
  * WC requires at least: 4.3
  * WC tested up to: 8.8
  * Requires at least: 5.2
- * Requires PHP: 7.0
+ * Requires PHP: 7.4
  * Requires Plugins: woocommerce
  * Text Domain: wc1c-main
  * Domain Path: /assets/languages
@@ -21,9 +21,9 @@ namespace
 {
 	defined('ABSPATH') || exit;
 
-	if(version_compare(PHP_VERSION, '7.0') < 0)
+	if(version_compare(PHP_VERSION, '7.4') < 0)
 	{
-        trigger_error('Minimal PHP version for used WC1C plugin: 7.0. Please update PHP version.');
+        trigger_error('Minimal PHP version for used WC1C plugin: 7.4. Please update PHP version.');
 		return false;
 	}
 
