@@ -210,7 +210,7 @@ final class Admin
         wp_enqueue_script
         (
 			'wc1c_admin_bootstrap',
-			wc1c()->environment()->get('plugin_directory_url') . 'assets/js/bootstrap.bundle.min.js',
+            wc1c()->environment()->get('plugin_directory_url') . 'assets/js/bootstrap/bootstrap.bundle.min.js',
 			[],
 			wc1c()->environment()->get('wc1c_version')
         );
