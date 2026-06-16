@@ -25,7 +25,7 @@
     }
   ],
   "require": {
-    "php": ">=7.0",
+    "php": ">=7.4",
     "wc1c/cml": "dev-main",
     "wc1c/wc": "dev-main",
     "digiom/woplucore": "dev-main",
