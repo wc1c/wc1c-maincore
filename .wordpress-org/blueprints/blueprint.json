@@ -1,0 +1,40 @@
+{
+  "landingPage": "/wp-admin/admin.php?page=wc1c",
+  "preferredVersions": {
+    "php": "8.3",
+    "wp": "latest"
+  },
+  "phpExtensionBundles": [
+    "kitchen-sink"
+  ],
+  "steps": [
+    {
+      "step": "defineWpConfigConsts",
+      "consts": {
+        "WP_DEBUG": false
+      }
+    },
+    {
+      "step": "login",
+      "username": "admin",
+      "password": "password"
+    },
+    {
+      "step": "installPlugin",
+      "pluginData": {
+        "resource": "wordpress.org/plugins",
+        "slug": "wc1c-main"
+      },
+      "options": {
+        "activate": true
+      }
+    },
+    {
+      "step": "setSiteOptions",
+      "options": {
+        "blogname": "WC1C",
+        "blogdescription": "Preview WC1C!"
+      }
+    }
+  ]
+}
