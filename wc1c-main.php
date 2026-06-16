@@ -23,7 +23,7 @@ namespace
 
 	if(version_compare(PHP_VERSION, '7.4') < 0)
 	{
-        trigger_error('Minimal PHP version for used WC1C plugin: 7.4. Please update PHP version.');
+        trigger_error('Minimal PHP version for used plugin: 7.4. Please update PHP version.');
 		return false;
 	}
 
