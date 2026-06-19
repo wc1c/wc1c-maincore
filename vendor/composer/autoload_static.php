@@ -4,79 +4,74 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit4940c5972a9a9b1004e686a7bc766643
+class ComposerStaticInit6d699cb315e004d0d2aa5ffefa680ba8
 {
     public static $prefixLengthsPsr4 = array (
-        'W' => 
+        'W' =>
         array (
             'Wc1c\\Wc\\' => 8,
             'Wc1c\\Main\\' => 10,
             'Wc1c\\Cml\\' => 9,
         ),
-        'T' => 
+        'T' =>
         array (
             'Tecodes\\Client\\' => 15,
         ),
-        'P' => 
+        'P' =>
         array (
             'Psr\\Log\\' => 8,
             'Psr\\Http\\Message\\' => 17,
         ),
-        'M' => 
+        'M' =>
         array (
             'Monolog\\' => 8,
         ),
-        'D' => 
+        'D' =>
         array (
             'Digiom\\Wotices\\' => 15,
             'Digiom\\Woplucore\\' => 17,
-            'Digiom\\Woap\\' => 12,
             'Digiom\\Psr7wp\\' => 14,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Wc1c\\Wc\\' => 
+        'Wc1c\\Wc\\' =>
         array (
             0 => __DIR__ . '/..' . '/wc1c/wc/src',
         ),
-        'Wc1c\\Main\\' => 
+        'Wc1c\\Main\\' =>
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),
-        'Wc1c\\Cml\\' => 
+        'Wc1c\\Cml\\' =>
         array (
             0 => __DIR__ . '/..' . '/wc1c/cml/src',
         ),
-        'Tecodes\\Client\\' => 
+        'Tecodes\\Client\\' =>
         array (
             0 => __DIR__ . '/..' . '/tecodes/client/src',
         ),
-        'Psr\\Log\\' => 
+        'Psr\\Log\\' =>
         array (
             0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
         ),
-        'Psr\\Http\\Message\\' => 
+        'Psr\\Http\\Message\\' =>
         array (
             0 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
-        'Monolog\\' => 
+        'Monolog\\' =>
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
         ),
-        'Digiom\\Wotices\\' => 
+        'Digiom\\Wotices\\' =>
         array (
             0 => __DIR__ . '/..' . '/digiom/wotices/src',
         ),
-        'Digiom\\Woplucore\\' => 
+        'Digiom\\Woplucore\\' =>
         array (
             0 => __DIR__ . '/..' . '/digiom/woplucore/src',
         ),
-        'Digiom\\Woap\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/digiom/woap/src',
-        ),
-        'Digiom\\Psr7wp\\' => 
+        'Digiom\\Psr7wp\\' =>
         array (
             0 => __DIR__ . '/..' . '/digiom/psr7wp/src',
         ),
@@ -89,9 +84,9 @@ class ComposerStaticInit4940c5972a9a9b1004e686a7bc766643
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit4940c5972a9a9b1004e686a7bc766643::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit4940c5972a9a9b1004e686a7bc766643::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit4940c5972a9a9b1004e686a7bc766643::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit6d699cb315e004d0d2aa5ffefa680ba8::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit6d699cb315e004d0d2aa5ffefa680ba8::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit6d699cb315e004d0d2aa5ffefa680ba8::$classMap;
 
         }, null, ClassLoader::class);
     }
