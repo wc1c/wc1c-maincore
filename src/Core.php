@@ -13,7 +13,6 @@ use Wc1c\Main\Log\Formatter;
 use Wc1c\Main\Log\Handler;
 use Wc1c\Main\Log\Logger;
 use Wc1c\Main\Log\Processor;
-use Wc1c\Main\Settings\ConnectionSettings;
 use Wc1c\Main\Settings\InterfaceSettings;
 use Wc1c\Main\Settings\LogsSettings;
 use Wc1c\Main\Settings\MainSettings;
@@ -327,9 +326,6 @@ final class Core extends CoreAbstract
 		{
 			switch($context)
 			{
-				case 'connection':
-					$class = ConnectionSettings::class;
-					break;
 				case 'logs':
 					$class = LogsSettings::class;
 					break;

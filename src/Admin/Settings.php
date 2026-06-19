@@ -71,13 +71,6 @@ class Settings
 			'callback' => [InterfaceForm::class, 'instance']
 		];
 
-		$default_sections['connection'] =
-		[
-			'title' => __('Connection to the WC1C', 'wc1c-main'),
-			'visible' => true,
-			'callback' => [ConnectionForm::class, 'instance']
-		];
-
 		$this->initSections($default_sections);
 
 		// hook
