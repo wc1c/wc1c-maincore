@@ -17,13 +17,15 @@ foreach($admin->getSections() as $tab_key => $tab_name)
 
 	$class = $tab_name['class'] ?? '';
 
+    $url = esc_url(admin_url('admin.php?page=wc1c&section=' . $tab_key));
+
     if($tab_key === $admin->getCurrentSection())
     {
-        $nav .= '<a href="' . admin_url('admin.php?page=wc1c&section=' . $tab_key) . '" class="nav-tab nav-tab-active ' . esc_attr($class) . '">' . $tab_name['title'] . '</a>';
+        $nav .= '<a href="' . $url . '" class="nav-tab nav-tab-active ' . esc_attr($class) . '">' . $tab_name['title'] . '</a>';
     }
     else
     {
-        $nav .= '<a href="' . admin_url('admin.php?page=wc1c&section=' . $tab_key) . '" class="nav-tab ' . esc_attr($class) . '">' . $tab_name['title'] . '</a>';
+        $nav .= '<a href="' . $url . '" class="nav-tab ' . esc_attr($class) . '">' . $tab_name['title'] . '</a>';
     }
 }
 

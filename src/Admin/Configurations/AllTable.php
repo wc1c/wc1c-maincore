@@ -86,15 +86,15 @@ class AllTable extends TableAbstract
 		switch ($column_name)
 		{
 			case 'configuration_id':
-				return $item['configuration_id'];
+				return esc_html($item['configuration_id']);
 			case 'schema':
-				return $item['schema'];
+				return esc_html($item['schema']);
 			case 'date_create':
 			case 'date_activity':
 			case 'date_modify':
 				return $this->prettyColumnsDate($item, $column_name);
 			default:
-				return print_r($item, true);
+				return esc_html(print_r($item, true));
 		}
 	}
 
@@ -170,8 +170,16 @@ class AllTable extends TableAbstract
 			$status_description = __('Awaiting final configuration removal. All algorithms are disabled.', 'wc1c-main');
 		}
 
-		return '<span class="' . $status_class . '" data-bs-toggle="popover" data-bs-custom-class="configurations-status-popover ' . $status_class . '" data-bs-title="' . __('Status description', 'wc1c-main') . '" data-bs-trigger="hover focus click" data-bs-content="' . $status_description . '">' . $status . '</span>';
-	}
+        return sprintf
+        (
+            '<span class="%s" data-bs-toggle="popover" data-bs-custom-class="configurations-status-popover %s" data-bs-title="%s" data-bs-trigger="hover focus click" data-bs-content="%s">%s</span>',
+            esc_attr($status_class),
+            esc_attr($status_class),
+            esc_attr__('Status description', 'wc1c-main'),
+            esc_attr($status_description),
+            esc_html($status)
+        );
+    }
 
 	/**
 	 * Configuration name
@@ -191,11 +199,10 @@ class AllTable extends TableAbstract
 			return $e->getMessage();
 		}
 
-		$actions =
-		[
-			'update' => '<a href="' . $this->utilityAdminConfigurationsGetUrl('update', $item['configuration_id']) . '">' . __('Open configuration', 'wc1c-main') . '</a>',
-			'delete' => '<a href="' . $this->utilityAdminConfigurationsGetUrl('delete', $item['configuration_id']) . '">' . __('Mark as deleted', 'wc1c-main') . '</a>',
-		];
+        $actions = [
+            'update' => '<a href="' . esc_url($this->utilityAdminConfigurationsGetUrl('update', $item['configuration_id'])) . '">' . esc_html__('Open configuration', 'wc1c-main') . '</a>',
+            'delete' => '<a href="' . esc_url($this->utilityAdminConfigurationsGetUrl('delete', $item['configuration_id'])) . '">' . esc_html__('Mark as deleted', 'wc1c-main') . '</a>',
+        ];
 
 		if('deleted' === $item['status'] || ('draft' === $item['status'] && 'yes' === wc1c()->settings()->get('configurations_draft_delete', 'yes')))
 		{
@@ -212,17 +219,18 @@ class AllTable extends TableAbstract
 		$user = get_userdata($item['user_id']);
 		if($user instanceof \WP_User && $user->exists())
 		{
-			$metas['user'] = __('User:', 'wc1c-main') . ' <span class="row-metas-line-content">' . $user->get('nickname') . ' (' . $item['user_id']. ')</span>';
-		}
+            $metas['user'] = esc_html__('User:', 'wc1c-main') . ' <span class="row-metas-line-content">' . esc_html($user->get('nickname')) . ' (' . esc_html($item['user_id']) . ')</span>';
+        }
 		else
 		{
-			$metas['user'] =  __('User:', 'wc1c-main') . ' <span class="row-metas-line-content">' . __('user is not exists.', 'wc1c-main') . '</span>';
+			$metas['user'] =  esc_html__('User:', 'wc1c-main') . ' <span class="row-metas-line-content">' . esc_html__('user is not exists.', 'wc1c-main') . '</span>';
 		}
 
 		try
 		{
 			$schema = wc1c()->schemas()->get($item['schema']);
-			$metas['schema'] = __('Schema:', 'wc1c-main') . ' <span class="row-metas-line-content">' . $item['schema'] . ' (' . $schema->getName() . ')</span>';
+
+            $metas['schema'] = esc_html__('Schema:', 'wc1c-main') . ' <span class="row-metas-line-content">' . esc_html($item['schema']) . ' (' . esc_html($schema->getName()) . ')</span>';
 
             if($item['schema'] === 'productscml' || $item['schema'] === 'pqcml')
             {
@@ -235,11 +243,11 @@ class AllTable extends TableAbstract
                     $metas['productscml-catalog-full'] = sprintf
                     (
                         '%1$s <span class="row-metas-line-content">%2$s (<span class="time">%3$s %4$s</span> %5$s)</span>',
-                        __('Full exchange:', 'wc1c-main'),
+                        esc_html__('Full exchange:', 'wc1c-main'),
                         /* translators: human-readable time difference */
                         sprintf(_x('%s ago', '%s = human-readable time difference', 'wc1c-main'), human_time_diff($timestamp, current_time('timestamp'))),
                         date_i18n('d/m/Y', $timestamp),
-                        __('at', 'wc1c-main'),
+                        esc_html__('at', 'wc1c-main'),
                         date_i18n('H:i:s', $timestamp)
                       );
                 }
@@ -247,16 +255,16 @@ class AllTable extends TableAbstract
 				{
 					$metas['productscml-catalog-full'] = sprintf
 					(
-						'%s <span class="row-metas-line-content">%s</span>',
-						__('Full exchange:', 'wc1c-main'),
-						__('not produced', 'wc1c-main')
+						'%1$s <span class="row-metas-line-content">%2$s</span>',
+                        esc_html__('Full exchange:', 'wc1c-main'),
+                        esc_html__('not produced', 'wc1c-main')
 					);
 				}
             }
 		}
 		catch(\Throwable $e)
 		{
-			$metas['schema'] = __('Schema:', 'wc1c-main') . ' <span class="row-metas-line-content">' . $item['schema'] . ' (' . __('not found, please install the schema', 'wc1c-main') . ')</span>';
+			$metas['schema'] = esc_html__('Schema:', 'wc1c-main') . ' <span class="row-metas-line-content">' . esc_html($item['schema']) . ' (' . esc_html__('not found, please install the schema', 'wc1c-main') . ')</span>';
 		}
 
 		if(has_filter('wc1c_admin_configurations_all_row_metas'))
@@ -264,13 +272,12 @@ class AllTable extends TableAbstract
 			$metas = apply_filters('wc1c_admin_configurations_all_row_metas', $metas, $item);
 		}
 
-		return sprintf
-		(
-			'<span class="configuration-name">%1$s</span><div class="configuration-metas">%2$s</div><div class="configuration-actions">%3$s</div>',
-			$item['name'],
-			$this->rowMetas($metas),
-			$this->rowActions($actions, true)
-		);
+        return sprintf(
+            '<span class="configuration-name">%1$s</span><div class="configuration-metas">%2$s</div><div class="configuration-actions">%3$s</div>',
+            esc_html($item['name']),
+            $this->rowMetas($metas),
+            $this->rowActions($actions, true)
+        );
 	}
 
 	/**
@@ -278,26 +285,19 @@ class AllTable extends TableAbstract
 	 *
 	 * @return string
 	 */
-	public function rowMetas($data): string
-	{
-		$metas_count = count($data);
+    public function rowMetas($data): string
+    {
+        $metas_count = count($data);
+        if(!$metas_count) return '';
 
-		if(!$metas_count)
-		{
-			return '';
-		}
-
-		$out = '<div class="row-metas">';
-
-		foreach($data as $meta => $meta_text)
-		{
-			$out .= '<div class="row-metas-line ' . $meta . '">' . $meta_text . '</div>';
-		}
-
-		$out .= '</div>';
-
-		return $out;
-	}
+        $out = '<div class="row-metas">';
+        foreach($data as $meta => $meta_text)
+        {
+            $out .= '<div class="row-metas-line ' . esc_attr($meta) . '">' . wp_kses_post($meta_text) . '</div>';
+        }
+        $out .= '</div>';
+        return $out;
+    }
 
 	/**
 	 * All columns
@@ -354,16 +354,15 @@ class AllTable extends TableAbstract
 
 		// All link
 		$class = $current === 'all' ? ' class="current"' :'';
-		$all_url = remove_query_arg('status');
+        $all_url = esc_url(remove_query_arg('status'));
 
-		$status_links['all'] = sprintf
-		(
-			'<a href="%s" %s>%s <span class="count">(%d)</span></a>',
-			$all_url,
-			$class,
-			__('All', 'wc1c-main'),
-			$this->storage_configurations->count()
-		);
+        $status_links['all'] = sprintf(
+            '<a href="%1$s" %2$s>%3$s <span class="count">(%4$d)</span></a>',
+            $all_url,
+            esc_attr($class),
+            esc_html__('All', 'wc1c-main'),
+            (int) $this->storage_configurations->count()
+        );
 
 		$statuses = $this->utilityConfigurationsGetStatuses();
 
