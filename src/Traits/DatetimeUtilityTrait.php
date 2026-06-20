@@ -21,6 +21,7 @@ trait DatetimeUtilityTrait
 	{
 		$original_timezone = date_default_timezone_get();
 
+        // phpcs:ignore WordPress.DateTime.RestrictedFunctions.timezone_change_date_default_timezone_set
 		date_default_timezone_set('UTC');
 
 		if(null === $from_timestamp)
@@ -32,6 +33,7 @@ trait DatetimeUtilityTrait
 			$next_timestamp = strtotime($time_string, $from_timestamp);
 		}
 
+        // phpcs:ignore WordPress.DateTime.RestrictedFunctions.timezone_change_date_default_timezone_set
 		date_default_timezone_set($original_timezone);
 
 		return $next_timestamp;
@@ -75,7 +77,8 @@ trait DatetimeUtilityTrait
 			foreach($abbr as $city)
 			{
 				// WordPress restrict the use of date(), since it's affected by timezone settings, but in this case is just what we need to guess the correct timezone
-				if((bool) date('I') === (bool) $city['dst'] && $city['timezone_id'] && (int) $city['offset'] === $utc_offset)
+                // phpcs:ignore WordPress.DateTime.RestrictedFunctions.date_date
+                if((bool) date('I') === (bool) $city['dst'] && $city['timezone_id'] && (int) $city['offset'] === $utc_offset)
 				{
 					return $city['timezone_id'];
 				}
