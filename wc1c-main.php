@@ -23,6 +23,7 @@ namespace
 
 	if(version_compare(PHP_VERSION, '7.4') < 0)
 	{
+        // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_trigger_error
         trigger_error('Minimal PHP version for used plugin: 7.4. Please update PHP version.');
 		return false;
 	}
@@ -35,7 +36,8 @@ namespace
 
 		if(!is_readable($autoloader))
 		{
-			trigger_error(sprintf('%s: %s','File is not found', $autoloader));
+            // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_trigger_error
+            trigger_error(sprintf('%1$s: %2$s','File is not found', esc_attr($autoloader)));
 			return false;
 		}
 
@@ -97,7 +99,8 @@ namespace Wc1c\Main
 	}
 	catch(\Throwable $e)
 	{
-		trigger_error($e->getMessage());
+        // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_trigger_error
+		trigger_error(esc_html($e->getMessage()));
 		return false;
 	}
 
