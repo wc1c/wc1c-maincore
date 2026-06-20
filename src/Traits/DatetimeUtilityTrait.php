@@ -114,7 +114,7 @@ trait DatetimeUtilityTrait
 	{
 		if(!$date)
 		{
-			return __('not', 'wc1c-main');
+			return esc_html__('not', 'wc1c-main');
 		}
 
 		$timestamp_create = $this->utilityStringToTimestamp($date) + $this->utilityTimezoneOffset();
@@ -122,7 +122,7 @@ trait DatetimeUtilityTrait
         return sprintf
 		(
             /* translators: 1: Time create d/m/Y, 2: Time create H:i:s. */
-            esc_html__('%1$s <span class="time">in: %2$s</span>', 'wc1c-main'),
+            wp_kses_post('%1$s <span class="time">in: %2$s</span>'),
 			date_i18n('d/m/Y', $timestamp_create),
 			date_i18n('H:i:s', $timestamp_create)
 		);
