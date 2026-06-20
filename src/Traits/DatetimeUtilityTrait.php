@@ -116,9 +116,10 @@ trait DatetimeUtilityTrait
 
 		$timestamp_create = $this->utilityStringToTimestamp($date) + $this->utilityTimezoneOffset();
 
-		return sprintf
+        return sprintf
 		(
-			__('%s <span class="time">in: %s</span>', 'wc1c-main'),
+            /* translators: 1: Time create d/m/Y, 2: Time create H:i:s. */
+            esc_html__('%1$s <span class="time">in: %2$s</span>', 'wc1c-main'),
 			date_i18n('d/m/Y', $timestamp_create),
 			date_i18n('H:i:s', $timestamp_create)
 		);

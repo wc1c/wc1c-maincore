@@ -429,7 +429,7 @@ final class Core extends CoreAbstract
 	 */
 	public function localization()
 	{
-        wc1c()->log()->debug(__('Localization loading.'));
+        wc1c()->log()->debug(__('Localization loading.', 'default'));
 
 		$locale = determine_locale();
 

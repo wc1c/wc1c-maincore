@@ -117,6 +117,7 @@ class AllTable extends TableAbstract
 				date_i18n('d/m/Y', $timestamp),
 				__('Time', 'wc1c-main'),
 				date_i18n('H:i:s', $timestamp),
+                /* translators: human-readable time difference */
 				sprintf(_x('(%s ago)', '%s = human-readable time difference', 'wc1c-main'), human_time_diff($timestamp, current_time('timestamp')))
 			);
 		}
@@ -233,8 +234,9 @@ class AllTable extends TableAbstract
 
                     $metas['productscml-catalog-full'] = sprintf
                     (
-                        '%s <span class="row-metas-line-content">%s (<span class="time">%s %s</span> %s)</span>',
+                        '%1$s <span class="row-metas-line-content">%2$s (<span class="time">%3$s %4$s</span> %5$s)</span>',
                         __('Full exchange:', 'wc1c-main'),
+                        /* translators: human-readable time difference */
                         sprintf(_x('%s ago', '%s = human-readable time difference', 'wc1c-main'), human_time_diff($timestamp, current_time('timestamp'))),
                         date_i18n('d/m/Y', $timestamp),
                         __('at', 'wc1c-main'),

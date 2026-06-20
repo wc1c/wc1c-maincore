@@ -168,7 +168,8 @@ class MainUpdate
 
 		if($configuration->getDateActivity())
 		{
-			$body .= sprintf(_x(' (%s ago).', '%s = human-readable time difference', 'wc1c-main'), human_time_diff($configuration->getDateActivity()->getOffsetTimestamp(), current_time('timestamp')));
+            /* translators: human-readable time difference */
+            $body .= sprintf(_x(' (%s ago).', '%s = human-readable time difference', 'wc1c-main'), human_time_diff($configuration->getDateActivity()->getOffsetTimestamp(), current_time('timestamp')));
 		}
 
 		$body .= '</div></li>';
@@ -178,6 +179,7 @@ class MainUpdate
 
 		if($configuration->getDateCreate())
 		{
+            /* translators: human-readable time difference */
 			$body .= sprintf(_x(' (%s ago).', '%s = human-readable time difference', 'wc1c-main'), human_time_diff($configuration->getDateCreate()->getOffsetTimestamp(), current_time('timestamp')));
 		}
 
@@ -187,6 +189,7 @@ class MainUpdate
 
 		if($configuration->getDateModify())
 		{
+            /* translators: human-readable time difference */
 			$body .= sprintf(_x(' (%s ago).', '%s = human-readable time difference', 'wc1c-main'), human_time_diff($configuration->getDateModify()->getOffsetTimestamp(), current_time('timestamp')));
 		}
 
