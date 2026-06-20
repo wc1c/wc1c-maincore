@@ -8,7 +8,7 @@
 	printf
 	(
 		'<p>%1$s %2$s</p>',
-		__('Information about all available official extensions is available on the website:', 'wc1c-main'),
+            esc_html__('Information about all available official extensions is available on the website:', 'wc1c-main'),
 		'<a href="https://wc1c.info/extensions" target=_blank>https://wc1c.info/extensions</a>'
 	);
 	?>
