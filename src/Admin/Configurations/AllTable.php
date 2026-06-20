@@ -448,8 +448,18 @@ class AllTable extends TableAbstract
 			$offset = $per_page * ($current_page - 1);
 		}
 
-		$orderby = (!empty($_REQUEST['orderby'])) ? sanitize_text_field($_REQUEST['orderby']) : 'configuration_id';
-		$order = (!empty($_REQUEST['order'])) ? sanitize_text_field($_REQUEST['order']) : 'desc';
+        $allowed_orderby = ['configuration_id', 'status', 'date_create', 'date_activity', 'name'];
+        $orderby = (!empty($_REQUEST['orderby']) && in_array($_REQUEST['orderby'], $allowed_orderby, true))
+            ? sanitize_text_field($_REQUEST['orderby'])
+            : 'configuration_id';
+
+        $allowed_order = ['asc', 'desc'];
+        $order = (!empty($_REQUEST['order']) && in_array(strtolower($_REQUEST['order']), $allowed_order, true))
+            ? strtolower(sanitize_text_field($_REQUEST['order']))
+            : 'desc';
+
+        $storage_args['orderby'] = $orderby;
+        $storage_args['order'] = $order;
 
 		$storage_args = [];
 
