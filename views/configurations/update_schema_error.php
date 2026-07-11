@@ -10,5 +10,5 @@
 
 <div class="wc1c-configurations-alert mb-2">
     <h3><?php printf('%s', esc_html(sanitize_text_field($title))); ?></h3>
-    <p class="fs-6"><?php printf('%s', esc_html($text)); ?></p>
+    <p class="fs-6"><?php printf('%s', wp_kses_post($text)); ?></p>
 </div>
