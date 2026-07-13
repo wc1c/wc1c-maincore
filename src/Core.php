@@ -36,6 +36,11 @@ final class Core extends CoreAbstract
 	 */
 	private $timer;
 
+    /**
+     * @var Transliterator
+     */
+    private $transliterator;
+
 	/**
 	 * @var SettingsAbstract[]
 	 */
@@ -149,6 +154,21 @@ final class Core extends CoreAbstract
 	{
 		return Extensions\Core::instance();
 	}
+
+    /**
+     * Transliterator
+     *
+     * @return Transliterator
+     */
+    public function transliterator(): Transliterator
+    {
+        if(is_null($this->transliterator))
+        {
+            $this->transliterator = new Transliterator();
+        }
+
+        return $this->transliterator;
+    }
 
 	/**
 	 * Filesystem
