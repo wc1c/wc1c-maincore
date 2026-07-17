@@ -3,15 +3,15 @@
  * Plugin Name: WC1C
  * Plugin URI: https://wordpress.org/plugins/wc1c-main/
  * Description: Implementing a flexible mechanism for exchanging various data between 1C Company products and the WooCommerce plugin.
- * Version: 0.23.0
- * WC requires at least: 4.3
- * WC tested up to: 8.8
- * Requires at least: 5.2
- * Requires PHP: 7.0
+ * Version: 0.24.0
+ * WC requires at least: 4.5
+ * WC tested up to: 10.9
+ * Requires at least: 5.3
+ * Requires PHP: 7.4
  * Requires Plugins: woocommerce
  * Text Domain: wc1c-main
  * Domain Path: /assets/languages
- * Copyright: WC1C team © 2018-2024
+ * Copyright: WC1C team © 2018-2026
  * Author: WC1C team
  * Author URI: https://wc1c.info
  * License: GNU General Public License v3.0
@@ -21,9 +21,10 @@ namespace
 {
 	defined('ABSPATH') || exit;
 
-	if(version_compare(PHP_VERSION, '7.0') < 0)
+	if(version_compare(PHP_VERSION, '7.4') < 0)
 	{
-        trigger_error('Minimal PHP version for used WC1C plugin: 7.0. Please update PHP version.');
+        // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_trigger_error
+        trigger_error('Minimal PHP version for used plugin: 7.4. Please update PHP version.');
 		return false;
 	}
 
@@ -35,7 +36,8 @@ namespace
 
 		if(!is_readable($autoloader))
 		{
-			trigger_error(sprintf('%s: %s','File is not found', $autoloader));
+            // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_trigger_error
+            trigger_error(sprintf('%1$s: %2$s','File is not found', esc_attr($autoloader)));
 			return false;
 		}
 
@@ -97,7 +99,8 @@ namespace Wc1c\Main
 	}
 	catch(\Throwable $e)
 	{
-		trigger_error($e->getMessage());
+        // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_trigger_error
+		trigger_error(esc_html($e->getMessage()));
 		return false;
 	}
 

@@ -18,7 +18,7 @@ foreach($admins->getSections() as $tab_key => $tab_name)
 
 	$views[$tab_key] = sprintf
 	(
-		'<a href="%s" %s>%s</a>',
+		'<a href="%1$s" %2$s>%3$s</a>',
 		$sold_url,
 		$class,
 		esc_html($tab_name['title'])

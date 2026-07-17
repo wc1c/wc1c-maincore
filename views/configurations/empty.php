@@ -16,10 +16,10 @@
 <?php
 	if(!empty($_REQUEST['s']))
 	{
-		$search_text = wc_clean(wp_unslash($_REQUEST['s']));
+        $search_text = sanitize_text_field(wp_unslash($_REQUEST['s']));
 
         echo '<br/>';
-        printf('%s %s', __( 'Configurations by query is not found, query:', 'wc1c-main' ), $search_text);
+        printf('%1$s %2$s', esc_html__( 'Configurations by query is not found, query:', 'wc1c-main' ), esc_html($search_text));
 	}
     else
     {
@@ -37,7 +37,7 @@
         <?php esc_html_e('It is recommended to create at least two configurations: 1. To exchange nomenclature data, 2. To exchange orders data.', 'wc1c-main'); ?>
     </p>
     <a href="<?php echo esc_url_raw($args['url_create']); ?>" class="mt-2 mx-0 fs-6 btn-lg d-inline-block page-title-action">
-        <?php _e('New configuration', 'wc1c-main'); ?>
+        <?php esc_html_e('New configuration', 'wc1c-main'); ?>
     </a>
 <?php
     }

@@ -2,11 +2,12 @@
 
 <tr>
     <td style="width: 40%;">
-        <b><?php esc_html_e($args['title']); ?></b>
+        <b><?php printf('%s', esc_html($args['title'])); ?></b>
     </td>
     <td class="">
 	    <?php
-	        esc_html_e(apply_filters('wc1c_admin_report_data_row_print', $args['data']));
+            $data = apply_filters('wc1c_admin_report_data_row_print', $args['data']);
+            printf('%s', esc_html($data));
 	    ?>
     </td>
 </tr>

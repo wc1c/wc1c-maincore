@@ -68,7 +68,7 @@ class ConfigurationsStorage extends WithMetaDataStorageAbstract
 
 		if(false === wc1c()->database()->insert($this->getTableName(), $insert_data))
 		{
-			$object_id = new WP_Error('db_insert_error', __('Could not insert into the database'), wc1c()->database()->last_error);
+			$object_id = new WP_Error('db_insert_error', __('Could not insert into the database', 'wc1c-main'), wc1c()->database()->last_error);
 		}
 		else
 		{

@@ -45,6 +45,7 @@ final class Admin
 		}
 
 		add_action('admin_menu', [$this, 'addMenu'], 30);
+        add_action('admin_enqueue_scripts', [$this, 'initGlobalStyles']);
 
 		if(isset($_GET['page']) && 'wc1c' === $_GET['page'] && wc1c()->context()->isAdmin())
 		{
@@ -150,17 +151,6 @@ final class Admin
 			];
 		}
 
-		if(!wc1c()->tecodes()->is_valid())
-		{
-			$default_sections['promo'] =
-			[
-				'title' => __('Activation', 'wc1c-main'),
-				'visible' => true,
-				'callback' => [Admin\Promo\Activation::class, 'instance'],
-				'class' => 'promo'
-			];
-		}
-
 		$this->initSections($default_sections);
 		$this->setCurrentSection('configurations');
 
@@ -182,6 +172,20 @@ final class Admin
 		);
 	}
 
+    /**
+     * Global styles
+     */
+    public function initGlobalStyles()
+    {
+        wp_enqueue_style
+        (
+            'wc1c_admin_global',
+            wc1c()->environment()->get('plugin_directory_url') . 'assets/css/global.min.css',
+            [],
+            wc1c()->environment()->get('wc1c_version')
+        );
+    }
+
 	/**
 	 * Scripts
 	 */
@@ -190,7 +194,7 @@ final class Admin
         wp_enqueue_script
         (
 			'wc1c_admin_bootstrap',
-			wc1c()->environment()->get('plugin_directory_url') . 'assets/js/bootstrap.bundle.min.js',
+            wc1c()->environment()->get('plugin_directory_url') . 'assets/js/bootstrap/bootstrap.bundle.min.js',
 			[],
 			wc1c()->environment()->get('wc1c_version')
         );
@@ -280,50 +284,5 @@ final class Admin
 	public function linksLeft(array $links): array
 	{
 		return array_merge(['site' => '<a href="' . esc_url(admin_url('admin.php?page=wc1c')) . '">' . __('Dashboard', 'wc1c-main') . '</a>'], $links);
-	}
-
-	/**
-	 * Connect box
-	 *
-	 * @param string $text Button text
-	 * @param bool $status
-	 */
-	public function connectBox(string $text, bool $status = false)
-	{
-		$class = 'page-title-action nav-connect';
-		if($status === false)
-		{
-			$class .= ' status-0';
-		}
-		else
-		{
-			$class .= ' status-1';
-		}
-
-		if(wc1c()->tecodes()->is_valid() && $status)
-		{
-			$local = wc1c()->tecodes()->get_local_code();
-			$local_data = wc1c()->tecodes()->get_local_code_data($local);
-
-			if($local_data['code_date_expires'] === 'never')
-			{
-				$local_data['code_date_expires'] = __('never', 'wc1c-main');
-				$text .= ' (' . __('no deadline', 'wc1c-main') . ')';
-			}
-			else
-			{
-				$local_data['code_date_expires'] = date_i18n(get_option('date_format'), $local_data['code_date_expires']);
-				$text .= ' (' . __('to:', 'wc1c-main') . ' ' . $local_data['code_date_expires'] . ')';
-			}
-
-			$class .= ' status-3';
-		}
-		elseif($status)
-		{
-			$text .= ' (' . __('not activated', 'wc1c-main') . ')';
-			$class .= ' status-2';
-		}
-
-		echo wp_kses_post('<a href="' . admin_url('admin.php?page=wc1c&section=settings&do_settings=connection') . '" class="' . esc_attr($class) . '"> ' . sanitize_text_field($text) . ' </a>');
 	}
 }

@@ -1,3 +1,3 @@
 <?php defined('ABSPATH') || exit; ?>
 
-<p><?php _e('Error. Page for settings not found.', 'wc1c-main'); ?></p>
+<p><?php esc_html_e('Error. Page for settings not found.', 'wc1c-main'); ?></p>

@@ -14,13 +14,12 @@ foreach($update->getSections() as $tab_key => $tab_name)
 	$class = $update->getCurrentSection() === $tab_key ? ' active' :'';
 	$sold_url = esc_url(add_query_arg($update->getSectionKey(), $tab_key));
 
-	$views[$tab_key] = sprintf
-	(
-		'<a href="%s" class="nav-link fs-6 border border-1 rounded-0 border-bottom-0 text-decoration-none %s">%s </a>',
-		$sold_url,
-		$class,
-		$tab_name['title']
-	);
+    $views[$tab_key] = sprintf(
+        '<a href="%1$s" class="nav-link fs-6 border border-1 rounded-0 border-bottom-0 text-decoration-none %2$s">%3$s</a>',
+        $sold_url,
+        esc_attr($class),
+        esc_html($tab_name['title'])
+    );
 }
 
 if(count($views) < 1)

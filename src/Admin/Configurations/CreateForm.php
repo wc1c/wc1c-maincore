@@ -124,7 +124,7 @@ class CreateForm extends FormAbstract
 		?>
 		<tr valign="top">
 			<th scope="row" class="titledesc">
-				<label for="<?php echo esc_attr( $field_key ); ?>"><?php echo wp_kses_post( $data['title'] ); ?> <?php echo $this->getTooltipHtml($data); ?></label>
+				<label for="<?php echo esc_attr( $field_key ); ?>"><?php echo wp_kses_post( $data['title'] ); ?> <?php echo esc_html($this->getTooltipHtml($data)); ?></label>
 
 				<div class="mt-2" style="font-weight: normal;">
 					<?php echo wp_kses_post($this->getDescriptionHtml($data)); ?>
@@ -140,7 +140,7 @@ class CreateForm extends FormAbstract
 					<div class="mb-3 border border-secondary rounded-2 p-2" style="border: solid;">
 
                         <div>
-	                        <?php _e('Identifier:', 'wc1c-main'); ?> <b><?php echo esc_attr($option_key); ?></b>
+	                        <?php esc_html_e('Identifier:', 'wc1c-main'); ?> <b><?php echo esc_attr($option_key); ?></b>
                             <hr>
                         </div>
 

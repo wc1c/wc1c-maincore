@@ -1,5 +1,10 @@
 .woocommerce_page_wc1c
 {
+  table.wp-list-table .column-name
+  {
+    width: inherit!important;
+  }
+
   .wp-header-end
   {
     margin-bottom: 15px;
@@ -68,14 +73,6 @@
   }
 }
 
-.wc1c-admin-connection
-{
-  .wc1c-title-wrap
-  {
-    margin-top: 10px;
-  }
-}
-
 .wc1c_urls
 {
   border: 2px dashed #eeeeee;
@@ -96,4 +93,9 @@
   background-color: white;
   border: 2px solid #fd0;
   border-left: 4px solid #fd0;
+}
+
+.wc-admin-breadcrumb a
+{
+  font-size: 18px;
 }

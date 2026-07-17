@@ -51,14 +51,27 @@ class Delete
 		$redirect = true;
 		$force_delete = false;
 		$configuration_status = $configuration->getStatus();
+        $cap_check = true;
 
 		$notice_args['type'] = 'error';
 		$notice_args['data'] = __('Error. The configuration to be deleted is active and cannot be deleted.', 'wc1c-main');
 
+        if(!current_user_can('manage_woocommerce'))
+        {
+            $notice_args['data'] = __('Error. You do not have permission to delete configurations.', 'wc1c-main');
+            $cap_check = false;
+        }
+
+        if($configuration->getUserId() !== get_current_user_id() && !current_user_can('manage_options'))
+        {
+            $notice_args['data'] = __('Error. You do not have permission to delete this configuration.', 'wc1c-main');
+            $cap_check = false;
+        }
+
 		/**
 		 * Защита от удаления активных соединений
 		 */
-		if(!$configuration->isStatus('active') && !$configuration->isStatus('processing'))
+		if($cap_check && !$configuration->isStatus('active') && !$configuration->isStatus('processing'))
 		{
 			/**
 			 * Окончательное удаление черновиков без корзины

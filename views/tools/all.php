@@ -19,12 +19,12 @@
 	            }
             }
 
-	        $args =
+            $args =
             [
-                'id' => $tool_id,
-                'name' => $tool_object->getName(),
-                'description' => $tool_object->getDescription(),
-                'url' => $args['object']->utilityAdminToolsGetUrl($tool_id),
+                'id' => esc_attr($tool_id),
+                'name' => esc_html($tool_object->getName()),
+                'description' => wp_kses_post($tool_object->getDescription()),
+                'url' => esc_url($args['object']->utilityAdminToolsGetUrl($tool_id)),
                 'object' => $tool_object,
             ];
 

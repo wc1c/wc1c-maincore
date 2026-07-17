@@ -119,7 +119,7 @@ abstract class ExtensionAbstract implements ExtensionContract
 			return $default_value;
 		}
 
-		throw new RuntimeException(__('Meta value by name is not available.', 'wc1c-main'));
+		throw new RuntimeException(esc_html__('Meta value by name is not available.', 'wc1c-main'));
 	}
 
 	/**
@@ -178,9 +178,12 @@ abstract class ExtensionAbstract implements ExtensionContract
 		$this->setMeta('version_wc1c_min', $plugin_data['RequiresWC1C']);
 		$this->setMeta('version_wc1c_max', $plugin_data['TestedWC1C']);
 
-		$this->setMeta('author', __($plugin_data['Author'], $locale));
-		$this->setMeta('name', __($plugin_data['Name'], $locale));
-		$this->setMeta('description', __($plugin_data['Description'], $locale));
+        // phpcs:ignore WordPress.WP.I18n.LowLevelTranslationFunction,WordPress.WP.I18n.NonSingularStringLiteralText,WordPress.WP.I18n.NonSingularStringLiteralDomain
+        $this->setMeta('author', __($plugin_data['Author'], $locale));
+        // phpcs:ignore WordPress.WP.I18n.LowLevelTranslationFunction,WordPress.WP.I18n.NonSingularStringLiteralText,WordPress.WP.I18n.NonSingularStringLiteralDomain
+        $this->setMeta('name', __($plugin_data['Name'], $locale));
+        // phpcs:ignore WordPress.WP.I18n.LowLevelTranslationFunction,WordPress.WP.I18n.NonSingularStringLiteralText,WordPress.WP.I18n.NonSingularStringLiteralDomain
+        $this->setMeta('description', __($plugin_data['Description'], $locale));
 
 		return true;
 	}
