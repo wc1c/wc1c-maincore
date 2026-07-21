@@ -40,7 +40,7 @@ class Database extends StepAbstract
 			(
 				[
 					'type' => 'error',
-					'data' => __('Create tables error. Please retry.', 'wc1c-main')
+					'data' => __('Create tables error. Please retry.', 'wc1c-maincore')
 				]
 			);
 		}

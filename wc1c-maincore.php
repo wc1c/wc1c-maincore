@@ -1,7 +1,7 @@
 <?php
 /**
- * Plugin Name: WC1C
- * Plugin URI: https://wordpress.org/plugins/wc1c-main/
+ * Plugin Name: WC1C-Maincore
+ * Plugin URI: https://wordpress.org/plugins/wc1c-maincore/
  * Description: Implementing a flexible mechanism for exchanging various data between 1C Company products and the WooCommerce plugin.
  * Version: 0.24.0
  * WC requires at least: 4.5
@@ -9,7 +9,7 @@
  * Requires at least: 5.3
  * Requires PHP: 7.4
  * Requires Plugins: woocommerce
- * Text Domain: wc1c-main
+ * Text Domain: wc1c-maincore
  * Domain Path: /assets/languages
  * Copyright: WC1C team © 2018-2026
  * Author: WC1C team
@@ -65,7 +65,7 @@ namespace
          */
 		function wc1c(): Wc1c\Main\Core
 		{
-			return Wc1c\Main\Core();
+			return Wc1c\Main\Core::instance();
 		}
 	}
 }
@@ -76,14 +76,28 @@ namespace
 namespace Wc1c\Main
 {
     /**
-     * For internal use
-     *
-     * @return Core Main instance of plugin core
+     * @since 0.24.0
      */
-    function core(): Core
+    register_activation_hook( __FILE__, function()
     {
-        return Core::instance();
-    }
+        $conflicting_plugins = array
+        (
+            'wc1c-main/wc1c-main.php',
+            'woocommerce-and-1centerprise-data-exchange/woocommerce-1c.php',
+        );
+
+        if ( ! function_exists( 'is_plugin_active' ) ) {
+            include_once ABSPATH . 'wp-admin/includes/plugin.php';
+        }
+
+        foreach($conflicting_plugins as $plugin)
+        {
+            if(is_plugin_active($plugin))
+            {
+                deactivate_plugins($plugin, true);
+            }
+        }
+    });
 
 	$loader = new \Digiom\Woplucore\Loader();
 
@@ -106,5 +120,5 @@ namespace Wc1c\Main
 
 	$context = new Context(__FILE__, 'wc1c', $loader);
 
-	core()->register($context);
+	wc1c()->register($context);
 }

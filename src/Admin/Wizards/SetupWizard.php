@@ -50,7 +50,7 @@ final class SetupWizard extends WizardAbstract
 	{
 		$default_sections[$this->getId()] =
 		[
-			'title' => __('Setup wizard', 'wc1c-main'),
+			'title' => __('Setup wizard', 'wc1c-maincore'),
 			'visible' => true,
 			'callback' => [__CLASS__, 'instance']
 		];
@@ -77,17 +77,17 @@ final class SetupWizard extends WizardAbstract
 		[
 			'check' =>
 			[
-				'name' => __('Compatibility', 'wc1c-main'),
+				'name' => __('Compatibility', 'wc1c-maincore'),
 				'callback' => [Check::class, 'instance'],
 			],
 			'database' =>
 			[
-				'name' => __('Database', 'wc1c-main'),
+				'name' => __('Database', 'wc1c-maincore'),
 				'callback' => [Database::class, 'instance'],
 			],
 			'complete' =>
 			[
-				'name' => __('Completing', 'wc1c-main'),
+				'name' => __('Completing', 'wc1c-maincore'),
 				'callback' => [Complete::class, 'instance'],
 			],
 		];

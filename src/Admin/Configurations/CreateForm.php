@@ -39,14 +39,14 @@ class CreateForm extends FormAbstract
 	{
 		$fields['name'] =
         [
-            'title' => __('Name of the configuration', 'wc1c-main'),
+            'title' => __('Name of the configuration', 'wc1c-maincore'),
             'type' => 'text',
             'description' => sprintf
             (
                     '%s %s<hr>%s',
-                    __('Enter any data up to 255 characters.', 'wc1c-main'),
-                    __('The name is used to quickly distinguish between multiple configurations that have been created.', 'wc1c-main'),
-                    __('Some examples: 1. Exchange data on products, 2. Exchange data on orders, 3. Update prices and stocks, etc.', 'wc1c-main')
+                    __('Enter any data up to 255 characters.', 'wc1c-maincore'),
+                    __('The name is used to quickly distinguish between multiple configurations that have been created.', 'wc1c-maincore'),
+                    __('Some examples: 1. Exchange data on products, 2. Exchange data on orders, 3. Update prices and stocks, etc.', 'wc1c-maincore')
             ),
             'default' => '',
             'css' => 'width: 100%;',
@@ -75,7 +75,7 @@ class CreateForm extends FormAbstract
 
 		$fields['schema'] =
 		[
-			'title' => __('Configuration schema', 'wc1c-main'),
+			'title' => __('Configuration schema', 'wc1c-maincore'),
 			'type' => 'radio',
 			'description' => '',
 			'default' => $default_id,
@@ -140,7 +140,7 @@ class CreateForm extends FormAbstract
 					<div class="mb-3 border border-secondary rounded-2 p-2" style="border: solid;">
 
                         <div>
-	                        <?php esc_html_e('Identifier:', 'wc1c-main'); ?> <b><?php echo esc_attr($option_key); ?></b>
+	                        <?php esc_html_e('Identifier:', 'wc1c-maincore'); ?> <b><?php echo esc_attr($option_key); ?></b>
                             <hr>
                         </div>
 
@@ -184,7 +184,7 @@ class CreateForm extends FormAbstract
 			return false;
 		}
 
-        $message = __('Configuration creating error. Please retry.', 'wc1c-main');
+        $message = __('Configuration creating error. Please retry.', 'wc1c-maincore');
 
 		if(empty($post_data) || !wp_verify_nonce($post_data['_wc1c-admin-nonce'], 'wc1c-admin-configurations-create-save'))
 		{
@@ -232,7 +232,7 @@ class CreateForm extends FormAbstract
 
 		if(empty($data['name']))
 		{
-            $message = __('Configuration creating error. Name is required.', 'wc1c-main');
+            $message = __('Configuration creating error. Name is required.', 'wc1c-maincore');
 
 			wc1c()->admin()->notices()->create
 			(
@@ -249,7 +249,7 @@ class CreateForm extends FormAbstract
 
 		if(empty($data['schema']))
 		{
-            $message = __('Configuration creating error. Schema select is required.', 'wc1c-main');
+            $message = __('Configuration creating error. Schema select is required.', 'wc1c-maincore');
 
 			wc1c()->admin()->notices()->create
 			(
@@ -270,7 +270,7 @@ class CreateForm extends FormAbstract
 
 		if('yes' === wc1c()->settings()->get('configurations_unique_name', 'yes') && $data_storage->isExistingByName($data['name']))
 		{
-            $message = __('Configuration creating error. Name is exists.', 'wc1c-main');
+            $message = __('Configuration creating error. Name is exists.', 'wc1c-maincore');
 
 			wc1c()->admin()->notices()->create
 			(
@@ -291,13 +291,13 @@ class CreateForm extends FormAbstract
 
 		if($configuration->save())
 		{
-            $message = __('Configuration creating is complete. Configuration ID:', 'wc1c-main');
+            $message = __('Configuration creating is complete. Configuration ID:', 'wc1c-maincore');
 
 			wc1c()->admin()->notices()->create
 			(
 				[
 					'type' => 'update',
-					'data' => $message . ' ' . $configuration->getId() . ' (<a href="' . $this->utilityAdminConfigurationsGetUrl('update', $configuration->getId()) . '">' . __('edit configuration', 'wc1c-main') . '</a>)'
+					'data' => $message . ' ' . $configuration->getId() . ' (<a href="' . $this->utilityAdminConfigurationsGetUrl('update', $configuration->getId()) . '">' . __('edit configuration', 'wc1c-maincore') . '</a>)'
 				]
 			);
 
@@ -307,7 +307,7 @@ class CreateForm extends FormAbstract
 			return true;
 		}
 
-        $message = __('Configuration creating error. Please try saving again or change fields.', 'wc1c-main');
+        $message = __('Configuration creating error. Please try saving again or change fields.', 'wc1c-maincore');
 
 		wc1c()->admin()->notices()->create
 		(

@@ -101,8 +101,8 @@ final class Admin
 		add_submenu_page
 		(
 			'woocommerce',
-			__('Integration with 1C', 'wc1c-main'),
-			__('Integration with 1C', 'wc1c-main'),
+			__('Integration with 1C', 'wc1c-maincore'),
+			__('Integration with 1C', 'wc1c-maincore'),
 			'manage_woocommerce',
             wc1c()->context()->getSlug(),
 			[$this, 'route']
@@ -119,14 +119,14 @@ final class Admin
 
 		$default_sections['configurations'] =
 		[
-			'title' => __('Configurations', 'wc1c-main'),
+			'title' => __('Configurations', 'wc1c-maincore'),
 			'visible' => true,
 			'callback' => [Configurations::class, 'instance']
 		];
 
 		$default_sections['tools'] =
 		[
-			'title' => __('Tools', 'wc1c-main'),
+			'title' => __('Tools', 'wc1c-maincore'),
 			'visible' => true,
 			'callback' => [Tools::class, 'instance']
 		];
@@ -135,7 +135,7 @@ final class Admin
 		{
 			$default_sections['settings'] =
 			[
-				'title' => __('Settings', 'wc1c-main'),
+				'title' => __('Settings', 'wc1c-maincore'),
 				'visible' => true,
 				'callback' => [Settings::class, 'instance']
 			];
@@ -145,7 +145,7 @@ final class Admin
 		{
 			$default_sections['extensions'] =
 			[
-				'title' => __('Extensions', 'wc1c-main'),
+				'title' => __('Extensions', 'wc1c-maincore'),
 				'visible' => true,
 				'callback' => [Extensions::class, 'instance']
 			];
@@ -283,6 +283,6 @@ final class Admin
 	 */
 	public function linksLeft(array $links): array
 	{
-		return array_merge(['site' => '<a href="' . esc_url(admin_url('admin.php?page=wc1c')) . '">' . __('Dashboard', 'wc1c-main') . '</a>'], $links);
+		return array_merge(['site' => '<a href="' . esc_url(admin_url('admin.php?page=wc1c')) . '">' . __('Dashboard', 'wc1c-maincore') . '</a>'], $links);
 	}
 }

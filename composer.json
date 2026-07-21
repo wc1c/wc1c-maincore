@@ -1,5 +1,5 @@
 {
-  "name": "wc1c/wc1c-main",
+  "name": "wc1c/wc1c-maincore",
   "description": "Integration of WooCommerce with 1C products (different configurations)",
   "type": "project",
   "minimum-stability": "stable",

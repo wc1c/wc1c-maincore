@@ -38,18 +38,18 @@ trait ConfigurationsUtilityTrait
 	 */
 	public function utilityConfigurationsGetStatusesLabel($status)
 	{
-		$default_label = __('Undefined', 'wc1c-main');
+		$default_label = __('Undefined', 'wc1c-maincore');
 
 		$statuses_labels = apply_filters
 		(
 			'wc1c_configurations_get_statuses_labels',
 			[
-				'draft' => __('Draft', 'wc1c-main'),
-				'active' => __('Active', 'wc1c-main'),
-				'inactive' => __('Inactive', 'wc1c-main'),
-				'error' => __('Error', 'wc1c-main'),
-				'processing' => __('Processing', 'wc1c-main'),
-				'deleted' => __('Deleted', 'wc1c-main'),
+				'draft' => __('Draft', 'wc1c-maincore'),
+				'active' => __('Active', 'wc1c-maincore'),
+				'inactive' => __('Inactive', 'wc1c-maincore'),
+				'error' => __('Error', 'wc1c-maincore'),
+				'processing' => __('Processing', 'wc1c-maincore'),
+				'deleted' => __('Deleted', 'wc1c-maincore'),
 			]
 		);
 
@@ -74,18 +74,18 @@ trait ConfigurationsUtilityTrait
 	 */
 	public function utilityConfigurationsGetStatusesFolder($status)
 	{
-		$default_folder = __('Undefined', 'wc1c-main');
+		$default_folder = __('Undefined', 'wc1c-maincore');
 
 		$statuses_folders = apply_filters
 		(
 			'wc1c_configurations_get_statuses_folders',
 			[
-				'draft' => __('Drafts', 'wc1c-main'),
-				'active' => __('Activated', 'wc1c-main'),
-				'inactive' => __('Deactivated', 'wc1c-main'),
-				'error' => __('With errors', 'wc1c-main'),
-				'processing' => __('In processing', 'wc1c-main'),
-				'deleted' => __('Trash', 'wc1c-main'),
+				'draft' => __('Drafts', 'wc1c-maincore'),
+				'active' => __('Activated', 'wc1c-maincore'),
+				'inactive' => __('Deactivated', 'wc1c-maincore'),
+				'error' => __('With errors', 'wc1c-maincore'),
+				'processing' => __('In processing', 'wc1c-maincore'),
+				'deleted' => __('Trash', 'wc1c-maincore'),
 			]
 		);
 

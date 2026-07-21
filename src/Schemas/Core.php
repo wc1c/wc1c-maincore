@@ -46,11 +46,11 @@ final class Core
 	 */
 	public function init($configuration): SchemaContract
 	{
-        wc1c()->log()->debug(esc_html__('Initializing the schema for configuration.', 'wc1c-main'));
+        wc1c()->log()->debug(esc_html__('Initializing the schema for configuration.', 'wc1c-maincore'));
 
 		if(false === $configuration)
 		{
-			throw new Exception(esc_html__('$configuration is false', 'wc1c-main'));
+			throw new Exception(esc_html__('$configuration is false', 'wc1c-maincore'));
 		}
 
 		if(!is_object($configuration))
@@ -60,7 +60,7 @@ final class Core
 
 			if(!$storage_configurations->isExistingById($configuration))
 			{
-				throw new Exception(esc_html__('$configuration is not exists', 'wc1c-main'));
+				throw new Exception(esc_html__('$configuration is not exists', 'wc1c-maincore'));
 			}
 
 			$configuration = new Configuration($configuration);
@@ -68,38 +68,38 @@ final class Core
 
 		if(!$configuration instanceof Configuration)
 		{
-			throw new Exception(esc_html__('$configuration is not instanceof Configuration', 'wc1c-main'));
+			throw new Exception(esc_html__('$configuration is not instanceof Configuration', 'wc1c-maincore'));
 		}
 
 		$schemas = $this->get();
 
 		if(!is_array($schemas))
 		{
-			throw new Exception(esc_html__('$schemas is not array.', 'wc1c-main'));
+			throw new Exception(esc_html__('$schemas is not array.', 'wc1c-maincore'));
 		}
 
 		$schema_id = $configuration->getSchema();
 
 		if(!array_key_exists($schema_id, $schemas))
 		{
-			throw new Exception(esc_html__('Schema not found by id:', 'wc1c-main') . ' ' . esc_html($schema_id));
+			throw new Exception(esc_html__('Schema not found by id:', 'wc1c-maincore') . ' ' . esc_html($schema_id));
 		}
 
 		if(!is_object($schemas[$schema_id]))
 		{
-			throw new Exception(esc_html__('$schemas[$schema_id] is not object', 'wc1c-main'));
+			throw new Exception(esc_html__('$schemas[$schema_id] is not object', 'wc1c-maincore'));
 		}
 
 		$init_schema = $schemas[$schema_id];
 
 		if($init_schema->isInitialized())
 		{
-			throw new Exception(esc_html__('Old initialized, $schema_id:', 'wc1c-main') . ' ' . esc_html($schema_id));
+			throw new Exception(esc_html__('Old initialized, $schema_id:', 'wc1c-maincore') . ' ' . esc_html($schema_id));
 		}
 
 		if(!method_exists($init_schema, 'init'))
 		{
-			throw new Exception(esc_html__('Method init not found in schema, $schema_id:', 'wc1c-main') . ' ' . esc_html($schema_id));
+			throw new Exception(esc_html__('Method init not found in schema, $schema_id:', 'wc1c-maincore') . ' ' . esc_html($schema_id));
 		}
 
 		$current_configuration_id = $configuration->getId();
@@ -119,12 +119,12 @@ final class Core
 
 		if(true !== $init_schema_result)
 		{
-			throw new Exception(esc_html__('Schema is not initialized.', 'wc1c-main'));
+			throw new Exception(esc_html__('Schema is not initialized.', 'wc1c-maincore'));
 		}
 
 		$init_schema->setInitialized(true);
 
-        wc1c()->log()->debug(esc_html__('Initializing the schema for configuration is completed.', 'wc1c-main'), ['configuration_id' => esc_html($current_configuration_id), 'schema_id' => esc_html($schema_id)]);
+        wc1c()->log()->debug(esc_html__('Initializing the schema for configuration is completed.', 'wc1c-maincore'), ['configuration_id' => esc_html($current_configuration_id), 'schema_id' => esc_html($schema_id)]);
 
 		return $init_schema;
 	}
@@ -148,7 +148,7 @@ final class Core
 				return $this->schemas[$schema_id];
 			}
 
-			throw new RuntimeException(esc_html__('Schema by ID is unavailable.', 'wc1c-main'));
+			throw new RuntimeException(esc_html__('Schema by ID is unavailable.', 'wc1c-maincore'));
 		}
 
 		return $this->schemas;
@@ -161,7 +161,7 @@ final class Core
 	 */
 	public function load()
 	{
-        wc1c()->log()->debug(esc_html__('Schemas loading.', 'wc1c-main'));
+        wc1c()->log()->debug(esc_html__('Schemas loading.', 'wc1c-maincore'));
 
 		add_action(wc1c()->context()->getSlug() . '_default_schemas_loading', [$this, 'loadProductsCml'], 10, 1);
 		add_action(wc1c()->context()->getSlug() . '_default_schemas_loading', [$this, 'loadProductsCleanerCml'], 10, 1);
@@ -174,10 +174,10 @@ final class Core
 		}
         else
         {
-            wc1c()->log()->info(esc_html__('Loading of external schemes is disabled through the settings. Only standard schemas are loaded.', 'wc1c-main'));
+            wc1c()->log()->info(esc_html__('Loading of external schemes is disabled through the settings. Only standard schemas are loaded.', 'wc1c-maincore'));
         }
 
-		wc1c()->log()->debug(esc_html__('Schemas loading is completed.', 'wc1c-main'), ['schemas' => $schemas]);
+		wc1c()->log()->debug(esc_html__('Schemas loading is completed.', 'wc1c-maincore'), ['schemas' => $schemas]);
 
 		try
 		{
@@ -204,7 +204,7 @@ final class Core
 		}
 		catch(\Throwable $e)
 		{
-			wc1c()->log('schemas')->error(esc_html__('Schema ProductsCML is not loaded.', 'wc1c-main'), ['exception' => $e]);
+			wc1c()->log('schemas')->error(esc_html__('Schema ProductsCML is not loaded.', 'wc1c-maincore'), ['exception' => $e]);
 			return $schemas;
 		}
 
@@ -228,7 +228,7 @@ final class Core
 		}
 		catch(\Throwable $e)
 		{
-			wc1c()->log('schemas')->error(esc_html__('Schema ProductsCleanerCML is not loaded.', 'wc1c-main'), ['exception' => $e]);
+			wc1c()->log('schemas')->error(esc_html__('Schema ProductsCleanerCML is not loaded.', 'wc1c-maincore'), ['exception' => $e]);
 			return $schemas;
 		}
 

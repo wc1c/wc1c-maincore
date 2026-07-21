@@ -56,7 +56,7 @@ class InlineForm extends FormAbstract
 			(
 				[
 					'type' => 'error',
-					'data' => __('Update error. Please retry.', 'wc1c-main')
+					'data' => __('Update error. Please retry.', 'wc1c-maincore')
 				]
 			);
 

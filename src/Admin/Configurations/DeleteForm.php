@@ -34,12 +34,12 @@ class DeleteForm extends FormAbstract
 	{
 		$fields['accept'] =
 		[
-			'title' => __('Delete confirmation', 'wc1c-main'),
+			'title' => __('Delete confirmation', 'wc1c-maincore'),
 			'type' => 'checkbox',
 			'label' => sprintf(
 				"%s<hr>%s",
-				__('I confirm that Configuration will be permanently and irrevocably deleted from WooCommerce.', 'wc1c-main'),
-				__('The directory with files for configuration from the FILE system will be completely removed.', 'wc1c-main')
+				__('I confirm that Configuration will be permanently and irrevocably deleted from WooCommerce.', 'wc1c-maincore'),
+				__('The directory with files for configuration from the FILE system will be completely removed.', 'wc1c-maincore')
 			),
 			'default' => 'no',
 		];
@@ -74,7 +74,7 @@ class DeleteForm extends FormAbstract
 			return false;
 		}
 
-        $message = __('Configuration deleting error. Please retry.', 'wc1c-main');
+        $message = __('Configuration deleting error. Please retry.', 'wc1c-maincore');
 
 		if(empty($post_data) || !wp_verify_nonce($post_data['_wc1c-admin-nonce-configurations-delete'], 'wc1c-admin-configurations-delete-save'))
 		{
@@ -122,7 +122,7 @@ class DeleteForm extends FormAbstract
 
 		if(!isset($data['accept']) || $data['accept'] !== 'yes')
 		{
-            $message = __('Configuration deleting error. Confirmation of final deletion is required.', 'wc1c-main');
+            $message = __('Configuration deleting error. Confirmation of final deletion is required.', 'wc1c-maincore');
 
 			wc1c()->admin()->notices()->create
 			(

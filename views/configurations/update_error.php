@@ -1,11 +1,11 @@
 <?php defined('ABSPATH') || exit;
 
-    $label = __('Back to configurations list', 'wc1c-main');
+    $label = __('Back to configurations list', 'wc1c-maincore');
     wc1c()->views()->adminBackLink($label, $args['back_url']);
 
-    $title = esc_html__('Error', 'wc1c-main');
+    $title = esc_html__('Error', 'wc1c-maincore');
     $title = apply_filters('wc1c_admin_configurations_update_error_title', $title);
-    $text = esc_html__('Update is not available. Configuration not found or unavailable.', 'wc1c-main');
+    $text = esc_html__('Update is not available. Configuration not found or unavailable.', 'wc1c-maincore');
     $text = apply_filters('wc1c_admin_configurations_update_error_text', $text);
 ?>
 

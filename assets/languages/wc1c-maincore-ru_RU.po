@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WC1C\n"
-"POT-Creation-Date: 2026-07-17 22:36+0300\n"
-"PO-Revision-Date: 2026-07-17 22:50+0300\n"
+"POT-Creation-Date: 2026-07-21 21:20+0300\n"
+"PO-Revision-Date: 2026-07-21 21:21+0300\n"
 "Last-Translator: Frescoref\n"
 "Language-Team: \n"
 "Language: ru_RU\n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Generator: Poedit 2.2\n"
 "X-Poedit-Basepath: ../..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
-"X-Poedit-WPHeader: wc1c-main.php\n"
+"X-Poedit-WPHeader: wc1c-maincore.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
 "esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
@@ -6423,12 +6423,12 @@ msgid "If continue, the required tables will be created in the database."
 msgstr "Если продолжить, необходимые таблицы будут созданы в базе данных."
 
 #. Plugin Name of the plugin/theme
-msgid "WC1C"
-msgstr "WC1C"
+msgid "WC1C-Maincore"
+msgstr ""
 
 #. Plugin URI of the plugin/theme
-msgid "https://wordpress.org/plugins/wc1c-main/"
-msgstr "https://wordpress.org/plugins/wc1c-main/"
+msgid "https://wordpress.org/plugins/wc1c-maincore/"
+msgstr "https://wordpress.org/plugins/wc1c-maincore/"
 
 #. Description of the plugin/theme
 msgid ""
@@ -6445,6 +6445,9 @@ msgstr "Команда WC1C"
 #. Author URI of the plugin/theme
 msgid "https://wc1c.info"
 msgstr "https://wc1c.info"
+
+#~ msgid "WC1C"
+#~ msgstr "WC1C"
 
 #~ msgid "Activation"
 #~ msgstr "Активация"

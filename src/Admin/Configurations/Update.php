@@ -32,14 +32,14 @@ class Update
 
 		$default_sections['main'] =
 		[
-			'title' => __('Settings', 'wc1c-main'),
+			'title' => __('Settings', 'wc1c-maincore'),
 			'visible' => true,
 			'callback' => [MainUpdate::class, 'instance']
 		];
 
         $default_sections['logs'] =
         [
-            'title' => __('Logs', 'wc1c-main'),
+            'title' => __('Logs', 'wc1c-maincore'),
             'visible' => true,
             'callback' => [\Wc1c\Main\Admin\Promo\Logs::class, 'instance'],
             'class' => 'promo'
@@ -90,9 +90,9 @@ class Update
 	 */
 	public function outputSchemaErrorText($text): string
 	{
-		$new_text = __('The exchange schema based on which the configuration was created is not available.', 'wc1c-main');
+		$new_text = __('The exchange schema based on which the configuration was created is not available.', 'wc1c-maincore');
 
-		$new_text .= '<br /> ' . __('Install the missing schema to work this configuration, change the status and name or delete the configuration.', 'wc1c-main');
+		$new_text .= '<br /> ' . __('Install the missing schema to work this configuration, change the status and name or delete the configuration.', 'wc1c-maincore');
 
 		return $new_text;
 	}
@@ -133,13 +133,13 @@ class Update
 
 		$fields['name'] =
 		[
-			'title' => __('Configuration name', 'wc1c-main'),
+			'title' => __('Configuration name', 'wc1c-maincore'),
 			'type' => 'text',
-			'description' => __('Used for convenient distribution of multiple configurations.', 'wc1c-main'),
+			'description' => __('Used for convenient distribution of multiple configurations.', 'wc1c-maincore'),
 			'default' => '',
 			'class' => 'form-control form-control-sm rounded-0',
             'button_class' => 'rounded-0',
-			'button' => __('Rename', 'wc1c-main'),
+			'button' => __('Rename', 'wc1c-maincore'),
 		];
 
 		$inline_args =
@@ -168,7 +168,7 @@ class Update
 					(
 						[
 							'type' => 'update',
-							'data' => __('Configuration name update success.', 'wc1c-main')
+							'data' => __('Configuration name update success.', 'wc1c-maincore')
 						]
 					);
 				}
@@ -178,7 +178,7 @@ class Update
 					(
 						[
 							'type' => 'error',
-							'data' => __('Configuration name update error. Please retry saving or change fields.', 'wc1c-main')
+							'data' => __('Configuration name update error. Please retry saving or change fields.', 'wc1c-maincore')
 						]
 					);
 				}
