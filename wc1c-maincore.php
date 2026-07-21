@@ -65,7 +65,7 @@ namespace
          */
 		function wc1c(): Wc1c\Main\Core
 		{
-			return Wc1c\Main\Core();
+			return Wc1c\Main\Core::instance();
 		}
 	}
 }
@@ -75,16 +75,6 @@ namespace
  */
 namespace Wc1c\Main
 {
-    /**
-     * For internal use
-     *
-     * @return Core Main instance of plugin core
-     */
-    function core(): Core
-    {
-        return Core::instance();
-    }
-
 	$loader = new \Digiom\Woplucore\Loader();
 
     $loader->addNamespace(__NAMESPACE__, plugin_dir_path(__FILE__) . 'src');
@@ -106,5 +96,5 @@ namespace Wc1c\Main
 
 	$context = new Context(__FILE__, 'wc1c', $loader);
 
-	core()->register($context);
+	wc1c()->register($context);
 }
