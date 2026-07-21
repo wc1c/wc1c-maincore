@@ -75,6 +75,30 @@ namespace
  */
 namespace Wc1c\Main
 {
+    /**
+     * @since 0.24.0
+     */
+    register_activation_hook( __FILE__, function()
+    {
+        $conflicting_plugins = array
+        (
+            'wc1c-main/wc1c-main.php',
+            'woocommerce-and-1centerprise-data-exchange/woocommerce-1c.php',
+        );
+
+        if ( ! function_exists( 'is_plugin_active' ) ) {
+            include_once ABSPATH . 'wp-admin/includes/plugin.php';
+        }
+
+        foreach($conflicting_plugins as $plugin)
+        {
+            if(is_plugin_active($plugin))
+            {
+                deactivate_plugins($plugin, true);
+            }
+        }
+    });
+
 	$loader = new \Digiom\Woplucore\Loader();
 
     $loader->addNamespace(__NAMESPACE__, plugin_dir_path(__FILE__) . 'src');
