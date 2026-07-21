@@ -39,14 +39,14 @@ class UpdateForm extends FormAbstract
 	{
 		$fields['status'] =
         [
-            'title' => __('Status', 'wc1c-main'),
+            'title' => __('Status', 'wc1c-maincore'),
             'type' => 'checkbox',
-            'label' => __('Check the box if you want to enable this configuration. Disabled by default.', 'wc1c-main'),
+            'label' => __('Check the box if you want to enable this configuration. Disabled by default.', 'wc1c-maincore'),
             'default' => 'yes',
             'description' => sprintf
             (
 	            '%s',
-	            __('The configuration is either enabled or disabled. In the off state, all configuration mechanisms will not work.', 'wc1c-main')
+	            __('The configuration is either enabled or disabled. In the off state, all configuration mechanisms will not work.', 'wc1c-maincore')
             ),
         ];
 
@@ -86,7 +86,7 @@ class UpdateForm extends FormAbstract
 			(
 				[
 					'type' => 'error',
-					'data' => __('Update error. Please retry.', 'wc1c-main')
+					'data' => __('Update error. Please retry.', 'wc1c-maincore')
 				]
 			);
 
@@ -132,7 +132,7 @@ class UpdateForm extends FormAbstract
 
 		$args =
         [
-            'header' => '<h3 class="p-0 m-0">' . __('Fast navigation', 'wc1c-main') . '</h3>',
+            'header' => '<h3 class="p-0 m-0">' . __('Fast navigation', 'wc1c-maincore') . '</h3>',
             'object' => $this
         ];
 

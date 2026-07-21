@@ -1,7 +1,7 @@
 <?php
 /**
- * Plugin Name: WC1C
- * Plugin URI: https://wordpress.org/plugins/wc1c-main/
+ * Plugin Name: WC1C-Maincore
+ * Plugin URI: https://wordpress.org/plugins/wc1c-maincore/
  * Description: Implementing a flexible mechanism for exchanging various data between 1C Company products and the WooCommerce plugin.
  * Version: 0.24.0
  * WC requires at least: 4.5
@@ -9,7 +9,7 @@
  * Requires at least: 5.3
  * Requires PHP: 7.4
  * Requires Plugins: woocommerce
- * Text Domain: wc1c-main
+ * Text Domain: wc1c-maincore
  * Domain Path: /assets/languages
  * Copyright: WC1C team © 2018-2026
  * Author: WC1C team

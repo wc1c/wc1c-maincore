@@ -77,7 +77,7 @@ final class Core extends CoreAbstract
 		}
 		catch(\Throwable $e)
 		{
-			wc1c()->log()->emergency(__('Timer is not loaded. Further execution of algorithms without a timer is impossible.', 'wc1c-main'), ['exception' => $e]);
+			wc1c()->log()->emergency(__('Timer is not loaded. Further execution of algorithms without a timer is impossible.', 'wc1c-maincore'), ['exception' => $e]);
 			return;
 		}
 
@@ -87,7 +87,7 @@ final class Core extends CoreAbstract
 		}
 		catch(\Throwable $e)
 		{
-			wc1c()->log()->alert(__('Extensions is not loaded. Execution continued, but without all plugins.', 'wc1c-main'), ['exception' => $e]);
+			wc1c()->log()->alert(__('Extensions is not loaded. Execution continued, but without all plugins.', 'wc1c-maincore'), ['exception' => $e]);
 		}
 
 		try
@@ -96,7 +96,7 @@ final class Core extends CoreAbstract
 		}
 		catch(\Throwable $e)
 		{
-			wc1c()->log()->alert(__('Extensions is not initialized.', 'wc1c-main'), ['exception' => $e]);
+			wc1c()->log()->alert(__('Extensions is not initialized.', 'wc1c-maincore'), ['exception' => $e]);
 		}
 
 		try
@@ -105,7 +105,7 @@ final class Core extends CoreAbstract
 		}
 		catch(\Throwable $e)
 		{
-			wc1c()->log()->alert(__('Schemas is not loaded.', 'wc1c-main'), ['exception' => $e]);
+			wc1c()->log()->alert(__('Schemas is not loaded.', 'wc1c-maincore'), ['exception' => $e]);
 		}
 
 		try
@@ -114,7 +114,7 @@ final class Core extends CoreAbstract
 		}
 		catch(\Throwable $e)
 		{
-			wc1c()->log()->alert(__('Tools is not loaded.', 'wc1c-main'), ['exception' => $e]);
+			wc1c()->log()->alert(__('Tools is not loaded.', 'wc1c-maincore'), ['exception' => $e]);
 		}
 
 		if(false !== wc1c()->context()->isReceiver() || false !== wc1c()->context()->isAdmin())
@@ -125,7 +125,7 @@ final class Core extends CoreAbstract
 			}
 			catch(\Throwable $e)
 			{
-				wc1c()->log()->alert(__('Tools is not initialized.', 'wc1c-main'), ['exception' => $e]);
+				wc1c()->log()->alert(__('Tools is not initialized.', 'wc1c-maincore'), ['exception' => $e]);
 			}
 		}
 
@@ -137,7 +137,7 @@ final class Core extends CoreAbstract
 			}
 			catch(\Throwable $e)
 			{
-				wc1c()->log()->alert(__('Receiver is not loaded.', 'wc1c-main'), ['exception' => $e]);
+				wc1c()->log()->alert(__('Receiver is not loaded.', 'wc1c-maincore'), ['exception' => $e]);
 			}
 		}
 
@@ -207,7 +207,7 @@ final class Core extends CoreAbstract
 	 */
 	public function views(): Views
 	{
-		return Views::instance()->setSlug('wc1c-main')->setPluginDir($this->environment()->get('plugin_directory_path'));
+		return Views::instance()->setSlug('wc1c-maincore')->setPluginDir($this->environment()->get('plugin_directory_path'));
 	}
 
 	/**
@@ -422,7 +422,7 @@ final class Core extends CoreAbstract
 	 */
 	private function loadReceiver()
 	{
-        wc1c()->log()->debug(__('Receiver loading.', 'wc1c-main'));
+        wc1c()->log()->debug(__('Receiver loading.', 'wc1c-maincore'));
 
 		$default_class_name = Receiver::class;
 
@@ -430,7 +430,7 @@ final class Core extends CoreAbstract
 
 		if(false === class_exists($use_class_name))
 		{
-			wc1c()->log()->notice(__('Receiver loading: class is not exists, use is default.', 'wc1c-main'), ['context' => $use_class_name]);
+			wc1c()->log()->notice(__('Receiver loading: class is not exists, use is default.', 'wc1c-maincore'), ['context' => $use_class_name]);
 
             $use_class_name = $default_class_name;
 		}
@@ -441,7 +441,7 @@ final class Core extends CoreAbstract
 
 		$this->setReceiver($receiver);
 
-        wc1c()->log()->debug(__('Receiver loading is completed.', 'wc1c-main'), ['class' => $use_class_name]);
+        wc1c()->log()->debug(__('Receiver loading is completed.', 'wc1c-maincore'), ['class' => $use_class_name]);
 	}
 
 	/**
@@ -455,13 +455,13 @@ final class Core extends CoreAbstract
 
 		if(has_filter('plugin_locale'))
 		{
-			$locale = apply_filters('plugin_locale', $locale, 'wc1c-main');
+			$locale = apply_filters('plugin_locale', $locale, 'wc1c-maincore');
 		}
 
-		load_textdomain('wc1c-main', WP_LANG_DIR . '/plugins/wc1c-main-' . $locale . '.mo');
-		load_textdomain('wc1c-main', wc1c()->environment()->get('plugin_directory_path') . 'assets/languages/wc1c-main-' . $locale . '.mo');
+		load_textdomain('wc1c-maincore', WP_LANG_DIR . '/plugins/wc1c-maincore-' . $locale . '.mo');
+		load_textdomain('wc1c-maincore', wc1c()->environment()->get('plugin_directory_path') . 'assets/languages/wc1c-maincore-' . $locale . '.mo');
 
-		wc1c()->log()->debug(__('Localization loaded.', 'wc1c-main'), ['locale' => $locale]);
+		wc1c()->log()->debug(__('Localization loaded.', 'wc1c-maincore'), ['locale' => $locale]);
 	}
 
 	/**

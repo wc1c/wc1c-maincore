@@ -114,7 +114,7 @@ trait DatetimeUtilityTrait
 	{
 		if(!$date)
 		{
-			return esc_html__('not', 'wc1c-main');
+			return esc_html__('not', 'wc1c-maincore');
 		}
 
 		$timestamp_create = $this->utilityStringToTimestamp($date) + $this->utilityTimezoneOffset();

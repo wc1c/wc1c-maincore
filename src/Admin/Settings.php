@@ -43,21 +43,21 @@ class Settings
 
 		$default_sections['main'] =
 		[
-			'title' => __('Main', 'wc1c-main'),
+			'title' => __('Main', 'wc1c-maincore'),
 			'visible' => true,
 			'callback' => [MainForm::class, 'instance']
 		];
 
 		$default_sections['logs'] =
 		[
-			'title' => __('Event logs', 'wc1c-main'),
+			'title' => __('Event logs', 'wc1c-maincore'),
 			'visible' => true,
 			'callback' => [LogsForm::class, 'instance']
 		];
 
 		$default_sections['interface'] =
 		[
-			'title' => __('Interface', 'wc1c-main'),
+			'title' => __('Interface', 'wc1c-maincore'),
 			'visible' => true,
 			'callback' => [InterfaceForm::class, 'instance']
 		];

@@ -66,9 +66,9 @@ abstract class Form extends FormAbstract
 			return false;
 		}
 
-        wc1c()->log()->info(__('Saving settings.', 'wc1c-main'));
+        wc1c()->log()->info(__('Saving settings.', 'wc1c-maincore'));
 
-        $message = __('The settings have not been saved.', 'wc1c-main');
+        $message = __('The settings have not been saved.', 'wc1c-maincore');
 
         if(empty($post_data) || !wp_verify_nonce($post_data['_wc1c-admin-nonce'], 'wc1c-admin-settings-save'))
 		{
@@ -135,7 +135,7 @@ abstract class Form extends FormAbstract
 			return false;
 		}
 
-        $message = __('The settings have been successfully saved.', 'wc1c-main');
+        $message = __('The settings have been successfully saved.', 'wc1c-maincore');
 
 		wc1c()->admin()->notices()->create
 		(

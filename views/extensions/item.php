@@ -3,7 +3,7 @@
 <div class="extensions-all-item mb-2 mt-2 rounded-1 border border-3 bg-white">
     <div class="card-header bg-light p-2 border-0">
         <h2 class="card-title mt-0 mb-0 float-start">
-	        <?php printf('%s', wp_kses_post($args['object']->getMeta('name', __('none', 'wc1c-main')))); ?>
+	        <?php printf('%s', wp_kses_post($args['object']->getMeta('name', __('none', 'wc1c-maincore')))); ?>
         </h2>
         <div class="clearfix"></div>
     </div>
@@ -11,30 +11,30 @@
         <div class="row g-0">
             <div class="col-24 col-md-15 col-lg-18 p-0">
                 <p class="card-text mt-2 mb-2 fs-6">
-		            <?php printf('%s', wp_kses_post($args['object']->getMeta('description', __('none', 'wc1c-main')))); ?>
+		            <?php printf('%s', wp_kses_post($args['object']->getMeta('description', __('none', 'wc1c-maincore')))); ?>
                 </p>
             </div>
             <div class="col-24 mt-2 mt-md-0 col-md-9 col-lg-6 p-0">
                 <ul class="list-group m-0">
                     <li class="list-group-item m-0 list-group-item-light">
-                        <?php esc_html_e('ID:', 'wc1c-main'); ?>
+                        <?php esc_html_e('ID:', 'wc1c-maincore'); ?>
                         <span class="badge bg-secondary"><?php printf('%s', wp_kses_post($args['id'])); ?></span>
                     </li>
                     <li class="list-group-item m-0">
-                            <?php esc_html_e('Version:', 'wc1c-main'); ?>
+                            <?php esc_html_e('Version:', 'wc1c-maincore'); ?>
                             <span class="badge btn-sm bg-success">
-                            <?php printf('%s', wp_kses_post($args['object']->getMeta('version', __('none', 'wc1c-main')))); ?>
+                            <?php printf('%s', wp_kses_post($args['object']->getMeta('version', __('none', 'wc1c-maincore')))); ?>
                          </span>
                     </li>
                     <li class="list-group-item m-0">
-		                <?php esc_html_e('Versions WC1C:', 'wc1c-main'); ?>
-	                    <?php esc_html_e('from', 'wc1c-main'); ?>
+		                <?php esc_html_e('Versions WC1C:', 'wc1c-maincore'); ?>
+	                    <?php esc_html_e('from', 'wc1c-maincore'); ?>
                         <span class="badge btn-sm bg-success">
-                            <?php printf('%s', wp_kses_post($args['object']->getMeta('version_wc1c_min', __('none', 'wc1c-main')))); ?>
+                            <?php printf('%s', wp_kses_post($args['object']->getMeta('version_wc1c_min', __('none', 'wc1c-maincore')))); ?>
                          </span>
-	                    <?php esc_html_e('to', 'wc1c-main'); ?>
+	                    <?php esc_html_e('to', 'wc1c-maincore'); ?>
                         <span class="badge btn-sm bg-success">
-                            <?php printf('%s', wp_kses_post($args['object']->getMeta('version_wc1c_max', __('none', 'wc1c-main')))); ?>
+                            <?php printf('%s', wp_kses_post($args['object']->getMeta('version_wc1c_max', __('none', 'wc1c-maincore')))); ?>
                         </span>
                     </li>
                 </ul>

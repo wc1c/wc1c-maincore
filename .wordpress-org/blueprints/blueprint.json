@@ -23,7 +23,7 @@
       "step": "installPlugin",
       "pluginData": {
         "resource": "wordpress.org/plugins",
-        "slug": "wc1c-main"
+        "slug": "wc1c-maincore"
       },
       "options": {
         "activate": true

@@ -119,7 +119,7 @@ abstract class ExtensionAbstract implements ExtensionContract
 			return $default_value;
 		}
 
-		throw new RuntimeException(esc_html__('Meta value by name is not available.', 'wc1c-main'));
+		throw new RuntimeException(esc_html__('Meta value by name is not available.', 'wc1c-maincore'));
 	}
 
 	/**

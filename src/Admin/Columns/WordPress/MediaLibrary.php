@@ -35,7 +35,7 @@ final class MediaLibrary
     {
 		$columns_after =
 		[
-			'wc1c' => __('1C information', 'wc1c-main'),
+			'wc1c' => __('1C information', 'wc1c-maincore'),
 		];
 
 		return array_merge($columns, $columns_after);
@@ -60,7 +60,7 @@ final class MediaLibrary
 
             if('' === $content)
             {
-                $content .= '<span class="na">' . __('Not found', 'wc1c-main') . '</span>';
+                $content .= '<span class="na">' . __('Not found', 'wc1c-maincore') . '</span>';
             }
 
 			printf('%s', wp_kses_post($content));
@@ -82,20 +82,20 @@ final class MediaLibrary
 
         if($time)
         {
-            $content .= '<span class="na">' . __('Activity:', 'wc1c-main') . ' ';
+            $content .= '<span class="na">' . __('Activity:', 'wc1c-maincore') . ' ';
             /* translators: human-readable time difference */
-            $content .= sprintf(_x('%s ago.', '%s = human-readable time difference', 'wc1c-main'), human_time_diff($time, current_time('timestamp', true)));
+            $content .= sprintf(_x('%s ago.', '%s = human-readable time difference', 'wc1c-maincore'), human_time_diff($time, current_time('timestamp', true)));
             $content .= '</span><br/>';
         }
 
         if($schema_id)
         {
-            $content .= '<span class="na">' . __('Schema ID:', 'wc1c-main') . ' ' . $schema_id . '</span>';
+            $content .= '<span class="na">' . __('Schema ID:', 'wc1c-maincore') . ' ' . $schema_id . '</span>';
         }
 
         if($config_id)
         {
-            $content .= '<br/><span class="na">' . __('Configuration ID:', 'wc1c-main') . ' ' . $config_id . '</span>';
+            $content .= '<br/><span class="na">' . __('Configuration ID:', 'wc1c-maincore') . ' ' . $config_id . '</span>';
         }
 
         return $content;

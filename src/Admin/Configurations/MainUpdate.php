@@ -71,7 +71,7 @@ class MainUpdate
 					(
 						[
 							'type' => 'update',
-							'data' => esc_html__('Configuration update success.', 'wc1c-main')
+							'data' => esc_html__('Configuration update success.', 'wc1c-maincore')
 						]
 					);
 				}
@@ -81,7 +81,7 @@ class MainUpdate
 					(
 						[
 							'type' => 'error',
-							'data' => esc_html__('Configuration update error. Please retry saving or change fields.', 'wc1c-main')
+							'data' => esc_html__('Configuration update error. Please retry saving or change fields.', 'wc1c-maincore')
 						]
 					);
 				}
@@ -109,9 +109,9 @@ class MainUpdate
 				$args =
 				[
 					'type' => 'danger',
-					'header' => '<h4 class="alert-heading mt-0 mb-1">' . esc_html__('Debug is enabled!', 'wc1c-main') . '</h4>',
+					'header' => '<h4 class="alert-heading mt-0 mb-1">' . esc_html__('Debug is enabled!', 'wc1c-maincore') . '</h4>',
 					'object' => $this,
-					'body' => esc_html__('The current configuration has debug mode enabled. You must disable this mode after debugging is complete.', 'wc1c-main')
+					'body' => esc_html__('The current configuration has debug mode enabled. You must disable this mode after debugging is complete.', 'wc1c-maincore')
 				];
 			}
 
@@ -120,9 +120,9 @@ class MainUpdate
 				$args =
 				[
 					'type' => 'warning',
-					'header' => '<h4 class="alert-heading mt-0 mb-1">' . esc_html__('Info is enabled!', 'wc1c-main') . '</h4>',
+					'header' => '<h4 class="alert-heading mt-0 mb-1">' . esc_html__('Info is enabled!', 'wc1c-maincore') . '</h4>',
 					'object' => $this,
-					'body' => esc_html__('The extended information recording mode is enabled for the current configuration. It is recommended to disable this mode after debugging is complete.', 'wc1c-main')
+					'body' => esc_html__('The extended information recording mode is enabled for the current configuration. It is recommended to disable this mode after debugging is complete.', 'wc1c-maincore')
 				];
 			}
 
@@ -134,20 +134,20 @@ class MainUpdate
 
 		$args =
 		[
-			'header' => '<h3 class="p-0 m-0">' . esc_html__('About configuration', 'wc1c-main') . '</h3>',
+			'header' => '<h3 class="p-0 m-0">' . esc_html__('About configuration', 'wc1c-maincore') . '</h3>',
 			'object' => $this
 		];
 
 		$body = '<ul class="list-group m-0 list-group-flush">';
 		$body .= '<li class="list-group-item p-2 m-0">';
-		$body .= esc_html__('ID:', 'wc1c-main') . ' <b>' . esc_attr($configuration->getId()) . '</b>';
+		$body .= esc_html__('ID:', 'wc1c-maincore') . ' <b>' . esc_attr($configuration->getId()) . '</b>';
 		$body .= '</li>';
 		$body .= '<li class="list-group-item p-2 m-0">';
-		$body .= esc_html__('Schema ID:', 'wc1c-main') . ' <b>' . esc_attr($configuration->getSchema()) . '</b>';
+		$body .= esc_html__('Schema ID:', 'wc1c-maincore') . ' <b>' . esc_attr($configuration->getSchema()) . '</b>';
 		$body .= '</li>';
 
 		$body .= '<li class="list-group-item p-2 m-0">';
-		$body .= esc_html__('Status', 'wc1c-main') . ': <b>' . esc_html($this->utilityConfigurationsGetStatusesLabel($configuration->getStatus())) . '</b>';
+		$body .= esc_html__('Status', 'wc1c-maincore') . ': <b>' . esc_html($this->utilityConfigurationsGetStatusesLabel($configuration->getStatus())) . '</b>';
 		$body .= '</li>';
 
 		$body .= '<li class="list-group-item p-2 m-0">';
@@ -155,48 +155,48 @@ class MainUpdate
 		$user = get_userdata($user_id);
 		if($user instanceof \WP_User && $user->exists())
 		{
-			$body .= esc_html__('Owner:', 'wc1c-main') . ' <b>' . esc_html($user->get('nickname')) . '</b> (' . esc_attr($user_id) . ')';
+			$body .= esc_html__('Owner:', 'wc1c-maincore') . ' <b>' . esc_html($user->get('nickname')) . '</b> (' . esc_attr($user_id) . ')';
 		}
 		else
 		{
-			$body .= esc_html__('User is not exists.', 'wc1c-main');
+			$body .= esc_html__('User is not exists.', 'wc1c-maincore');
 		}
 		$body .= '</li>';
 
 		$body .= '<li class="list-group-item p-2 m-0">';
-		$body .= esc_html__('Date active:', 'wc1c-main') . '<div class="p-1 mt-1 bg-light">' . $this->utilityPrettyDate($configuration->getDateActivity());
+		$body .= esc_html__('Date active:', 'wc1c-maincore') . '<div class="p-1 mt-1 bg-light">' . $this->utilityPrettyDate($configuration->getDateActivity());
 
 		if($configuration->getDateActivity())
 		{
             /* translators: human-readable time difference */
-            $body .= sprintf(_x(' (%s ago).', '%s = human-readable time difference', 'wc1c-main'), human_time_diff($configuration->getDateActivity()->getOffsetTimestamp(), current_time('timestamp')));
+            $body .= sprintf(_x(' (%s ago).', '%s = human-readable time difference', 'wc1c-maincore'), human_time_diff($configuration->getDateActivity()->getOffsetTimestamp(), current_time('timestamp')));
 		}
 
 		$body .= '</div></li>';
 
 		$body .= '<li class="list-group-item p-2 m-0">';
-		$body .= esc_html__('Date create:', 'wc1c-main') . '<div class="p-1 mt-1 bg-light">' . $this->utilityPrettyDate($configuration->getDateCreate());
+		$body .= esc_html__('Date create:', 'wc1c-maincore') . '<div class="p-1 mt-1 bg-light">' . $this->utilityPrettyDate($configuration->getDateCreate());
 
 		if($configuration->getDateCreate())
 		{
             /* translators: human-readable time difference */
-			$body .= sprintf(_x(' (%s ago).', '%s = human-readable time difference', 'wc1c-main'), human_time_diff($configuration->getDateCreate()->getOffsetTimestamp(), current_time('timestamp')));
+			$body .= sprintf(_x(' (%s ago).', '%s = human-readable time difference', 'wc1c-maincore'), human_time_diff($configuration->getDateCreate()->getOffsetTimestamp(), current_time('timestamp')));
 		}
 
 		$body .= '</div></li>';
 		$body .= '<li class="list-group-item p-2 m-0">';
-		$body .= esc_html__('Date modify:', 'wc1c-main') . '<div class="p-1 mt-1 bg-light">'. $this->utilityPrettyDate($configuration->getDateModify());
+		$body .= esc_html__('Date modify:', 'wc1c-maincore') . '<div class="p-1 mt-1 bg-light">'. $this->utilityPrettyDate($configuration->getDateModify());
 
 		if($configuration->getDateModify())
 		{
             /* translators: human-readable time difference */
-			$body .= sprintf(_x(' (%s ago).', '%s = human-readable time difference', 'wc1c-main'), human_time_diff($configuration->getDateModify()->getOffsetTimestamp(), current_time('timestamp')));
+			$body .= sprintf(_x(' (%s ago).', '%s = human-readable time difference', 'wc1c-maincore'), human_time_diff($configuration->getDateModify()->getOffsetTimestamp(), current_time('timestamp')));
 		}
 
 		$body .= '</div></li>';
 
 		$body .= '<li class="list-group-item p-2 m-0">';
-		$body .= esc_html__('Directory:', 'wc1c-main') . '<div class="p-1 mt-1 bg-light">' . wp_normalize_path($configuration->getUploadDirectory()) . '</div>';
+		$body .= esc_html__('Directory:', 'wc1c-maincore') . '<div class="p-1 mt-1 bg-light">' . wp_normalize_path($configuration->getUploadDirectory()) . '</div>';
 		$body .= '</li>';
 
 		$size = 0;
@@ -208,7 +208,7 @@ class MainUpdate
 		}
 
 		$body .= '<li class="list-group-item p-2 m-0">';
-		$body .= esc_html__('Directory size:', 'wc1c-main') . ' <b>' . size_format($size) . '</b>';
+		$body .= esc_html__('Directory size:', 'wc1c-maincore') . ' <b>' . size_format($size) . '</b>';
 		$body .= '</li>';
 
 		$size = 0;
@@ -220,7 +220,7 @@ class MainUpdate
 		}
 
 		$body .= '<li class="list-group-item p-2 m-0">';
-		$body .= esc_html__('Logs directory size:', 'wc1c-main') . ' <b>' . size_format($size) . '</b>';
+		$body .= esc_html__('Logs directory size:', 'wc1c-maincore') . ' <b>' . size_format($size) . '</b>';
 		$body .= '</li>';
 
 		$body .= '</ul>';
@@ -235,7 +235,7 @@ class MainUpdate
 
 			$args =
 			[
-				'header' => '<h3 class="p-0 m-0">' . esc_html__('About schema', 'wc1c-main') . '</h3>',
+				'header' => '<h3 class="p-0 m-0">' . esc_html__('About schema', 'wc1c-maincore') . '</h3>',
 				'object' => $this
 			];
 

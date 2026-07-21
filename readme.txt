@@ -1,4 +1,4 @@
-=== WC1C ===
+=== WC1C-Maincore ===
 Contributors: WC1C, Frescoref
 Tags: commerceml, 1c, cml, wc1c, integration 1C
 Requires at least: 5.3
@@ -37,7 +37,7 @@ All features: [https://wc1c.info/features](https://wc1c.info/features)
 * Russian - always included
 
 == Installation ==
-1. Archive extract and upload folder "wc1c-main" to /wp-content/plugins (final path: /wp-content/plugins/wc1c-main/).
+1. Archive extract and upload folder "wc1c-maincore" to /wp-content/plugins (final path: /wp-content/plugins/wc1c-maincore/).
 2. Activate the plugin.
 3. Done, goto plugin settings.
 
@@ -237,7 +237,7 @@ List of major changes from version to version. [Goto full list.](https://wc1c.in
 * Fix: more
 
 = 0.14.0 =
-* Rename wc1c to wc1c-main
+* Rename wc1c to wc1c-maincore
 * Fix: more
 
 = 0.13.1 =

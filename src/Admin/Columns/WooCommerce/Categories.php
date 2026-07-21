@@ -35,7 +35,7 @@ final class Categories
 	{
 		$columns_after =
 		[
-			'wc1c' => __('1C information', 'wc1c-main'),
+			'wc1c' => __('1C information', 'wc1c-maincore'),
 		];
 
 		return array_merge($columns, $columns_after);
@@ -76,18 +76,18 @@ final class Categories
 
 				if($schema_id)
 				{
-					$content .= '<span class="na">' . __('Schema ID: ', 'wc1c-main') . $schema_id . '</span>';
+					$content .= '<span class="na">' . __('Schema ID: ', 'wc1c-maincore') . $schema_id . '</span>';
 				}
 
 				if($config_id)
 				{
-					$content .= '<br/><span class="na">' . __('Configuration ID: ', 'wc1c-main')  . $config_id . '</span>';
+					$content .= '<br/><span class="na">' . __('Configuration ID: ', 'wc1c-maincore')  . $config_id . '</span>';
 				}
 			}
 
 			if('' === $content)
 			{
-				$content = '<span class="na">' . __('Not found', 'wc1c-main') . '</span>';
+				$content = '<span class="na">' . __('Not found', 'wc1c-maincore') . '</span>';
 			}
 
 			$columns .= $content;

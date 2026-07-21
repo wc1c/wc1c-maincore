@@ -13,6 +13,6 @@
         </table>
     </div>
     <p class="submit p-1 pt-0 mt-1">
-	    <input type="submit" name="submit" id="submit" class="button button-danger" value="<?php esc_html_e('Delete', 'wc1c-main'); ?>">
+	    <input type="submit" name="submit" id="submit" class="button button-danger" value="<?php esc_html_e('Delete', 'wc1c-maincore'); ?>">
     </p>
 </form>
