@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WC1C\n"
-"POT-Creation-Date: 2026-07-17 22:36+0300\n"
-"PO-Revision-Date: 2026-07-17 22:50+0300\n"
+"POT-Creation-Date: 2026-07-21 21:20+0300\n"
+"PO-Revision-Date: 2026-07-21 21:21+0300\n"
 "Last-Translator: Frescoref\n"
 "Language-Team: \n"
 "Language: ru_RU\n"
@@ -6423,8 +6423,8 @@ msgid "If continue, the required tables will be created in the database."
 msgstr "Если продолжить, необходимые таблицы будут созданы в базе данных."
 
 #. Plugin Name of the plugin/theme
-msgid "WC1C"
-msgstr "WC1C"
+msgid "WC1C-Maincore"
+msgstr ""
 
 #. Plugin URI of the plugin/theme
 msgid "https://wordpress.org/plugins/wc1c-maincore/"
@@ -6445,6 +6445,9 @@ msgstr "Команда WC1C"
 #. Author URI of the plugin/theme
 msgid "https://wc1c.info"
 msgstr "https://wc1c.info"
+
+#~ msgid "WC1C"
+#~ msgstr "WC1C"
 
 #~ msgid "Activation"
 #~ msgstr "Активация"
