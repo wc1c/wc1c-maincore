@@ -3,7 +3,7 @@
         'name' => 'wc1c/wc1c-maincore',
         'pretty_version' => 'dev-trunk',
         'version' => 'dev-trunk',
-        'reference' => '0b801dc6ba1b3cb7503d7a7a2f4219255b29102a',
+        'reference' => 'f8e2216eceb7d16baba45960ea9e6e4771a08fe2',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -99,7 +99,7 @@
         'wc1c/wc1c-maincore' => array(
             'pretty_version' => 'dev-trunk',
             'version' => 'dev-trunk',
-            'reference' => '0b801dc6ba1b3cb7503d7a7a2f4219255b29102a',
+            'reference' => 'f8e2216eceb7d16baba45960ea9e6e4771a08fe2',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

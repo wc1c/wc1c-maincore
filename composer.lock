@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bf1e24be3420341e633e258dd0c38fbb",
+    "content-hash": "49e2ada597d93adb147747443a45efc4",
     "packages": [
         {
             "name": "digiom/psr7wp",
