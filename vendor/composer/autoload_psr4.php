@@ -9,7 +9,7 @@ return array(
     'Wc1c\\Wc\\' => array($vendorDir . '/wc1c/wc/src'),
     'Wc1c\\Main\\' => array($baseDir . '/src'),
     'Wc1c\\Cml\\' => array($vendorDir . '/wc1c/cml/src'),
-    'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
+    'Psr\\Log\\' => array($vendorDir . '/psr/log/src'),
     'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src'),
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
     'Digiom\\Wotices\\' => array($vendorDir . '/digiom/wotices/src'),
