@@ -53,9 +53,12 @@ trait SectionsTrait
 	 */
 	public function initCurrentSection()
 	{
-		$current_section = !empty($_GET[$this->getSectionKey()]) ? sanitize_title($_GET[$this->getSectionKey()]) : '';
+		$section_key = $this->getSectionKey();
 
-		if($current_section !== '')
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$current_section = isset($_GET[$section_key]) ? sanitize_title(wp_unslash($_GET[$section_key])) : '';
+
+		if ($current_section !== '') // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		{
 			$this->setCurrentSection($current_section);
 		}
