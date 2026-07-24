@@ -59,7 +59,7 @@ class Core extends SchemaAbstract
 	public function __construct()
 	{
 		$this->setId('productscml');
-		$this->setVersion('0.16.0');
+		$this->setVersion('0.16.1');
 
 		$this->setName(esc_html__('Products data exchange via CommerceML', 'wc1c-maincore'));
 		$this->setDescription(esc_html__('Creating and updating products (goods) in WooCommerce according to data from 1C using the CommerceML protocol of different versions.', 'wc1c-maincore'));
@@ -336,7 +336,8 @@ class Core extends SchemaAbstract
 
 			ob_start();
 			nocache_headers();
-			do_action($wc1c_receiver_action);
+            // todo: optimize via remove dynamic  hook
+            do_action($wc1c_receiver_action);  // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound
 			ob_end_clean();
 		}
 

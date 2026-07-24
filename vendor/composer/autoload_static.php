@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit6d699cb315e004d0d2aa5ffefa680ba8
+class ComposerStaticInit51e489f10ea9dcd5e3cd6f571d2ff4fd
 {
     public static $prefixLengthsPsr4 = array (
         'W' =>
@@ -12,10 +12,6 @@ class ComposerStaticInit6d699cb315e004d0d2aa5ffefa680ba8
             'Wc1c\\Wc\\' => 8,
             'Wc1c\\Main\\' => 10,
             'Wc1c\\Cml\\' => 9,
-        ),
-        'T' =>
-        array (
-            'Tecodes\\Client\\' => 15,
         ),
         'P' =>
         array (
@@ -46,10 +42,6 @@ class ComposerStaticInit6d699cb315e004d0d2aa5ffefa680ba8
         'Wc1c\\Cml\\' =>
         array (
             0 => __DIR__ . '/..' . '/wc1c/cml/src',
-        ),
-        'Tecodes\\Client\\' =>
-        array (
-            0 => __DIR__ . '/..' . '/tecodes/client/src',
         ),
         'Psr\\Log\\' =>
         array (
@@ -84,9 +76,9 @@ class ComposerStaticInit6d699cb315e004d0d2aa5ffefa680ba8
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit6d699cb315e004d0d2aa5ffefa680ba8::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit6d699cb315e004d0d2aa5ffefa680ba8::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit6d699cb315e004d0d2aa5ffefa680ba8::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit51e489f10ea9dcd5e3cd6f571d2ff4fd::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit51e489f10ea9dcd5e3cd6f571d2ff4fd::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit51e489f10ea9dcd5e3cd6f571d2ff4fd::$classMap;
 
         }, null, ClassLoader::class);
     }

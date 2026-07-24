@@ -9,35 +9,50 @@ defined('ABSPATH') || exit;
  */
 trait DatetimeUtilityTrait
 {
-	/**
-	 * Convert mysql datetime to PHP timestamp, forcing UTC. Wrapper for strtotime
-	 *
-	 * @param string $time_string Time string
-	 * @param int|null $from_timestamp Timestamp to convert from
-	 *
-	 * @return int
-	 */
-	public function utilityStringToTimestamp($time_string, $from_timestamp = null): int
-	{
-		$original_timezone = date_default_timezone_get();
+    /**
+     * Convert MySQL datetime to PHP timestamp, forcing UTC.
+     * Wrapper for strtotime with explicit UTC handling, without global timezone changes.
+     *
+     * @param string|null $time_string Time string to parse (e.g., '2026-07-24 12:00:00').If null, returns 0.
+     * @param int|null $from_timestamp Optional Unix timestamp to use as base for relative parsing.
+     *
+     * @return int Unix timestamp, or 0 if the string could not be parsed or is null.
+     */
+    public function utilityStringToTimestamp( ?string $time_string, ?int $from_timestamp = null ): int
+    {
+        // Handle null input exactly as strtotime would — return 0 (false converted to int).
+        if( null === $time_string )
+        {
+            return 0;
+        }
 
-        // phpcs:ignore WordPress.DateTime.RestrictedFunctions.timezone_change_date_default_timezone_set
-		date_default_timezone_set('UTC');
+        try
+        {
+            // Create a base DateTime object in UTC.
+            if( null !== $from_timestamp )
+            {
+                $date = new \DateTime( '@' . $from_timestamp );
+                $date->setTimezone( new \DateTimeZone( 'UTC' ) );
+            }
+            else
+            {
+                $date = new \DateTime( 'now', new \DateTimeZone( 'UTC' ) );
+            }
 
-		if(null === $from_timestamp)
-		{
-			$next_timestamp = strtotime($time_string);
-		}
-		else
-		{
-			$next_timestamp = strtotime($time_string, $from_timestamp);
-		}
+            // Apply the modification (supports the same formats as strtotime).
+            $modified = $date->modify($time_string);
+            if( false === $modified ) {
+                return 0;
+            }
 
-        // phpcs:ignore WordPress.DateTime.RestrictedFunctions.timezone_change_date_default_timezone_set
-		date_default_timezone_set($original_timezone);
-
-		return $next_timestamp;
-	}
+            return $date->getTimestamp();
+        }
+        catch(\Exception $e)
+        {
+            // Any parsing error returns 0, just like strtotime returning false.
+            return 0;
+        }
+    }
 
 	/**
 	 * Helper to retrieve the timezone string for a site until

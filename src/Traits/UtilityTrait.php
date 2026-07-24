@@ -67,7 +67,7 @@ trait UtilityTrait
 			return true;
 		}
 
-		$get_tool_id = sanitize_text_field(wc1c()->getVar($_GET['tool_id'], ''));
+		$get_tool_id = isset($_GET['tool_id']) ? sanitize_text_field(wp_unslash($_GET['tool_id'])) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 		if($get_tool_id !== $tool_id)
 		{
@@ -84,7 +84,7 @@ trait UtilityTrait
 	 */
 	public function utilityIsWc1cAdmin()
 	{
-		if(false !== is_admin() && 'wc1c' === sanitize_text_field(wc1c()->getVar($_GET['page'], '')))
+		if(false !== is_admin() && 'wc1c' === (isset($_GET['page']) ? sanitize_text_field(wp_unslash($_GET['page'])) : '')) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		{
 			return true;
 		}
@@ -101,7 +101,7 @@ trait UtilityTrait
 	 */
 	public function utilityIsWc1cAdminSectionRequest($section = '')
 	{
-		if(sanitize_text_field(wc1c()->getVar($_GET['section'], '')) !== $section)
+		if((isset($_GET['section']) ? sanitize_text_field(wp_unslash($_GET['section'])) : '') !== $section) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		{
 			return false;
 		}
@@ -166,11 +166,14 @@ trait UtilityTrait
 	 */
 	public function dump($data, $die = false)
 	{
-		echo '<pre>';
-		var_dump($data);
-		echo '</pre>';
+		if (defined('WP_DEBUG') && WP_DEBUG)
+		{
+			echo '<pre>';
+			var_dump($data); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_var_dump
+			echo '</pre>';
+		}
 
-		if($die)
+		if ($die)
 		{
 			die;
 		}

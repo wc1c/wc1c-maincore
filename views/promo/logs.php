@@ -1,5 +1,7 @@
 <?php defined('ABSPATH') || exit;
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
+
 $text = sprintf
 (
     '%s %s<hr>%s',
@@ -19,3 +21,5 @@ $img = wc1c()->environment()->get('plugin_directory_url') . 'assets/images/promo
 
     <img src="<?php echo esc_url($img); ?>" class="card-img" alt="Logs">
 </div>
+
+<?php // phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound ?>

@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
-        'name' => 'wc1c/wc1c-main',
+        'name' => 'wc1c/wc1c-maincore',
         'pretty_version' => 'dev-trunk',
         'version' => 'dev-trunk',
-        'reference' => '42773ba7b817ff93e93a84e6b66faaf1938ce919',
+        'reference' => 'a5b72d1153bb8d7eddbf5b1d18f04cf69d7b6e50',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -42,18 +42,18 @@
             'dev_requirement' => false,
         ),
         'monolog/monolog' => array(
-            'pretty_version' => '1.27.1',
-            'version' => '1.27.1.0',
-            'reference' => '904713c5929655dc9b97288b69cfeedad610c9a1',
+            'pretty_version' => '2.11.0',
+            'version' => '2.11.0.0',
+            'reference' => '37308608e599f34a1a4845b16440047ec98a172a',
             'type' => 'library',
             'install_path' => __DIR__ . '/../monolog/monolog',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
         'psr/http-message' => array(
-            'pretty_version' => '1.0.1',
-            'version' => '1.0.1.0',
-            'reference' => 'f6561bf28d520154e4b0ec72be95418abe6d9363',
+            'pretty_version' => '2.0',
+            'version' => '2.0.0.0',
+            'reference' => '402d35bcb92c70c026d1a6a9883f06b2ead23d71',
             'type' => 'library',
             'install_path' => __DIR__ . '/../psr/http-message',
             'aliases' => array(),
@@ -71,19 +71,8 @@
         'psr/log-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '1.0.0',
+                0 => '1.0.0 || 2.0.0 || 3.0.0',
             ),
-        ),
-        'tecodes/client' => array(
-            'pretty_version' => 'dev-main',
-            'version' => 'dev-main',
-            'reference' => '7f3fe81214afa36c467b99a856775b2554f2722e',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../tecodes/client',
-            'aliases' => array(
-                0 => '9999999-dev',
-            ),
-            'dev_requirement' => false,
         ),
         'wc1c/cml' => array(
             'pretty_version' => 'dev-main',
@@ -107,10 +96,10 @@
             ),
             'dev_requirement' => false,
         ),
-        'wc1c/wc1c-main' => array(
+        'wc1c/wc1c-maincore' => array(
             'pretty_version' => 'dev-trunk',
             'version' => 'dev-trunk',
-            'reference' => '42773ba7b817ff93e93a84e6b66faaf1938ce919',
+            'reference' => 'a5b72d1153bb8d7eddbf5b1d18f04cf69d7b6e50',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

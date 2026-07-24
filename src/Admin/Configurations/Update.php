@@ -53,9 +53,9 @@ class Update
 		$this->initSections($default_sections);
 		$this->setCurrentSection('main');
 
-		$configuration_id = absint(wc1c()->getVar($_GET['configuration_id'], 0));
+		$configuration_id = isset($_GET['configuration_id']) ? absint(wp_unslash($_GET['configuration_id'])) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
-		if(false === $this->setConfiguration($configuration_id))
+		if (false === $this->setConfiguration($configuration_id))
 		{
 			try
 			{
@@ -151,7 +151,16 @@ class Update
 		$inline_form = new InlineForm($inline_args);
 		$inline_form->loadSavedData(['name' => $configuration->getName()]);
 
-		if(isset($_GET['form']) && sanitize_text_field($_GET['form']) === $inline_form->getId())
+		$form_id = isset($_GET['form']) ? sanitize_text_field(wp_unslash($_GET['form'])) : '';
+		$nonce_name = '_wc1c-admin-nonce-' . $inline_form->getId();
+
+		$nonce = isset($_POST[$nonce_name]) ? sanitize_text_field(wp_unslash($_POST[$nonce_name])) : '';
+
+		if (
+			$form_id === $inline_form->getId() &&
+			!empty($nonce) &&
+			wp_verify_nonce($nonce, 'wc1c-admin-' . $inline_form->getId() . '-save')
+		)
 		{
 			$configuration_name = $inline_form->save();
 

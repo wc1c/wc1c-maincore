@@ -40,7 +40,7 @@ class Core extends SchemaAbstract
 	public function __construct()
 	{
 		$this->setId('productscleanercml');
-		$this->setVersion('0.5.0');
+		$this->setVersion('0.5.1');
 
 		$this->setName(esc_html__('Cleaning of products via CommerceML', 'wc1c-maincore'));
 		$this->setDescription(esc_html__('Cleaning of existing products in WooCommerce according to the nomenclature from 1C via the CommerceML protocol.', 'wc1c-maincore'));
@@ -139,7 +139,8 @@ class Core extends SchemaAbstract
 
             ob_start();
             nocache_headers();
-            do_action($wc1c_receiver_action);
+            // todo: optimize via remove dynamic  hook
+            do_action($wc1c_receiver_action);  // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound
             ob_end_clean();
         }
 

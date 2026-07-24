@@ -25,7 +25,8 @@ class Delete
 	 */
 	public function __construct()
 	{
-		$configuration_id = absint(wc1c()->getVar($_GET['configuration_id'], 0));
+		// Nonce не требуется, так как это только чтение параметра навигации.
+		$configuration_id = isset($_GET['configuration_id']) ? absint(wp_unslash($_GET['configuration_id'])) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		$error = $this->setConfiguration($configuration_id);
 
 		if($error)

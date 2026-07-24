@@ -1,5 +1,7 @@
 <?php defined('ABSPATH') || exit;
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
+
 use Wc1c\Main\Admin\Wizards\Setup\Database;
 
 if(!isset($args['step']))
@@ -21,3 +23,5 @@ $step = $args['step'];
         <input type="submit" name="submit" id="submit" class="button button-primary button-large button-next" value="<?php esc_attr_e('Lets Go!', 'wc1c-maincore'); ?>">
     </p>
 </form>
+
+<?php // phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound ?>

@@ -3,7 +3,7 @@
  * Plugin Name: WC1C-Maincore
  * Plugin URI: https://wordpress.org/plugins/wc1c-maincore/
  * Description: Implementing a flexible mechanism for exchanging various data between 1C Company products and the WooCommerce plugin.
- * Version: 0.24.0
+ * Version: 0.24.1
  * WC requires at least: 4.5
  * WC tested up to: 10.9
  * Requires at least: 5.3
@@ -32,16 +32,16 @@ namespace
 	{
 		define('WC1C_PLUGIN_FILE', __FILE__);
 
-		$autoloader = __DIR__ . '/vendor/autoload.php';
+		$wc1c_autoloader = __DIR__ . '/vendor/autoload.php';
 
-		if(!is_readable($autoloader))
+		if(!is_readable($wc1c_autoloader))
 		{
             // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_trigger_error
-            trigger_error(sprintf('%1$s: %2$s','File is not found', esc_attr($autoloader)));
+            trigger_error(sprintf('%1$s: %2$s','File is not found', esc_attr($wc1c_autoloader)));
 			return false;
 		}
 
-		require_once $autoloader;
+		require_once $wc1c_autoloader;
 
         /**
          * Adds an action to declare compatibility with High Performance Order Storage (HPOS) before WooCommerce initialization.
@@ -99,7 +99,7 @@ namespace Wc1c\Main
         }
     });
 
-	$loader = new \Digiom\Woplucore\Loader();
+	$loader = new \Digiom\Woplucore\Loader(); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 
     $loader->addNamespace(__NAMESPACE__, plugin_dir_path(__FILE__) . 'src');
 
@@ -118,7 +118,7 @@ namespace Wc1c\Main
 		return false;
 	}
 
-	$context = new Context(__FILE__, 'wc1c', $loader);
+	$context = new Context(__FILE__, 'wc1c', $loader); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 
 	wc1c()->register($context);
 }

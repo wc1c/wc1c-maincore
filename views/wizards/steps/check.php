@@ -1,5 +1,7 @@
 <?php defined('ABSPATH') || exit;
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
+
 use Wc1c\Main\Admin\Wizards\Setup\Check;
 
 if(!isset($args['step']))
@@ -34,3 +36,5 @@ $available = true;
 <?php if(!$available) : ?>
     <p><strong><?php esc_html_e('Need to fix the compatibility errors and return to the setup wizard.', 'wc1c-maincore'); ?></strong></p>
 <?php endif;
+
+// phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound

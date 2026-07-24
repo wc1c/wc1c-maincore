@@ -20,16 +20,12 @@ abstract class ReceiverAbstract
     public $type = '';
 
     /**
-     * @return array
+     * Detects mode and type from various GET parameters.
+     *
+     * @return array Associative array with keys 'mode' and 'type'.
      */
     public function detectModeAndType(): array
     {
-        $data =
-        [
-            'mode' => '',
-            'type' => ''
-        ];
-
         if(!empty($this->getType()) && !empty($this->getMode()))
         {
             return
@@ -39,43 +35,58 @@ abstract class ReceiverAbstract
             ];
         }
 
-        if(wc1c()->getVar($_GET['get_param'], '') !== '' || wc1c()->getVar($_GET['get_param?type'], '') !== '')
+        $mode = '';
+        $type = '';
+
+        $mode_get = filter_input(INPUT_GET, 'mode', FILTER_UNSAFE_RAW);
+        $type_get = filter_input(INPUT_GET, 'type', FILTER_UNSAFE_RAW);
+
+        if ($mode_get !== null && $mode_get !== false)
+        {
+            $mode = sanitize_key($mode_get);
+        }
+        if ($type_get !== null && $type_get !== false)
+        {
+            $type = sanitize_key($type_get);
+        }
+
+        $get_param = filter_input(INPUT_GET, 'get_param', FILTER_UNSAFE_RAW);
+        $get_param_type = filter_input(INPUT_GET, 'get_param?type', FILTER_UNSAFE_RAW);
+
+        if (!empty($get_param) || !empty($get_param_type))
         {
             $output = [];
-            if(isset($_GET['get_param']))
+
+            if (!empty($get_param))
             {
-                $get_param = ltrim(sanitize_text_field($_GET['get_param']), '?');
-                parse_str($get_param, $output);
+                $param_str = sanitize_text_field($get_param);
+                parse_str($param_str, $output);
             }
 
-            if(array_key_exists('mode', $output))
+            if (isset($output['mode']) && $output['mode'] !== '')
             {
-                $data['mode'] = sanitize_key($output['mode']);
-            }
-            elseif(isset($_GET['mode']))
-            {
-                $data['mode'] = sanitize_key($_GET['mode']);
+                $mode = sanitize_key($output['mode']);
             }
 
-            if(array_key_exists('type', $output))
+            if (isset($output['type']) && $output['type'] !== '')
             {
-                $data['type'] = sanitize_key($output['type']);
-            }
-            elseif(isset($_GET['type']))
-            {
-                $data['type'] = sanitize_key($_GET['type']);
+                $type = sanitize_key($output['type']);
             }
 
-            if($data['type'] === '')
+            if (empty($type) && !empty($get_param_type))
             {
-                $data['type'] = sanitize_key($_GET['get_param?type']);
+                $type = sanitize_key($get_param_type);
             }
         }
 
-        $this->setMode($data['mode']);
-        $this->setType($data['type']);
+        $this->setMode($mode);
+        $this->setType($type);
 
-        return $data;
+        return
+        [
+            'mode' => $mode,
+            'type' => $type
+        ];
     }
 
     /**

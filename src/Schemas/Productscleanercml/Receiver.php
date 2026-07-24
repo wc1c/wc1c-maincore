@@ -1,8 +1,9 @@
 <?php namespace Wc1c\Main\Schemas\Productscleanercml;
 
+// phpcs:disable WordPress.Security.NonceVerification.Recommended
+
 defined('ABSPATH') || exit;
 
-use Wc1c\Main\Exceptions\RuntimeException;
 use Wc1c\Main\Traits\SingletonTrait;
 use Wc1c\Main\Traits\UtilityTrait;
 
@@ -62,42 +63,45 @@ final class Receiver
 	public function handler()
 	{
 		$this->core()->log()->info(esc_html__('Received new request for Receiver.', 'wc1c-maincore'));
-
+        
 		$mode = '';
 		$type = '';
 
-		if(wc1c()->getVar($_GET['get_param'], '') !== '' || wc1c()->getVar($_GET['get_param?type'], '') !== '')
-		{
-			$output = [];
-			if(isset($_GET['get_param']))
-			{
-				$get_param = ltrim(sanitize_text_field($_GET['get_param']), '?');
-				parse_str($get_param, $output);
-			}
+        $get_param = isset($_GET['get_param']) ? sanitize_text_field(wp_unslash($_GET['get_param'])) : '';
+        $get_param_type = isset($_GET['get_param?type']) ? sanitize_text_field(wp_unslash($_GET['get_param?type'])) : '';
 
-			if(array_key_exists('mode', $output))
-			{
-				$mode = sanitize_key($output['mode']);
-			}
-			elseif(isset($_GET['mode']))
-			{
-				$mode = sanitize_key($_GET['mode']);
-			}
+        if ($get_param !== '' || $get_param_type !== '')
+        {
+            $output = [];
+            if ($get_param !== '')
+            {
+                $get_param = ltrim(sanitize_text_field($get_param), '?');
+                parse_str($get_param, $output);
+            }
 
-			if(array_key_exists('type', $output))
-			{
-				$type = $output['type'];
-			}
-			elseif(isset($_GET['type']))
-			{
-				$type = sanitize_key($_GET['type']);
-			}
+            if (array_key_exists('mode', $output))
+            {
+                $mode = sanitize_key($output['mode']);
+            }
+            elseif (isset($_GET['mode']))
+            {
+                $mode = sanitize_key(wp_unslash($_GET['mode']));
+            }
 
-			if($type === '')
-			{
-				$type = sanitize_key($_GET['get_param?type']);
-			}
-		}
+            if (array_key_exists('type', $output))
+            {
+                $type = sanitize_key($output['type']);
+            }
+            elseif (isset($_GET['type']))
+            {
+                $type = sanitize_key(wp_unslash($_GET['type']));
+            }
+
+            if ($type === '' && $get_param_type !== '')
+            {
+                $type = sanitize_key($get_param_type);
+            }
+        }
 
 		$this->core()->log()->debug(esc_html__('Received request params.', 'wc1c-maincore'), ['type' => $type, 'mode=' => $mode]);
 
@@ -230,15 +234,15 @@ final class Receiver
 
             if(isset($_SERVER['REMOTE_USER']))
             {
-                $remote_user = sanitize_text_field($_SERVER['REMOTE_USER']);
+                $remote_user = sanitize_text_field(wp_unslash($_SERVER['REMOTE_USER']));
             }
             elseif(isset($_SERVER['REDIRECT_REMOTE_USER']))
             {
-                $remote_user = sanitize_text_field($_SERVER['REDIRECT_REMOTE_USER']);
+                $remote_user = sanitize_text_field(wp_unslash($_SERVER['REDIRECT_REMOTE_USER']));
             }
             elseif(isset($_SERVER['REDIRECT_HTTP_AUTHORIZATION']))
             {
-                $remote_user = sanitize_text_field($_SERVER['REDIRECT_HTTP_AUTHORIZATION']);
+                $remote_user = sanitize_text_field(wp_unslash($_SERVER['REDIRECT_HTTP_AUTHORIZATION']));
             }
 
             if (empty($remote_user))
@@ -265,8 +269,11 @@ final class Receiver
             return $credentials;
         }
 
-        $credentials['login'] = sanitize_text_field($_SERVER['PHP_AUTH_USER']);
-        $credentials['password'] = isset($_SERVER['PHP_AUTH_PW']) ? (string) $_SERVER['PHP_AUTH_PW'] : '';
+        if (isset($_SERVER['PHP_AUTH_USER']))
+        {
+            $credentials['login'] = sanitize_text_field(wp_unslash($_SERVER['PHP_AUTH_USER']));
+        }
+        $credentials['password'] = isset($_SERVER['PHP_AUTH_PW']) ? sanitize_text_field(wp_unslash($_SERVER['PHP_AUTH_PW'])) : '';
 
         $this->core()->log()->debug(esc_html__('Credentials extracted from PHP_AUTH headers.', 'wc1c-maincore'), ['login' => $credentials['login'], 'password_length' => strlen($credentials['password'])]);
 
@@ -308,7 +315,7 @@ final class Receiver
 
 		$session_name = session_name();
 
-		if(session_status() === PHP_SESSION_NONE)
+		if(session_status() === PHP_SESSION_NONE && defined('WC1C_RECEIVER_REQUEST') && WC1C_RECEIVER_REQUEST)
 		{
 			$this->core()->log()->debug(esc_html__('PHP session none, start new PHP session.', 'wc1c-maincore'));
 			session_start();
@@ -352,7 +359,8 @@ final class Receiver
      */
 	public function handlerCheckauthKey(bool $send_response = false): bool
     {
-		if(!isset($_GET['lazysign']))
+		$lazy_sign = isset($_GET['lazysign']) ? sanitize_text_field(wp_unslash($_GET['lazysign'])) : '';
+		if($lazy_sign === '')
 		{
             if('yes' === $this->core()->getOptions('browser_debug', 'no'))
             {
@@ -366,11 +374,9 @@ final class Receiver
 			{
 				$this->sendResponseByType('failure', $warning);
 			}
-
 			return false;
 		}
 
-		$lazy_sign = sanitize_text_field($_GET['lazysign']);
 		$lazy_sign_store = sanitize_text_field($this->core()->configuration()->getMeta('receiver_lazy_sign'));
 
 		if($lazy_sign_store !== $lazy_sign)
@@ -407,7 +413,14 @@ final class Receiver
 		{
 			$warning = esc_html__('Authorization check failed - session id differs from the original.', 'wc1c-maincore');
 
-			$this->core()->log()->warning($warning, ['client_session_id' => $_COOKIE[$session_name], 'server_session_id' => $session_id]);
+            $this->core()->log()->warning
+            (
+                $warning,
+                [
+                    'client_session_id' => isset($_COOKIE[$session_name]) ? sanitize_text_field(wp_unslash($_COOKIE[$session_name])) : '',
+                    'server_session_id' => $session_id,
+                ]
+            );
 
 			if($send_response)
 			{
@@ -417,7 +430,7 @@ final class Receiver
 			return false;
 		}
 
-		if(session_status() === PHP_SESSION_NONE)
+		if(session_status() === PHP_SESSION_NONE && defined('WC1C_RECEIVER_REQUEST') && WC1C_RECEIVER_REQUEST)
 		{
 			session_id($session_id);
 
@@ -467,6 +480,45 @@ final class Receiver
 		}
 
 		$this->core()->log()->debug(esc_html__('Session for receiving requests.', 'wc1c-maincore'), ['session'=> $_SESSION]);
+
+        $directory = $this->core()->getUploadDirectory();
+
+        $this->core()->log()->info(esc_html__('Check the directory for temporary files.', 'wc1c-maincore'), ['directory' => $directory]);
+
+        wc1c()->filesystem()->ensureDirectoryExists($directory);
+
+        if(!wc1c()->filesystem()->isDirectory($directory))
+        {
+            $error = esc_html__('Failed to check the temp directory.', 'wc1c-maincore');
+
+            $this->core()->log()->error($error, ['directory' => $directory]);
+
+            $this->sendResponseByType('failure', $error);
+        }
+        else
+        {
+            $ht_name = $directory . '/.htaccess';
+            if(!file_exists($ht_name))
+            {
+                $htaccess_content = "Options -Indexes\n" .
+                    "<IfModule mod_authz_core.c>\n" .
+                    "    Require all denied\n" .
+                    "</IfModule>\n" .
+                    "<IfModule !mod_authz_core.c>\n" .
+                    "    Deny from all\n" .
+                    "</IfModule>\n";
+
+                // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fopen
+                $fp = fopen($ht_name, 'wb');
+                if($fp)
+                {
+                    // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fwrite
+                    fwrite($fp, $htaccess_content);
+                    // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose
+                    fclose($fp);
+                }
+            }
+        }
 
 		$data['zip'] = 'zip=no' . PHP_EOL;
 
@@ -530,7 +582,7 @@ final class Receiver
             $this->sendResponseByType('failure', $response_description);
         }
 
-        $filename = wc1c()->getVar($_GET['filename'], '');
+        $filename = isset($_GET['filename']) ? sanitize_text_field(wp_unslash($_GET['filename'])) : '';
 
         if(has_filter('wc1c_schema_productscleanercml_handler_catalog_mode_file_filename'))
         {
@@ -664,10 +716,10 @@ final class Receiver
 
         // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fopen
         $input_stream = fopen('php://input', 'rb');
-
         if(!$input_stream)
         {
             $response_description = esc_html__('Failed to open input stream. The request contains no data to write to the file.', 'wc1c-maincore');
+
             $this->core()->log()->error($response_description);
             $this->sendResponseByType('failure', $response_description);
         }
@@ -681,13 +733,13 @@ final class Receiver
 
         // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fopen
         $output_stream = fopen($upload_file_path, $file_mode);
-
         if(!$output_stream)
         {
             // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose
             fclose($input_stream);
 
             $response_description = esc_html__('Failed to open output file for writing.', 'wc1c-maincore');
+
             $this->core()->log()->error($response_description, ['file_path' => $upload_file_path]);
             $this->sendResponseByType('failure', $response_description);
         }
@@ -701,7 +753,6 @@ final class Receiver
         {
             // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fread
             $chunk = fread($input_stream, $chunk_size);
-
             if($chunk === false)
             {
                 break;
@@ -709,7 +760,6 @@ final class Receiver
 
             // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fwrite
             $written = fwrite($output_stream, $chunk);
-
             if($written === false)
             {
                 // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose
@@ -718,6 +768,7 @@ final class Receiver
                 fclose($output_stream);
 
                 $response_description = esc_html__('Failed to write data to file.', 'wc1c-maincore');
+
                 $this->core()->log()->error($response_description, ['file_path' => $upload_file_path]);
                 $this->sendResponseByType('failure', $response_description);
             }
@@ -734,6 +785,7 @@ final class Receiver
         if($total_size === 0)
         {
             $response_description = esc_html__('The request contains no data to write to the file. Retry the upload.', 'wc1c-maincore');
+
             $this->core()->log()->error($response_description);
             $this->sendResponseByType('failure', $response_description);
         }
@@ -759,9 +811,9 @@ final class Receiver
 	{
 		$this->core()->log()->info(esc_html__('On request from 1C - started importing data from a file.', 'wc1c-maincore'));
 
-		$filename = wc1c()->getVar($_GET['filename'], '');
+		$filename = isset($_GET['filename']) ? sanitize_text_field(wp_unslash($_GET['filename'])) : '';
 
-		if($filename === '')
+		if(empty($filename))
 		{
 			$response_description = esc_html__('1C sent an empty file name for data import.', 'wc1c-maincore');
 

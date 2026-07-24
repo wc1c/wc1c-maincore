@@ -80,22 +80,23 @@ final class Environment
 	 *
 	 * @return bool
 	 */
-	public function initCurrentConfigurationId()
-	{
-		$config_id = absint(wc1c()->getVar($_GET['configuration_id'], 0));
+    public function initCurrentConfigurationId(): bool
+    {
+        $config_id = filter_input(INPUT_GET, 'configuration_id', FILTER_VALIDATE_INT);
 
-		if(0 < $config_id && 99999999 > $config_id)
-		{
-			if(wc1c()->context()->isReceiver() || wc1c()->context()->isAdmin())
-			{
-				$this->set('current_configuration_id', $config_id);
+        if($config_id === false || $config_id < 1 || $config_id > 99999999) {
+            return false;
+        }
 
-				return $this->get('current_configuration_id');
-			}
-		}
+        if(!wc1c()->context()->isReceiver() && !wc1c()->context()->isAdmin())
+        {
+            return false;
+        }
 
-		return false;
-	}
+        $this->set('current_configuration_id', $config_id);
+
+        return true;
+    }
 
 	/**
 	 * WordPress upload directory

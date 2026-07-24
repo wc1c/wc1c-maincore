@@ -1,5 +1,7 @@
 <?php defined('ABSPATH') || exit;
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
+
 use Wc1c\Main\Admin\Wizards\Setup\Complete;
 
 if(!isset($args['step']))
@@ -24,3 +26,5 @@ $step = $args['step'];
         <?php esc_html_e('Go to use', 'wc1c-maincore'); ?>
     </a>
 </p>
+
+<?php // phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound ?>

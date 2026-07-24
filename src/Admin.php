@@ -1,5 +1,7 @@
 <?php namespace Wc1c\Main;
 
+// phpcs:disable WordPress.Security.NonceVerification.Recommended
+
 defined('ABSPATH') || exit;
 
 use Digiom\Wotices\Interfaces\ManagerInterface;
@@ -24,7 +26,7 @@ final class Admin
 	use UtilityTrait;
 
 	/**
-	 * @var ManagerInterface Admin notices
+	 * @var ManagerInterface|null Admin notices
 	 */
 	private $notices;
 
@@ -73,11 +75,11 @@ final class Admin
 	 *
 	 * @return ManagerInterface
 	 */
-	public function notices()
+	public function notices(): ManagerInterface
 	{
 		if(empty($this->notices))
 		{
-            $admin = isset($_GET['page']) && 'wc1c' === $_GET['page'] && wc1c()->context()->isAdmin();
+            $admin = isset($_GET['page']) && 'wc1c' === wp_unslash($_GET['page']) && wc1c()->context()->isAdmin(); // phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 
 			$args =
 			[
@@ -95,8 +97,10 @@ final class Admin
 
 	/**
 	 * Init menu
+	 *
+	 * @return void
 	 */
-	public function addMenu()
+	public function addMenu(): void
 	{
 		add_submenu_page
 		(
@@ -111,8 +115,10 @@ final class Admin
 
 	/**
 	 * Initialization
+	 *
+	 * @return void
 	 */
-	public function init()
+	public function init(): void
 	{
 		// hook
 		do_action(wc1c()->context()->getSlug() . '_admin_before_init');
@@ -160,8 +166,10 @@ final class Admin
 
 	/**
 	 * Styles
+	 *
+	 * @return void
 	 */
-	public function initStyles()
+	public function initStyles(): void
 	{
 		wp_enqueue_style
 		(
@@ -174,29 +182,35 @@ final class Admin
 
     /**
      * Global styles
+     *
+     * @return void
      */
-    public function initGlobalStyles()
+    public function initGlobalStyles(): void
     {
         wp_enqueue_style
         (
             'wc1c_admin_global',
             wc1c()->environment()->get('plugin_directory_url') . 'assets/css/global.min.css',
             [],
-            wc1c()->environment()->get('wc1c_version')
+            wc1c()->environment()->get('wc1c_version'),
+            true
         );
     }
 
 	/**
 	 * Scripts
+	 *
+	 * @return void
 	 */
-	public function initScripts()
+	public function initScripts(): void
 	{
         wp_enqueue_script
         (
 			'wc1c_admin_bootstrap',
             wc1c()->environment()->get('plugin_directory_url') . 'assets/js/bootstrap/bootstrap.bundle.min.js',
 			[],
-			wc1c()->environment()->get('wc1c_version')
+			wc1c()->environment()->get('wc1c_version'),
+            true
         );
 
         wp_enqueue_script
@@ -204,7 +218,8 @@ final class Admin
 			'wc1c_admin_tocbot',
 			wc1c()->environment()->get('plugin_directory_url') . 'assets/js/tocbot/tocbot.min.js',
 			[],
-			wc1c()->environment()->get('wc1c_version')
+			wc1c()->environment()->get('wc1c_version'),
+            true
         );
 
 		wp_enqueue_script
@@ -212,14 +227,17 @@ final class Admin
 			'wc1c_admin_main',
 			wc1c()->environment()->get('plugin_directory_url') . 'assets/js/admin.js',
 			[],
-			wc1c()->environment()->get('wc1c_version')
+			wc1c()->environment()->get('wc1c_version'),
+            true
 		);
 	}
 
 	/**
 	 * Route sections
+	 *
+	 * @return void
 	 */
-	public function route()
+	public function route(): void
 	{
 		$sections = $this->getSections();
 		$current_section = $this->initCurrentSection();
@@ -250,16 +268,20 @@ final class Admin
 
 	/**
 	 * Error
+	 *
+	 * @return void
 	 */
-	public function wrapError()
+	public function wrapError(): void
 	{
 		wc1c()->views()->getView('error.php');
 	}
 
 	/**
 	 * Header
+	 *
+	 * @return void
 	 */
-	public function wrapHeader()
+	public function wrapHeader(): void
 	{
 		$args['url_create'] = $this->utilityAdminConfigurationsGetUrl('create');
 
@@ -268,8 +290,10 @@ final class Admin
 
 	/**
 	 * Sections
+	 *
+	 * @return void
 	 */
-	public function wrapSections()
+	public function wrapSections(): void
 	{
 		wc1c()->views()->getView('sections.php');
 	}

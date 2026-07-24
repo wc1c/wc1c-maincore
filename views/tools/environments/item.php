@@ -1,5 +1,7 @@
 <?php defined('ABSPATH') || exit; ?>
 
+<?php // phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound ?>
+
 <div class="mb-3 mt-2 pt-0 pb-0 pl-0 pr-0" style=" border: 1px solid rgba(0,0,0,.125);">
     <div class="card-header p-2">
         <h2 class="m-0 p-0 pb-1"><?php printf('%s', esc_html($args['title'])); ?></h2>
@@ -17,3 +19,5 @@
         </table>
     </div>
 </div>
+
+<?php // phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound ?>

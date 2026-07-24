@@ -1,5 +1,7 @@
 <?php defined('ABSPATH') || exit; ?>
 
+<?php // phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound ?>
+
 <tr>
     <td style="width: 40%;">
         <b><?php printf('%s', esc_html($args['title'])); ?></b>
@@ -11,3 +13,5 @@
 	    ?>
     </td>
 </tr>
+
+<?php // phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound ?>

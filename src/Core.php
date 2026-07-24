@@ -63,11 +63,13 @@ final class Core extends CoreAbstract
 
 	/**
 	 * Initialization
+	 *
+	 * @return void
 	 */
-	public function init()
+	public function init(): void
 	{
 		// hook
-		do_action($this->context()->getSlug() . '_before_init');
+		do_action($this->context()->getSlug() . '_before_init'); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound
 
 		$this->localization();
 
@@ -142,7 +144,7 @@ final class Core extends CoreAbstract
 		}
 
 		// hook
-		do_action($this->context()->getSlug() . '_after_init');
+		do_action($this->context()->getSlug() . '_after_init'); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound
 	}
 
 	/**
@@ -228,7 +230,7 @@ final class Core extends CoreAbstract
      * @param array $params
      * @return LoggerInterface
      */
-	public function log(string $channel = 'main', string $name = '', array $params = [])
+	public function log(string $channel = 'main', string $name = '', array $params = []): LoggerInterface
 	{
 		$channel = strtolower($channel);
 
@@ -248,7 +250,7 @@ final class Core extends CoreAbstract
 			}
 
 			$path = '';
-			$max_files = $this->settings('logs')->get('logger_files_max', 30);
+			$max_files = (int) $this->settings('logs')->get('logger_files_max', 30);
 
 			$logger = new Logger($channel);
 
@@ -282,7 +284,7 @@ final class Core extends CoreAbstract
 
             if(!is_null($params['files_max']))
             {
-                $max_files = $params['files_max'];
+                $max_files = (int) $params['files_max'];
             }
 
 			if('' === $path)
@@ -308,7 +310,10 @@ final class Core extends CoreAbstract
 					$logger->pushHandler(new StreamHandler('php://output', $level));
 				}
 			}
-			catch(\Throwable $e){}
+			catch(\Throwable $e)
+			{
+				// Silently fail, logger will be empty
+			}
 
 			/**
 			 * Внешние назначения для логгера
@@ -335,7 +340,7 @@ final class Core extends CoreAbstract
 	 *
 	 * @return SettingsAbstract
 	 */
-	public function settings(string $context = 'main')
+	public function settings(string $context = 'main'): SettingsAbstract
 	{
 		if(!isset($this->settings[$context]))
 		{
@@ -386,7 +391,7 @@ final class Core extends CoreAbstract
 				$php_max_execution = $this->settings()->get('php_max_execution_time', $php_max_execution);
 			}
 
-			$timer->setMaximum($php_max_execution);
+			$timer->setMaximum((int) $php_max_execution);
 
 			$this->timer = $timer;
 		}
@@ -408,8 +413,9 @@ final class Core extends CoreAbstract
 	 * Set Receiver
 	 *
 	 * @param Receiver $receiver
+	 * @return void
 	 */
-	public function setReceiver(Receiver $receiver)
+	public function setReceiver(Receiver $receiver): void
 	{
 		$this->receiver = $receiver;
 	}
@@ -420,7 +426,7 @@ final class Core extends CoreAbstract
 	 * @return void
 	 * @throws Exception
 	 */
-	private function loadReceiver()
+	private function loadReceiver(): void
 	{
         wc1c()->log()->debug(__('Receiver loading.', 'wc1c-maincore'));
 
@@ -446,20 +452,24 @@ final class Core extends CoreAbstract
 
 	/**
 	 * Load localisation
+	 *
+	 * @return void
 	 */
-	public function localization()
+	public function localization(): void
 	{
-        wc1c()->log()->debug(__('Localization loading.', 'default'));
+        wc1c()->log()->debug('Localization loading.');
 
 		$locale = determine_locale();
 
 		if(has_filter('plugin_locale'))
 		{
-			$locale = apply_filters('plugin_locale', $locale, 'wc1c-maincore');
+			$locale = apply_filters('plugin_locale', $locale, 'wc1c-maincore'); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 		}
 
-		load_textdomain('wc1c-maincore', WP_LANG_DIR . '/plugins/wc1c-maincore-' . $locale . '.mo');
-		load_textdomain('wc1c-maincore', wc1c()->environment()->get('plugin_directory_path') . 'assets/languages/wc1c-maincore-' . $locale . '.mo');
+		$loaded = load_textdomain('wc1c-maincore', WP_LANG_DIR . '/plugins/wc1c-maincore-' . $locale . '.mo');
+		if (!$loaded) {
+			load_textdomain('wc1c-maincore', wc1c()->environment()->get('plugin_directory_path') . 'assets/languages/wc1c-maincore-' . $locale . '.mo');
+		}
 
 		wc1c()->log()->debug(__('Localization loaded.', 'wc1c-maincore'), ['locale' => $locale]);
 	}
@@ -504,12 +514,13 @@ final class Core extends CoreAbstract
 	 *
 	 * @param string $name constant name
 	 * @param string|bool $value constant value
+	 * @return void
 	 */
-	public function define(string $name, $value)
+	public function define(string $name, $value): void
 	{
 		if(!defined($name))
 		{
-			define($name, $value);
+			define($name, $value); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.VariableConstantNameFound
 		}
 	}
 }

@@ -50,7 +50,19 @@ class InlineForm extends FormAbstract
 			return false;
 		}
 
-		if(empty($post_data) || !wp_verify_nonce($_POST[$data_key], 'wc1c-admin-' . $this->getId() . '-save'))
+        $data_process = true;
+
+        if(empty($post_data) || !isset($post_data[$data_key]) || !wp_verify_nonce(sanitize_text_field(wp_unslash($post_data[$data_key])), 'wc1c-admin-' . $this->getId() . '-save'))
+        {
+            $data_process = false;
+        }
+
+        if(!current_user_can('manage_options'))
+        {
+            $data_process = false;
+        }
+
+		if($data_process === false)
 		{
 			wc1c()->admin()->notices()->create
 			(
