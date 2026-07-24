@@ -312,7 +312,7 @@ class Init extends ToolAbstract
 		(
 			'title' => __('Server info', 'wc1c-maincore'),
 			'description' => '',
-			'data' => sanitize_text_field($_SERVER['SERVER_SOFTWARE'])
+			'data' => isset($_SERVER['SERVER_SOFTWARE']) ? sanitize_text_field(wp_unslash($_SERVER['SERVER_SOFTWARE'])) : ''
 		);
 
 		/**
