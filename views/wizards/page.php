@@ -1,5 +1,7 @@
 <?php defined('ABSPATH') || exit;
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
+
 use Wc1c\Main\Admin\Wizards\SetupWizard;
 
 if(!isset($args['wizard']))
@@ -57,3 +59,5 @@ $wizard = $args['wizard'];
         <?php do_action('wc1c_wizard_content_output'); ?>
 	</div>
 </div>
+
+<?php // phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound ?>

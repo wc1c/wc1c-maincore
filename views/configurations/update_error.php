@@ -1,5 +1,7 @@
 <?php defined('ABSPATH') || exit;
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
+
     $label = __('Back to configurations list', 'wc1c-maincore');
     wc1c()->views()->adminBackLink($label, $args['back_url']);
 
@@ -13,3 +15,5 @@
     <h3><?php printf('%s', esc_html($title)); ?></h3>
     <p><?php printf('%s', esc_html($text)); ?></p>
 </div>
+
+<?php // phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound ?>

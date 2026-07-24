@@ -149,8 +149,10 @@ final class Receiver
             /**
              * @param Configuration $configuration Текущая конфигурация
              * @param SchemaAbstract $schema Текущая схема
+             *
+             * todo: optimize via remove dynamic  hook
              */
-            do_action($receiver_action, $configuration, $schema);
+            do_action($receiver_action, $configuration, $schema); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound
 
             ob_end_clean();
         }

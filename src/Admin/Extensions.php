@@ -12,102 +12,102 @@ use Wc1c\Main\Traits\SingletonTrait;
  */
 final class Extensions
 {
-	use SingletonTrait;
+    use SingletonTrait;
 
-	/**
-	 * @var array Available actions
-	 */
-	private $actions =
-	[
-		'all',
-	];
+    /**
+     * @var array Available actions
+     */
+    private $actions =
+        [
+            'all',
+        ];
 
-	/**
-	 * @var string Current action
-	 */
-	private $current_action = 'all';
+    /**
+     * @var string Current action
+     */
+    private $current_action = 'all';
 
-	/**
-	 * Extensions constructor.
-	 */
-	public function __construct()
-	{
-		$actions = apply_filters('wc1c_admin_extensions_init_actions', $this->actions);
+    /**
+     * Extensions constructor.
+     */
+    public function __construct()
+    {
+        $actions = apply_filters('wc1c_admin_extensions_init_actions', $this->actions);
 
-		$this->setActions($actions);
+        $this->setActions($actions);
 
-		$current_action = $this->initCurrentAction();
+        $current_action = $this->initCurrentAction();
 
-		switch($current_action)
-		{
-			case 'all':
-				All::instance();
-				break;
-			default:
-				All::instance();
-		}
-	}
+        switch($current_action)
+        {
+            case 'all':
+                All::instance();
+                break;
+            default:
+                All::instance();
+        }
+    }
 
-	/**
-	 * Current action
-	 *
-	 * @return string
-	 */
-	public function initCurrentAction()
-	{
-		$do_action = wc1c()->getVar($_GET['do_action'], 'all');
+    /**
+     * Current action
+     *
+     * @return string
+     */
+    public function initCurrentAction()
+    {
+        $do_action = isset($_GET['do_action']) ? sanitize_text_field(wp_unslash($_GET['do_action'])) : 'all'; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
-		if(in_array($do_action, $this->getActions(), true))
-		{
-			$this->setCurrentAction($do_action);
-		}
+        if(in_array($do_action, $this->getActions(), true))
+        {
+            $this->setCurrentAction($do_action);
+        }
 
-		return $this->getCurrentAction();
-	}
+        return $this->getCurrentAction();
+    }
 
-	/**
-	 * Get actions
-	 *
-	 * @return array
-	 */
-	public function getActions()
-	{
-		return apply_filters('wc1c_admin_extensions_get_actions', $this->actions);
-	}
+    /**
+     * Get actions
+     *
+     * @return array
+     */
+    public function getActions()
+    {
+        return apply_filters('wc1c_admin_extensions_get_actions', $this->actions);
+    }
 
-	/**
-	 * Set actions
-	 *
-	 * @param array $actions
-	 */
-	public function setActions($actions)
-	{
-		// hook
-		$actions = apply_filters('wc1c_admin_extensions_set_actions', $actions);
+    /**
+     * Set actions
+     *
+     * @param array $actions
+     */
+    public function setActions($actions)
+    {
+        // hook
+        $actions = apply_filters('wc1c_admin_extensions_set_actions', $actions);
 
-		$this->actions = $actions;
-	}
+        $this->actions = $actions;
+    }
 
-	/**
-	 * Get current action
-	 *
-	 * @return string
-	 */
-	public function getCurrentAction()
-	{
-		return apply_filters('wc1c_admin_extensions_get_current_action', $this->current_action);
-	}
+    /**
+     * Get current action
+     *
+     * @return string
+     */
+    public function getCurrentAction()
+    {
+        return apply_filters('wc1c_admin_extensions_get_current_action', $this->current_action);
+    }
 
-	/**
-	 * Set current action
-	 *
-	 * @param string $current_action
-	 */
-	public function setCurrentAction($current_action)
-	{
-		// hook
-		$current_action = apply_filters('wc1c_admin_extensions_set_current_action', $current_action);
+    /**
+     * Set current action
+     *
+     * @param string $current_action
+     */
+    public function setCurrentAction($current_action)
+    {
+        // hook
+        $current_action = apply_filters('wc1c_admin_extensions_set_current_action', $current_action);
 
-		$this->current_action = $current_action;
-	}
+        $this->current_action = $current_action;
+    }
 }

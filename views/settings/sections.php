@@ -1,5 +1,7 @@
 <?php defined('ABSPATH') || exit;
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
+
 $admins = Wc1c\Main\Admin\Settings::instance();
 
 $views = [];
@@ -37,3 +39,5 @@ foreach($views as $class => $view)
 }
 echo wp_kses_post(implode(" |</li>", $views) . "</li>");
 echo '</ul>';
+
+// phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound

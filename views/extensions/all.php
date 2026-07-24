@@ -1,5 +1,7 @@
 <?php defined('ABSPATH') || exit; ?>
 
+<?php // phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound ?>
+
 <?php do_action('wc1c_admin_extensions_before_show'); ?>
 
 <div class="extensions-all bg-white p-1 px-2 rounded-3 mt-2">

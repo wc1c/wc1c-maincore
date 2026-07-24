@@ -26,7 +26,7 @@ final class SetupWizard extends WizardAbstract
 	{
 		$this->setId('setup');
 		$this->setDefaultSteps();
-		$this->setStep(isset($_GET[$this->getId()]) ? sanitize_key($_GET[$this->getId()]) : current(array_keys($this->getSteps())));
+		$this->setStep(isset($_GET[$this->getId()]) ? sanitize_key(wp_unslash($_GET[$this->getId()])) : current(array_keys($this->getSteps()))); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 		$this->init();
 	}

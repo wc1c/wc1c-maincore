@@ -1,7 +1,9 @@
 <?php defined('ABSPATH') || exit; ?>
 
+<?php // phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound ?>
+
 <?php
-	if(empty($_REQUEST['s']))
+	if(empty($_REQUEST['s'])) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 	{
 ?>
     <div class="alert alert-primary fs-6">
@@ -14,8 +16,9 @@
 
 <h2 class="mt-0">
 <?php
-	if(!empty($_REQUEST['s']))
+	if(!empty($_REQUEST['s'])) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 	{
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended
         $search_text = sanitize_text_field(wp_unslash($_REQUEST['s']));
 
         echo '<br/>';
@@ -29,7 +32,7 @@
 </h2>
 
 <?php
-    if(empty($_REQUEST['s']))
+    if(empty($_REQUEST['s'])) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
     {
 ?>
     <p class="fs-6">
@@ -42,3 +45,5 @@
 <?php
     }
 ?>
+
+<?php // phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound ?>

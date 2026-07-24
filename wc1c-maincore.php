@@ -32,16 +32,16 @@ namespace
 	{
 		define('WC1C_PLUGIN_FILE', __FILE__);
 
-		$autoloader = __DIR__ . '/vendor/autoload.php';
+		$wc1c_autoloader = __DIR__ . '/vendor/autoload.php';
 
-		if(!is_readable($autoloader))
+		if(!is_readable($wc1c_autoloader))
 		{
             // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_trigger_error
-            trigger_error(sprintf('%1$s: %2$s','File is not found', esc_attr($autoloader)));
+            trigger_error(sprintf('%1$s: %2$s','File is not found', esc_attr($wc1c_autoloader)));
 			return false;
 		}
 
-		require_once $autoloader;
+		require_once $wc1c_autoloader;
 
         /**
          * Adds an action to declare compatibility with High Performance Order Storage (HPOS) before WooCommerce initialization.
@@ -99,7 +99,7 @@ namespace Wc1c\Main
         }
     });
 
-	$loader = new \Digiom\Woplucore\Loader();
+	$loader = new \Digiom\Woplucore\Loader(); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 
     $loader->addNamespace(__NAMESPACE__, plugin_dir_path(__FILE__) . 'src');
 
@@ -118,7 +118,7 @@ namespace Wc1c\Main
 		return false;
 	}
 
-	$context = new Context(__FILE__, 'wc1c', $loader);
+	$context = new Context(__FILE__, 'wc1c', $loader); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 
 	wc1c()->register($context);
 }

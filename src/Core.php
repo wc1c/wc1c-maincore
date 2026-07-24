@@ -69,7 +69,7 @@ final class Core extends CoreAbstract
 	public function init(): void
 	{
 		// hook
-		do_action($this->context()->getSlug() . '_before_init');
+		do_action($this->context()->getSlug() . '_before_init'); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound
 
 		$this->localization();
 
@@ -144,7 +144,7 @@ final class Core extends CoreAbstract
 		}
 
 		// hook
-		do_action($this->context()->getSlug() . '_after_init');
+		do_action($this->context()->getSlug() . '_after_init'); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound
 	}
 
 	/**
@@ -463,7 +463,7 @@ final class Core extends CoreAbstract
 
 		if(has_filter('plugin_locale'))
 		{
-			$locale = apply_filters('plugin_locale', $locale, 'wc1c-maincore');
+			$locale = apply_filters('plugin_locale', $locale, 'wc1c-maincore'); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 		}
 
 		$loaded = load_textdomain('wc1c-maincore', WP_LANG_DIR . '/plugins/wc1c-maincore-' . $locale . '.mo');
@@ -520,7 +520,7 @@ final class Core extends CoreAbstract
 	{
 		if(!defined($name))
 		{
-			define($name, $value);
+			define($name, $value); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.VariableConstantNameFound
 		}
 	}
 }

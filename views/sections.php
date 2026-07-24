@@ -1,4 +1,7 @@
 <?php namespace Wc1c\Main;
+
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
+
 defined('ABSPATH') || exit;
 
 $admin = Admin::instance();
@@ -32,3 +35,5 @@ foreach($admin->getSections() as $tab_key => $tab_name)
 printf('%s', wp_kses_post($nav));
 
 echo '</nav>';
+
+// phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound

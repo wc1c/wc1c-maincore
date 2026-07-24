@@ -1,5 +1,7 @@
 <?php namespace Wc1c\Main;
 
+// phpcs:disable WordPress.Security.NonceVerification.Recommended
+
 defined('ABSPATH') || exit;
 
 use Digiom\Wotices\Interfaces\ManagerInterface;
@@ -77,7 +79,7 @@ final class Admin
 	{
 		if(empty($this->notices))
 		{
-            $admin = isset($_GET['page']) && 'wc1c' === $_GET['page'] && wc1c()->context()->isAdmin();
+            $admin = isset($_GET['page']) && 'wc1c' === wp_unslash($_GET['page']) && wc1c()->context()->isAdmin(); // phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 
 			$args =
 			[
@@ -190,7 +192,8 @@ final class Admin
             'wc1c_admin_global',
             wc1c()->environment()->get('plugin_directory_url') . 'assets/css/global.min.css',
             [],
-            wc1c()->environment()->get('wc1c_version')
+            wc1c()->environment()->get('wc1c_version'),
+            true
         );
     }
 
@@ -206,7 +209,8 @@ final class Admin
 			'wc1c_admin_bootstrap',
             wc1c()->environment()->get('plugin_directory_url') . 'assets/js/bootstrap/bootstrap.bundle.min.js',
 			[],
-			wc1c()->environment()->get('wc1c_version')
+			wc1c()->environment()->get('wc1c_version'),
+            true
         );
 
         wp_enqueue_script
@@ -214,7 +218,8 @@ final class Admin
 			'wc1c_admin_tocbot',
 			wc1c()->environment()->get('plugin_directory_url') . 'assets/js/tocbot/tocbot.min.js',
 			[],
-			wc1c()->environment()->get('wc1c_version')
+			wc1c()->environment()->get('wc1c_version'),
+            true
         );
 
 		wp_enqueue_script
@@ -222,7 +227,8 @@ final class Admin
 			'wc1c_admin_main',
 			wc1c()->environment()->get('plugin_directory_url') . 'assets/js/admin.js',
 			[],
-			wc1c()->environment()->get('wc1c_version')
+			wc1c()->environment()->get('wc1c_version'),
+            true
 		);
 	}
 
