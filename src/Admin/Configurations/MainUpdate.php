@@ -39,7 +39,12 @@ class MainUpdate
 
 		$form->loadSavedData($form_data);
 
-		if(isset($_GET['form']) && sanitize_text_field($_GET['form']) === $form->getId())
+		if
+        (
+            isset($_GET['form']) && isset($_POST['_wc1c-admin-nonce']) &&
+			wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['_wc1c-admin-nonce'])), 'wc1c-admin-configurations-update-save') &&
+			sanitize_text_field(wp_unslash($_GET['form'])) === $form->getId()
+		)
 		{
 			$data = $form->save();
 
