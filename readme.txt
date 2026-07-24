@@ -1,6 +1,6 @@
 === WC1C-Maincore ===
 Contributors: WC1C, Frescoref
-Tags: commerceml, 1c, cml, wc1c, integration 1C
+Tags: commerceml, 1c, cml, wc1c, integration-1c
 Requires at least: 5.3
 Tested up to: 7.0
 Requires PHP: 7.4
