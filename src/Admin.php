@@ -24,7 +24,7 @@ final class Admin
 	use UtilityTrait;
 
 	/**
-	 * @var ManagerInterface Admin notices
+	 * @var ManagerInterface|null Admin notices
 	 */
 	private $notices;
 
@@ -73,7 +73,7 @@ final class Admin
 	 *
 	 * @return ManagerInterface
 	 */
-	public function notices()
+	public function notices(): ManagerInterface
 	{
 		if(empty($this->notices))
 		{
@@ -95,8 +95,10 @@ final class Admin
 
 	/**
 	 * Init menu
+	 *
+	 * @return void
 	 */
-	public function addMenu()
+	public function addMenu(): void
 	{
 		add_submenu_page
 		(
@@ -111,8 +113,10 @@ final class Admin
 
 	/**
 	 * Initialization
+	 *
+	 * @return void
 	 */
-	public function init()
+	public function init(): void
 	{
 		// hook
 		do_action(wc1c()->context()->getSlug() . '_admin_before_init');
@@ -160,8 +164,10 @@ final class Admin
 
 	/**
 	 * Styles
+	 *
+	 * @return void
 	 */
-	public function initStyles()
+	public function initStyles(): void
 	{
 		wp_enqueue_style
 		(
@@ -174,8 +180,10 @@ final class Admin
 
     /**
      * Global styles
+     *
+     * @return void
      */
-    public function initGlobalStyles()
+    public function initGlobalStyles(): void
     {
         wp_enqueue_style
         (
@@ -188,8 +196,10 @@ final class Admin
 
 	/**
 	 * Scripts
+	 *
+	 * @return void
 	 */
-	public function initScripts()
+	public function initScripts(): void
 	{
         wp_enqueue_script
         (
@@ -218,8 +228,10 @@ final class Admin
 
 	/**
 	 * Route sections
+	 *
+	 * @return void
 	 */
-	public function route()
+	public function route(): void
 	{
 		$sections = $this->getSections();
 		$current_section = $this->initCurrentSection();
@@ -250,16 +262,20 @@ final class Admin
 
 	/**
 	 * Error
+	 *
+	 * @return void
 	 */
-	public function wrapError()
+	public function wrapError(): void
 	{
 		wc1c()->views()->getView('error.php');
 	}
 
 	/**
 	 * Header
+	 *
+	 * @return void
 	 */
-	public function wrapHeader()
+	public function wrapHeader(): void
 	{
 		$args['url_create'] = $this->utilityAdminConfigurationsGetUrl('create');
 
@@ -268,8 +284,10 @@ final class Admin
 
 	/**
 	 * Sections
+	 *
+	 * @return void
 	 */
-	public function wrapSections()
+	public function wrapSections(): void
 	{
 		wc1c()->views()->getView('sections.php');
 	}

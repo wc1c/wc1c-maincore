@@ -1,8 +1,8 @@
 <?php namespace Wc1c\Main;
 
-use Wc1c\Main\Schemas\Abstracts\SchemaAbstract;
-
 defined('ABSPATH') || exit;
+
+use Wc1c\Main\Schemas\Abstracts\SchemaAbstract;
 
 /**
  * Receiver
@@ -24,7 +24,7 @@ final class Receiver
 	 *
 	 * @return void
 	 */
-	public function register()
+	public function register(): void
 	{
 		if(false === wc1c()->context()->isReceiver())
 		{
@@ -36,12 +36,19 @@ final class Receiver
 
 	/**
 	 * Handle requests
+	 *
+	 * @return void
 	 */
-	public function handleRequests()
+	public function handleRequests(): void
 	{
-		$_wc1c_receiver = sanitize_text_field($_GET['wc1c-receiver']);
+		$wc1c_receiver_raw = $_GET['wc1c-receiver'] ?? '';
+		$wc1c_receiver = sanitize_text_field($wc1c_receiver_raw);
 
-		$wc1c_receiver = wc1c()->getVar($_wc1c_receiver, false);
+		if('' === $wc1c_receiver)
+		{
+			wc1c()->log('receiver')->warning(esc_html__('Receiver request missing configuration ID.', 'wc1c-maincore'));
+			die(esc_html__('Receiver request missing configuration ID.', 'wc1c-maincore'));
+		}
 
 		wc1c()->log('receiver')->info(esc_html__('Received new request for Receiver.', 'wc1c-maincore'));
 		wc1c()->log('receiver')->debug(esc_html__('Receiver request params.', 'wc1c-maincore'), ['GET' => $_GET, 'POST' => $_POST, 'SERVER' => $_SERVER]);
