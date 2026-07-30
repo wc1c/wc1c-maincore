@@ -488,15 +488,6 @@ final class Receiver extends ReceiverAbstract
     {
         $this->core()->log()->info(esc_html__('Initializing 1C request receiver.', 'wc1c-maincore'));
 
-        if(has_filter('wc1c_schema_productscml_handler_catalog_mode_init_session'))
-        {
-            $_SESSION = apply_filters('wc1c_schema_productscml_handler_catalog_mode_init_session', $_SESSION, $this);
-
-            $this->core()->log()->info(esc_html__('Session for receiving requests is changed by external algorithms.', 'wc1c-maincore'), ['session'=> $_SESSION]);
-        }
-
-        $this->core()->log()->debug(esc_html__('Session for receiving requests.', 'wc1c-maincore'), ['session'=> $_SESSION]);
-
         $directory = $this->core()->getUploadDirectory();
 
         $this->core()->log()->info(esc_html__('Check the directory for temporary files.', 'wc1c-maincore'), ['directory' => $directory]);
