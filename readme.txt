@@ -49,15 +49,9 @@ Work is possible with all versions of 1C, which logically requires integration w
 = Is it possible to update only some product data? =
 This is possible, but depends on the exchange scheme used and the extensions installed. You can not only update prices, balances separately, but also update them and other information on various conditions.
 
-= What is activation in the settings and what does it give? =
-Activation allows the WC1C team to work on improving the plugin and release updates. In addition to providing financial assistance to improve WC1C, projects with activation have additional features, transmit statistical information and error data in the background for further release of updates.
-
 = Missing feature, how to add it? =
 First of all, you need to look at the section with extensions on the official website. If there is no extension that adds the desired feature, you can develop this feature yourself, or turn to paid services.
 You can also try to ask to add this feature for free (if activated) to the main plugin, or try to implement it through actions and filters (extensibility mechanism).
-
-= Are updates being released? =
-Updates are released as needed, but only when available to the WC1C team. For more or less guaranteed receipt of timely updates, you can purchase an activation code. On average, updates are needed once a month when WooCommerce updates are released.
 
 == Screenshots ==
 
