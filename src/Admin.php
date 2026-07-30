@@ -59,11 +59,6 @@ final class Admin
 			Admin\Wizards\Init::instance();
 		}
 
-		if(function_exists('is_plugin_active') && is_plugin_active('wc1c/wc1c.php'))
-		{
-			deactivate_plugins( 'wc1c/wc1c.php', true);
-		}
-
 		add_filter('plugin_action_links_' . wc1c()->environment()->get('plugin_basename'), [$this, 'linksLeft']);
 
 		// hook
