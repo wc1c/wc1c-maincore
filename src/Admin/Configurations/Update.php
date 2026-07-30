@@ -37,14 +37,6 @@ class Update
 			'callback' => [MainUpdate::class, 'instance']
 		];
 
-        $default_sections['logs'] =
-        [
-            'title' => __('Logs', 'wc1c-maincore'),
-            'visible' => true,
-            'callback' => [\Wc1c\Main\Admin\Promo\Logs::class, 'instance'],
-            'class' => 'promo'
-        ];
-
 		if(has_action('wc1c_admin_configurations_update_sections'))
 		{
 			$default_sections = apply_filters('wc1c_admin_configurations_update_sections', $default_sections);
