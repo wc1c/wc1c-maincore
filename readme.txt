@@ -4,7 +4,7 @@ Tags: commerceml, 1c, cml, wc1c, integration-1c
 Requires at least: 5.3
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 0.24.1
+Stable tag: 0.24.2
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Donate link: https://wc1c.info/market
@@ -70,6 +70,10 @@ Updates are released as needed, but only when available to the WC1C team. For mo
 
 == Changelog ==
 List of major changes from version to version. [Goto full list.](https://wc1c.info/changelogs)
+
+= 0.24.2 =
+* Remove: all promo
+* Fix: more
 
 = 0.24.1 =
 * Up: ProductsCML to 0.16.1

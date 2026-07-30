@@ -3,7 +3,7 @@
  * Plugin Name: WC1C-Maincore
  * Plugin URI: https://wordpress.org/plugins/wc1c-maincore/
  * Description: Implementing a flexible mechanism for exchanging various data between 1C Company products and the WooCommerce plugin.
- * Version: 0.24.1
+ * Version: 0.24.2
  * WC requires at least: 4.5
  * WC tested up to: 10.9
  * Requires at least: 5.3
