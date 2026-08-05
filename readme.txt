@@ -69,6 +69,7 @@ A summary of major changes. [View the full changelog here.](https://wc1c.info/ch
 * Updated: ProductsCML library to v0.16.2.
 * Updated: ProductsCleanerCML library to v0.5.2.
 * Fixed: Miscellaneous bugs and stability improvements.
+* Updated: `readme.txt` formatting.
 
 = 0.24.1 =
 * Updated: ProductsCML to v0.16.1.
