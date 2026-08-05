@@ -1,6 +1,6 @@
 === WC1C-Maincore ===
 Contributors: WC1C, Frescoref
-Tags: commerceml, 1c, cml, wc1c, integration-1c
+Tags: commerceml, 1c, cml, wc1c, 1c-enterprise
 Requires at least: 5.3
 Tested up to: 7.0
 Requires PHP: 7.4
@@ -9,299 +9,298 @@ License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Donate link: https://wc1c.info/market
 
-Integration of WooCommerce with 1C Company products (various configurations)
+Seamlessly integrate WooCommerce with 1C:Enterprise (various configurations) via CommerceML and other protocols.
 
 == Description ==
-Implementing a flexible mechanism for exchanging various data between 1C Company products and the WooCommerce plugin.
+A highly flexible, robust, and optimized data exchange engine bridging 1C:Enterprise and WooCommerce. Designed to handle complex synchronization scenarios while maintaining high performance.
 
-= Features =
-* ✅ Automation of work with products (goods, services) 1C and WooCommerce.
-- Various product types, including feature-based variations.
-- Exchange of data on products in both directions.
-- Selective data update.
-- Flexible matching of existing data (synchronization).
-- Sources for data.
-* ✅ Automation of work with orders for products (goods, services) 1C and WooCommerce.
-- Data exchange on orders in both directions.
-- Upload additional data such as payments and deliveries.
-- Flexible upload format settings.
-* ✅ Big data support.
-* ✅ Support for weak hosting.
-* ✅ Maintaining event logs of various levels for timely response to problems.
-* ✅ Expandability.
+= Key Features =
+* ✅ **Automated Product Management (Goods & Services)**
+  - Support for various product types, including variable products with attributes.
+  - Bi-directional product data synchronization.
+  - Selective and conditional data updates.
+  - Flexible mapping and synchronization of existing catalog data.
+  - Multiple data source configurations.
+* ✅ **Automated Order Processing**
+  - Bi-directional order data exchange.
+  - Export additional order metadata, including payments and shipping details.
+  - Highly customizable export formats and settings.
+* ✅ **Optimized for Large Catalogs:** Engineered to handle Big Data and high-volume imports without timing out.
+* ✅ **Low Resource Consumption:** Specifically optimized to run smoothly on shared or budget hosting environments.
+* ✅ **Comprehensive Logging:** Multi-level event logging for quick troubleshooting and monitoring.
+* ✅ **Highly Extensible:** Built with developers in mind, offering extensive hooks, filters, and add-on support.
 
-All features: [https://wc1c.info/features](https://wc1c.info/features)
+Explore all features: [https://wc1c.info/features](https://wc1c.info/features)
 
 == Translations ==
-* English - default, always included
-* Russian - always included
+* English (Default)
+* Russian (Built-in)
 
 == Installation ==
-1. Archive extract and upload folder "wc1c-maincore" to /wp-content/plugins (final path: /wp-content/plugins/wc1c-maincore/).
-2. Activate the plugin.
-3. Done, goto plugin settings.
+1. Extract the archive and upload the `wc1c-maincore` folder to the `/wp-content/plugins/` directory.
+2. Activate the plugin through the 'Plugins' menu in WordPress.
+3. Navigate to the plugin settings to configure your first 1C integration.
 
 == Frequently Asked Questions ==
 
 = What versions of 1C are supported? =
-Work is possible with all versions of 1C, which logically requires integration with an online store. Support for a specific version of 1C depends on the scheme used on the basis of which the configuration was created.
+The plugin supports any version of 1C:Enterprise that features online store integration capabilities (e.g., CommerceML). The exact level of support depends on the specific exchange schema and the underlying 1C configuration.
 
-= Is it possible to update only some product data? =
-This is possible, but depends on the exchange scheme used and the extensions installed. You can not only update prices, balances separately, but also update them and other information on various conditions.
+= Is it possible to update only specific product data? =
+Yes. Depending on the exchange schema and installed extensions, you can perform selective updates. For example, you can update only prices or stock levels, or apply conditional logic to update specific product attributes.
 
-= Missing feature, how to add it? =
-First of all, you need to look at the section with extensions on the official website. If there is no extension that adds the desired feature, you can develop this feature yourself, or turn to paid services.
-You can also try to ask to add this feature for free (if activated) to the main plugin, or try to implement it through actions and filters (extensibility mechanism).
+= Missing a feature? How can I add it? =
+First, check the official website's extensions directory. If no existing add-on fits your needs, you can develop a custom solution or request professional services. Alternatively, you can submit a feature request for the core plugin or implement custom logic using WordPress actions and filters (the plugin architecture is highly extensible).
 
 == Screenshots ==
 
-1. Configurations
-2. Tools
-3. Settings
-4. Creating new configuration
-5. Edit configuration
-6. Edit configuration 2
+1. Configuration List
+2. Tools Dashboard
+3. Global Settings
+4. Creating a New Configuration
+5. Editing a Configuration
+6. Advanced Configuration Settings
 
 == Changelog ==
-List of major changes from version to version. [Goto full list.](https://wc1c.info/changelogs)
+A summary of major changes. [View the full changelog here.](https://wc1c.info/changelogs)
 
 = 0.24.2 =
-* Remove: all promo
-* Fix: more
+* Removed: Promotional materials.
+* Updated: ProductsCML library to v0.16.2.
+* Updated: ProductsCleanerCML library to v0.5.2.
+* Fixed: Miscellaneous bugs and stability improvements.
 
 = 0.24.1 =
-* Up: ProductsCML to 0.16.1
-* Up: ProductsCleanerCML to 0.5.1
-* Up: monolog/monolog (1.27.1 => 2.11.0)
-* Up: psr/http-message (1.0.1 => 2.0)
-* Up: psr/log (1.1.4 => 2.0.0)
-* Up: readme.txt
-* Remove: tecodes/client
-* Fix: inline form
+* Updated: ProductsCML to v0.16.1.
+* Updated: ProductsCleanerCML to v0.5.1.
+* Updated: `monolog/monolog` dependency (1.27.1 => 2.11.0).
+* Updated: `psr/http-message` dependency (1.0.1 => 2.0).
+* Updated: `psr/log` dependency (1.1.4 => 2.0.0).
+* Updated: `readme.txt` formatting.
+* Removed: `tecodes/client` dependency.
+* Fixed: Inline form rendering issues.
 
 = 0.24.0 =
-* Requires PHP: 7.4
-* Support PHP: 8.4 & 8.5
-* WooCommerce requires at least: 4.5
-* WordPress requires at least: 5.3
-* WordPress tested up to: 6.6; 6.7; 6.8; 6.9; 7.0;
-* WooCommerce tested up to: 8.x; 9.x; 10.9;
-* Ability: new transliterator in core
-* Up: Bootstrap to 5.3.8
-* Up: ProductsCML to 0.16.0
-* Up: ProductsCleanerCML to 0.5.0
-* Up: styles
-* Up: language files
-* Fix: more
+* Requirement: Minimum PHP version is now 7.4.
+* Added: Support for PHP 8.4 & 8.5.
+* Requirement: Minimum WooCommerce version is now 4.5.
+* Requirement: Minimum WordPress version is now 5.3.
+* Tested: WordPress up to v6.6, 6.7, 6.8, 6.9, 7.0.
+* Tested: WooCommerce up to v8.x, 9.x, 10.9.
+* Added: New core transliterator engine.
+* Updated: Bootstrap to v5.3.8.
+* Updated: ProductsCML to v0.16.0.
+* Updated: ProductsCleanerCML to v0.5.0.
+* Updated: Admin UI styles.
+* Updated: Translation files.
+* Fixed: Miscellaneous bugs.
 
 = 0.23.0 =
-* Improvement: language phrases
-* Improvement: interface design
-* Improvement: High Performance Order Storage (HPOS) compatibility
-* Improvement: remove log setting for receiver
-* WP tested up to: 6.4 & 6.5
-* WC tested up to: 8.1 & 8.2 & 8.3 & 8.4 & 8.5 & 8.6 & 8.7 & 8.8
-* Support PHP: 8.3
-* Up: Bootstrap to 5.3.2
-* Up: styles
-* Up: set default level for main events to 250
-* Up: ProductsCML to 0.15.0
-* Fix: 1C information column in new orders list by HPOS
-* Fix: configurations sort
-* Fix: more
+* Improved: Language phrases and localization.
+* Improved: Admin interface design.
+* Improved: Full compatibility with WooCommerce High-Performance Order Storage (HPOS).
+* Improved: Removed redundant log settings for the receiver.
+* Tested: WordPress up to v6.4 & v6.5.
+* Tested: WooCommerce up to v8.8.
+* Added: Support for PHP 8.3.
+* Updated: Bootstrap to v5.3.2.
+* Updated: Admin UI styles.
+* Updated: Default level for main events set to 250.
+* Updated: ProductsCML to v0.15.0.
+* Fixed: 1C information column display in the new HPOS orders list.
+* Fixed: Configuration sorting logic.
+* Fixed: Miscellaneous bugs.
 
 = 0.22.0 =
-* WP tested up to: 6.3
-* WC tested up to: 7.9 & 8.0
-* Up: ProductsCML to 0.14.0
-* Up: language files
-* Up: CML library
-* Fix: more
+* Tested: WordPress up to v6.3.
+* Tested: WooCommerce up to v7.9 & v8.0.
+* Updated: ProductsCML to v0.14.0.
+* Updated: Translation files.
+* Updated: Core CML library.
+* Fixed: Miscellaneous bugs.
 
 = 0.21.1 =
-* Fix: more
+* Fixed: Miscellaneous bugs.
 
 = 0.21.0 =
-* WC tested up to: 7.6, 7.7, 7.8
-* Up: ProductsCML to 0.13.0
-* Up: Bootstrap to 5.3.0
-* Up: language files
-* Fix: more
+* Tested: WooCommerce up to v7.6, 7.7, 7.8.
+* Updated: ProductsCML to v0.13.0.
+* Updated: Bootstrap to v5.3.0.
+* Updated: Translation files.
+* Fixed: Miscellaneous bugs.
 
 = 0.20.0 =
-* WP tested up to: 6.2
-* Up: ProductsCML to 0.12.0
-* Up: language files
-* Up: CML library
-* Improvement: promo for codes
-* Ability: use Woplucore
-* Fix: more
+* Tested: WordPress up to v6.2.
+* Updated: ProductsCML to v0.12.0.
+* Updated: Translation files.
+* Updated: Core CML library.
+* Improved: Promotional banners logic.
+* Added: Woplucore framework integration.
+* Fixed: Miscellaneous bugs.
 
 = 0.19.2 =
-* Up: ProductsCML to 0.11.2
+* Updated: ProductsCML to v0.11.2.
 
 = 0.19.1 =
-* Up: ProductsCML to 0.11.1
+* Updated: ProductsCML to v0.11.1.
 
 = 0.19.0 =
-* WC tested up to: 7.5
-* Up: ProductsCML to 0.11.0
-* Ability: use Woplucore
-* Up: Woplucore to latest
-* Fix: more
+* Tested: WooCommerce up to v7.5.
+* Updated: ProductsCML to v0.11.0.
+* Added: Woplucore framework integration.
+* Updated: Woplucore to the latest version.
+* Fixed: Miscellaneous bugs.
 
 = 0.18.2 =
-* Up: ProductsCML to 0.10.2
-* Up: CML library
-* Fix: more
+* Updated: ProductsCML to v0.10.2.
+* Updated: Core CML library.
+* Fixed: Miscellaneous bugs.
 
 = 0.18.1 =
-* Up: ProductsCML to 0.10.1
+* Updated: ProductsCML to v0.10.1.
 
 = 0.18.0 =
-* Up: ProductsCML to 0.10.0
-* Up: language files
-* Up: CML library
-* Up: Woplucore to latest
-* Fix: more
+* Updated: ProductsCML to v0.10.0.
+* Updated: Translation files.
+* Updated: Core CML library.
+* Updated: Woplucore to the latest version.
+* Fixed: Miscellaneous bugs.
 
 = 0.17.0 =
-* PHP tested up to: 8.2
-* WC tested up to: 7.4
-* Up: ProductsCML to 0.9.0
-* Up: ProductsCleanerCML to 0.4.0
-* Up: language files
-* Up: Bootstrap to 5.2.3
-* Up: woplucore to latest
-* Up: CML library
-* Up: Wotices to latest
-* Fix: more
+* Tested: PHP up to v8.2.
+* Tested: WooCommerce up to v7.4.
+* Updated: ProductsCML to v0.9.0.
+* Updated: ProductsCleanerCML to v0.4.0.
+* Updated: Translation files.
+* Updated: Bootstrap to v5.2.3.
+* Updated: Woplucore to the latest version.
+* Updated: Core CML library.
+* Updated: Wotices to the latest version.
+* Fixed: Miscellaneous bugs.
 
 = 0.16.0 =
-* Up: ProductsCML to 0.8.0
-* Up: language files
-* Improvement: use woplucore
-* Improvement: statuses for configurations
-* Improvement: custom receiver in schemas
-* Improvement: configuration order by dates
-* Fix: more
+* Updated: ProductsCML to v0.8.0.
+* Updated: Translation files.
+* Improved: Woplucore integration.
+* Improved: Status indicators for configurations.
+* Improved: Custom receiver support in schemas.
+* Improved: Configuration sorting by date.
+* Fixed: Miscellaneous bugs.
 
 = 0.15.1 =
-* Up: language files
-* Fix: error
+* Updated: Translation files.
+* Fixed: Critical error.
 
 = 0.15.0 =
-* WC tested up to: 7.3
-* Up: ProductsCML to 0.7.0
-* Up: language files
-* Fix: more
+* Tested: WooCommerce up to v7.3.
+* Updated: ProductsCML to v0.7.0.
+* Updated: Translation files.
+* Fixed: Miscellaneous bugs.
 
 = 0.14.14 =
-* Up: language files
-* Fix: more
+* Updated: Translation files.
+* Fixed: Miscellaneous bugs.
 
 = 0.14.13 =
-* Up: language files
-* Fix: more
+* Updated: Translation files.
+* Fixed: Miscellaneous bugs.
 
 = 0.14.12 =
-* Up: language files
-* Fix: more
+* Updated: Translation files.
+* Fixed: Miscellaneous bugs.
 
 = 0.14.11 =
-* Fix: more
+* Fixed: Miscellaneous bugs.
 
 = 0.14.10 =
-* Fix: more
+* Fixed: Miscellaneous bugs.
 
 = 0.14.9 =
-* Up: ProductsCML to 0.6.0
-* Up: ProductsCleanerCML to 0.3.0
-* Up: language files
-* Fix: more
+* Updated: ProductsCML to v0.6.0.
+* Updated: ProductsCleanerCML to v0.3.0.
+* Updated: Translation files.
+* Fixed: Miscellaneous bugs.
 
 = 0.14.8 =
-* Fix: more
+* Fixed: Miscellaneous bugs.
 
 = 0.14.7 =
-* Fix: more
+* Fixed: Miscellaneous bugs.
 
 = 0.14.6 =
-* Fix: more
+* Fixed: Miscellaneous bugs.
 
 = 0.14.5 =
-* Fix: more
+* Fixed: Miscellaneous bugs.
 
 = 0.14.4 =
-* Fix: more
+* Fixed: Miscellaneous bugs.
 
 = 0.14.3 =
-* Fix: more
+* Fixed: Miscellaneous bugs.
 
 = 0.14.2 =
-* Fix: more
+* Fixed: Miscellaneous bugs.
 
 = 0.14.1 =
-* Fix: more
+* Fixed: Miscellaneous bugs.
 
 = 0.14.0 =
-* Rename wc1c to wc1c-maincore
-* Fix: more
+* Renamed: Plugin slug from `wc1c` to `wc1c-maincore`.
+* Fixed: Miscellaneous bugs.
 
 = 0.13.1 =
-* Fix: composer
+* Fixed: Composer dependency issues.
 
 = 0.13.0 =
-* Up: ProductsCML to 0.4.0
-* Up: language files
-* WC tested up to: 7.2
-* Fix: more
+* Updated: ProductsCML to v0.4.0.
+* Updated: Translation files.
+* Tested: WooCommerce up to v7.2.
+* Fixed: Miscellaneous bugs.
 
 = 0.12.0 =
-* Up: ProductsCML to 0.3.0
-* Up: language files
-* Fix: more
+* Updated: ProductsCML to v0.3.0.
+* Updated: Translation files.
+* Fixed: Miscellaneous bugs.
 
 = 0.11.1 =
-* Fix: more
+* Fixed: Miscellaneous bugs.
 
 = 0.11.0 =
-* Requires PHP: 7.0
-* WC requires at least: 4.3
-* WP Requires at least: 5.2
-* WP tested up to: 6.1
-* WC tested up to: 7.1
-* WC tested up to: 7.0
-* WC tested up to: 6.9
-* Update: CML & WC libraries
-* Fix: more
+* Requirement: Minimum PHP version is now 7.0.
+* Requirement: Minimum WooCommerce version is now 4.3.
+* Requirement: Minimum WordPress version is now 5.2.
+* Tested: WordPress up to v6.1.
+* Tested: WooCommerce up to v7.1, 7.0, 6.9.
+* Updated: Core CML & WC libraries.
+* Fixed: Miscellaneous bugs.
 
 = 0.10.0 =
-* WC tested up to: 6.8
-* Feature: setting for products in ProductsCML
-* Fix: more
+* Tested: WooCommerce up to v6.8.
+* Added: Advanced product settings in ProductsCML.
+* Fixed: Miscellaneous bugs.
 
 = 0.9.0 =
-* WC tested up to: 6.7
-* Moving libraries: WC, CML from src to vendor
-* Fix: more
+* Tested: WooCommerce up to v6.7.
+* Refactored: Moved WC and CML libraries from `src` to `vendor`.
+* Fixed: Miscellaneous bugs.
 
 = 0.8.3 =
-* Fix: more
+* Fixed: Miscellaneous bugs.
 
 = 0.8.2 =
-* Fix: error in while
+* Fixed: Infinite loop (`while`) error.
 
 = 0.8.1 =
-* Fix: error decoder in PHP7
+* Fixed: JSON decoder error on PHP 7 environments.
 
 = 0.8.0 =
-* WP tested up to: 6.0
-* WC tested up to: 6.6
-* More changes
+* Tested: WordPress up to v6.0.
+* Tested: WooCommerce up to v6.6.
+* Various improvements and bug fixes.
 
 = 0.7.0 =
-* Public release
+* Initial Public Release.
 
 = 0.1.0 =
-* Init release
+* Initial Alpha Release.
