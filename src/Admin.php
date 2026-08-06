@@ -74,7 +74,7 @@ final class Admin
 	{
 		if(empty($this->notices))
 		{
-            $admin = isset($_GET['page']) && 'wc1c' === wp_unslash($_GET['page']) && wc1c()->context()->isAdmin(); // phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+            $admin = isset($_GET['page']) && 'wc1c' === sanitize_key(wp_unslash($_GET['page'])) && wc1c()->context()->isAdmin(); // phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 
 			$args =
 			[
