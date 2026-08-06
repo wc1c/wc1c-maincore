@@ -476,13 +476,12 @@ class AllTable extends TableAbstract
 
         if(!empty($_REQUEST['s'])) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
         {
-            // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-            $search_text = wc_clean(wp_unslash($_REQUEST['s']));
+            $search_text = sanitize_text_field(wp_unslash($_REQUEST['s']));
             $storage_args['name'] =
-                [
-                    'value' => $search_text,
-                    'compare_key' => 'LIKE'
-                ];
+            [
+                'value' => $search_text,
+                'compare_key' => 'LIKE'
+            ];
         }
 
         /**
