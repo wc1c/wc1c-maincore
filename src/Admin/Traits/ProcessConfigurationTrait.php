@@ -22,8 +22,8 @@ trait ProcessConfigurationTrait
 	 *
 	 * @return bool
 	 */
-	public function setConfiguration($configuration_id)
-	{
+	public function setConfiguration($configuration_id): bool
+    {
 		if($configuration_id instanceof Configuration)
 		{
 			$this->configuration = $configuration_id;
@@ -55,8 +55,8 @@ trait ProcessConfigurationTrait
 	/**
 	 * @return Configuration
 	 */
-	public function getConfiguration()
-	{
+	public function getConfiguration(): Configuration
+    {
 		return $this->configuration;
 	}
 }
