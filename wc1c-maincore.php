@@ -85,8 +85,7 @@ namespace Wc1c\Main
 	}
 	catch(\Throwable $e)
 	{
-        // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_trigger_error
-		trigger_error(esc_html($e->getMessage()));
+        _doing_it_wrong(__FUNCTION__, esc_html($e->getMessage()), '');
 		return false;
 	}
 
