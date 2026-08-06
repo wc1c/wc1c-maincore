@@ -42,25 +42,25 @@ class Settings
         do_action('wc1c_admin_settings_before_init');
 
         $default_sections['main'] =
-            [
-                'title' => __('Main', 'wc1c-maincore'),
-                'visible' => true,
-                'callback' => [MainForm::class, 'instance']
-            ];
+        [
+            'title' => __('Main', 'wc1c-maincore'),
+            'visible' => true,
+            'callback' => [MainForm::class, 'instance']
+        ];
 
         $default_sections['logs'] =
-            [
-                'title' => __('Event logs', 'wc1c-maincore'),
-                'visible' => true,
-                'callback' => [LogsForm::class, 'instance']
-            ];
+        [
+            'title' => __('Event logs', 'wc1c-maincore'),
+            'visible' => true,
+            'callback' => [LogsForm::class, 'instance']
+        ];
 
         $default_sections['interface'] =
-            [
-                'title' => __('Interface', 'wc1c-maincore'),
-                'visible' => true,
-                'callback' => [InterfaceForm::class, 'instance']
-            ];
+        [
+            'title' => __('Interface', 'wc1c-maincore'),
+            'visible' => true,
+            'callback' => [InterfaceForm::class, 'instance']
+        ];
 
         $this->initSections($default_sections);
 
@@ -76,7 +76,7 @@ class Settings
     public function initCurrentSection(): string
     {
         // Nonce не требуется, это только навигационный параметр.
-        $current_section = isset($_GET['do_settings']) ? sanitize_title(wp_unslash($_GET['do_settings'])) : 'main'; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+        $current_section = isset($_GET['do_settings']) ? sanitize_key(wp_unslash($_GET['do_settings'])) : 'main'; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
         $current_section = !empty($current_section) ? $current_section : 'main';
 
         if($current_section !== '')
