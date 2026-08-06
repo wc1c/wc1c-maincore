@@ -26,7 +26,7 @@ final class Tools extends ScreenAbstract
     /**
      * @var string Current tool id
      */
-    private $current_tool_id = '';
+    private string $current_tool_id = '';
 
     /**
      * Tools constructor.
