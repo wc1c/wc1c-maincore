@@ -63,7 +63,7 @@ namespace
  */
 namespace Wc1c\Main
 {
-    $autoloader = __DIR__ . '/vendor/autoload.php';
+    $autoloader = __DIR__ . '/vendor/autoload.php'; // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 
     if(!is_readable($autoloader))
     {
