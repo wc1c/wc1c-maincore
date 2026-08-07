@@ -55,7 +55,7 @@ class InlineForm extends FormAbstract
 
         $data_process = true;
 
-        if(empty($post_data) || !wp_verify_nonce(sanitize_key(wp_unslash($post_data[$data_key])), 'wc1c-admin-' . $this->getId() . '-save'))
+        if(empty($post_data) || !wp_verify_nonce(sanitize_text_field(wp_unslash($post_data[$data_key])), 'wc1c-admin-' . $this->getId() . '-save'))
         {
             $data_process = false;
         }
