@@ -66,11 +66,11 @@ class Configuration extends ConfigurationsDataAbstract
 	 *
 	 * @param string $context What the value is for. Valid values are view and edit
 	 *
-	 * @return string
+	 * @return int
 	 */
-	public function getUserId(string $context = 'view'): string
+	public function getUserId(string $context = 'view'): int
 	{
-		return $this->getProp('user_id', $context);
+		return (int) $this->getProp('user_id', $context);
 	}
 
 	/**
@@ -80,7 +80,9 @@ class Configuration extends ConfigurationsDataAbstract
 	 */
 	public function setUserId($value)
 	{
-		$this->setProp('user_id', $value);
+        $value_int = (int) $value;
+
+		$this->setProp('user_id', $value_int);
 	}
 
 	/**
