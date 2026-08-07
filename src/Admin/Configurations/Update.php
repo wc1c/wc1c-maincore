@@ -2,7 +2,6 @@
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Main\Admin\InlineForm;
 use Wc1c\Main\Admin\Traits\ProcessConfigurationTrait;
 use Wc1c\Main\Exceptions\Exception;
 use Wc1c\Main\Traits\DatetimeUtilityTrait;

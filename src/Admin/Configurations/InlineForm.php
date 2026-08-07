@@ -1,4 +1,4 @@
-<?php namespace Wc1c\Main\Admin;
+<?php namespace Wc1c\Main\Admin\Configurations;
 
 defined('ABSPATH') || exit;
 
@@ -12,6 +12,8 @@ use Wc1c\Main\Abstracts\FormAbstract;
  */
 class InlineForm extends FormAbstract
 {
+    private $configuration;
+
 	/**
 	 * UpdateForm constructor.
 	 */
@@ -19,6 +21,7 @@ class InlineForm extends FormAbstract
 	{
 		$this->setId($args['id']);
 		$this->loadFields($args['fields']);
+        $this->configuration = $args['configuration'];
 	}
 
 	/**
@@ -57,7 +60,7 @@ class InlineForm extends FormAbstract
             $data_process = false;
         }
 
-        if(!current_user_can('manage_options'))
+        if($this->configuration->getUserId() !== get_current_user_id() && !current_user_can('edit_others_products'))
         {
             $data_process = false;
         }
@@ -101,6 +104,35 @@ class InlineForm extends FormAbstract
 				return false;
 			}
 		}
+
+        if(isset($this->saved_data['name']))
+        {
+            $this->configuration->setDateModify(time());
+            $this->configuration->setName($this->saved_data['name']);
+
+            $saved = $this->configuration->save();
+
+            if($saved)
+            {
+                wc1c()->admin()->notices()->create
+                (
+                    [
+                        'type' => 'update',
+                        'data' => esc_html__('Configuration name update success.', 'wc1c-maincore')
+                    ]
+                );
+            }
+            else
+            {
+                wc1c()->admin()->notices()->create
+                (
+                    [
+                        'type' => 'error',
+                        'data' => esc_html__('Configuration name update error. Please retry saving or change fields.', 'wc1c-maincore')
+                    ]
+                );
+            }
+        }
 
 		return $this->getSavedData();
 	}

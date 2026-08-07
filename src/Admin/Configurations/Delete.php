@@ -57,12 +57,6 @@ class Delete
 		$notice_args['type'] = 'error';
 		$notice_args['data'] = esc_html__('Error. The configuration to be deleted is active and cannot be deleted.', 'wc1c-maincore');
 
-        if(!current_user_can('manage_options'))
-        {
-            $notice_args['data'] = esc_html__('Error. You do not have permission to delete configurations.', 'wc1c-maincore');
-            $cap_check = false;
-        }
-
         if($configuration->getUserId() !== get_current_user_id() && !current_user_can('delete_others_products'))
         {
             $notice_args['data'] = esc_html__('Error. You do not have permission to delete this configuration.', 'wc1c-maincore');
