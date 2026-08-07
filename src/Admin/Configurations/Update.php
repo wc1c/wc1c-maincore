@@ -31,7 +31,7 @@ class Update
 
 		$default_sections['main'] =
 		[
-			'title' => __('Settings', 'wc1c-maincore'),
+			'title' => esc_html__('Settings', 'wc1c-maincore'),
 			'visible' => true,
 			'callback' => [MainUpdate::class, 'instance']
 		];
@@ -81,9 +81,9 @@ class Update
 	 */
 	public function outputSchemaErrorText($text): string
 	{
-		$new_text = __('The exchange schema based on which the configuration was created is not available.', 'wc1c-maincore');
+		$new_text = esc_html__('The exchange schema based on which the configuration was created is not available.', 'wc1c-maincore');
 
-		$new_text .= '<br /> ' . __('Install the missing schema to work this configuration, change the status and name or delete the configuration.', 'wc1c-maincore');
+		$new_text .= '<br /> ' . esc_html__('Install the missing schema to work this configuration, change the status and name or delete the configuration.', 'wc1c-maincore');
 
 		return $new_text;
 	}
