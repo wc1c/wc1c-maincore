@@ -393,7 +393,7 @@ class AllTable extends TableAbstract
                 '<a href="%s" %s>%s <span class="count">(%d)</span></a>',
                 esc_url($sold_url),
                 esc_html($class),
-                esc_html__($this->utilityConfigurationsGetStatusesFolder($status_key)),
+                esc_html($this->utilityConfigurationsGetStatusesFolder($status_key)),
                 absint($count)
             );
         }
