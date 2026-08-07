@@ -23,6 +23,7 @@ class Create extends ScreenAbstract
 	public function __construct()
 	{
 		$form = new CreateForm();
+
 		$form->loadFields();
 		$form->save();
 
