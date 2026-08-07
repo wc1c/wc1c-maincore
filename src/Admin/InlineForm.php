@@ -2,7 +2,7 @@
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Main\Exceptions\Exception;
+use Exception;
 use Wc1c\Main\Abstracts\FormAbstract;
 
 /**
@@ -68,7 +68,7 @@ class InlineForm extends FormAbstract
 			(
 				[
 					'type' => 'error',
-					'data' => __('Update error. Please retry.', 'wc1c-maincore')
+					'data' => esc_html__('Update error. Please retry.', 'wc1c-maincore')
 				]
 			);
 
