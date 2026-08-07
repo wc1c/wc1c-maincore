@@ -186,7 +186,7 @@ class CreateForm extends FormAbstract
 
         $message = esc_html__('Configuration creating error. Please retry.', 'wc1c-maincore');
 
-		if(empty($post_data) || !wp_verify_nonce($post_data['_wc1c-admin-nonce'], 'wc1c-admin-configurations-create-save'))
+		if(empty($post_data) || !wp_verify_nonce(sanitize_text_field(wp_unslash($post_data['_wc1c-admin-nonce'])), 'wc1c-admin-configurations-create-save'))
 		{
 			wc1c()->admin()->notices()->create
 			(

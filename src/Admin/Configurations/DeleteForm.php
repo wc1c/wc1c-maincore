@@ -77,7 +77,7 @@ class DeleteForm extends FormAbstract
 
         $message = esc_html__('Configuration deleting error. Please retry.', 'wc1c-maincore');
 
-		if(empty($post_data) || !wp_verify_nonce($post_data['_wc1c-admin-nonce-configurations-delete'], 'wc1c-admin-configurations-delete-save'))
+		if(empty($post_data) || !wp_verify_nonce(sanitize_text_field(wp_unslash($post_data['_wc1c-admin-nonce-configurations-delete'])), 'wc1c-admin-configurations-delete-save'))
 		{
 			wc1c()->admin()->notices()->create
 			(

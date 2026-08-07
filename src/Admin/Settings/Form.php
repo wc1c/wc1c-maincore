@@ -70,7 +70,7 @@ abstract class Form extends FormAbstract
 
         $message = esc_html__('The settings have not been saved.', 'wc1c-maincore');
 
-        if(empty($post_data) || !wp_verify_nonce($post_data['_wc1c-admin-nonce'], 'wc1c-admin-settings-save'))
+        if(empty($post_data) || !wp_verify_nonce(sanitize_text_field(wp_unslash($post_data['_wc1c-admin-nonce'])), 'wc1c-admin-settings-save'))
 		{
 			wc1c()->admin()->notices()->create
 			(
