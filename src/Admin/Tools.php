@@ -21,12 +21,12 @@ final class Tools extends ScreenAbstract
     /**
      * @var array All available tools
      */
-    public $tools = [];
+    public array $tools = [];
 
     /**
      * @var string Current tool id
      */
-    private $current_tool_id = '';
+    private string $current_tool_id = '';
 
     /**
      * Tools constructor.
@@ -57,9 +57,9 @@ final class Tools extends ScreenAbstract
     /**
      * @return bool
      */
-    protected function initCurrentId()
+    protected function initCurrentId(): bool
     {
-        $tool_id = isset($_GET['tool_id']) ? sanitize_text_field(wp_unslash($_GET['tool_id'])) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+        $tool_id = isset($_GET['tool_id']) ? sanitize_key(wp_unslash($_GET['tool_id'])) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
         if(!empty($tool_id) && array_key_exists($tool_id, $this->tools))
         {
@@ -73,7 +73,7 @@ final class Tools extends ScreenAbstract
     /**
      * @return string
      */
-    public function getCurrentToolId()
+    public function getCurrentToolId(): string
     {
         return $this->current_tool_id;
     }
@@ -81,7 +81,7 @@ final class Tools extends ScreenAbstract
     /**
      * @param string $current_tool_id
      */
-    public function setCurrentToolId($current_tool_id)
+    public function setCurrentToolId(string $current_tool_id)
     {
         $this->current_tool_id = $current_tool_id;
     }
@@ -104,13 +104,13 @@ final class Tools extends ScreenAbstract
             $tool = $this->tools[$this->getCurrentToolId()];
 
             $args =
-                [
-                    'id' => $this->getCurrentToolId(),
-                    'name' => $tool->getName(),
-                    'description' => $tool->getDescription(),
-                    'back_url' => $this->utilityAdminToolsGetUrl(),
-                    'object' => $tool,
-                ];
+            [
+                'id' => $this->getCurrentToolId(),
+                'name' => $tool->getName(),
+                'description' => $tool->getDescription(),
+                'back_url' => $this->utilityAdminToolsGetUrl(),
+                'object' => $tool,
+            ];
 
             wc1c()->views()->getView('tools/single.php', $args);
 

@@ -3,7 +3,7 @@
  * Plugin Name: WC1C-Maincore
  * Plugin URI: https://wordpress.org/plugins/wc1c-maincore/
  * Description: Implementing a flexible mechanism for exchanging various data between 1C Company products and the WooCommerce plugin.
- * Version: 0.24.1
+ * Version: 0.24.2
  * WC requires at least: 4.5
  * WC tested up to: 10.9
  * Requires at least: 5.3
@@ -23,25 +23,13 @@ namespace
 
 	if(version_compare(PHP_VERSION, '7.4') < 0)
 	{
-        // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_trigger_error
-        trigger_error('Minimal PHP version for used plugin: 7.4. Please update PHP version.');
+        _doing_it_wrong(__FUNCTION__, 'Minimal PHP version for used plugin: 7.4. Please update PHP version.', '');
 		return false;
 	}
 
 	if(false === defined('WC1C_PLUGIN_FILE'))
 	{
 		define('WC1C_PLUGIN_FILE', __FILE__);
-
-		$wc1c_autoloader = __DIR__ . '/vendor/autoload.php';
-
-		if(!is_readable($wc1c_autoloader))
-		{
-            // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_trigger_error
-            trigger_error(sprintf('%1$s: %2$s','File is not found', esc_attr($wc1c_autoloader)));
-			return false;
-		}
-
-		require_once $wc1c_autoloader;
 
         /**
          * Adds an action to declare compatibility with High Performance Order Storage (HPOS) before WooCommerce initialization.
@@ -61,6 +49,7 @@ namespace
         /**
          * For external use
          *
+         * @deprecated 0.24.2
          * @return Wc1c\Main\Core Main instance of core
          */
 		function wc1c(): Wc1c\Main\Core
@@ -75,33 +64,17 @@ namespace
  */
 namespace Wc1c\Main
 {
-    /**
-     * @since 0.24.0
-     */
-    register_activation_hook( __FILE__, function()
+    $autoloader = __DIR__ . '/vendor/autoload.php'; // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
+
+    if(!is_readable($autoloader))
     {
-        $conflicting_plugins = array
-        (
-            'wc1c-main/wc1c-main.php',
-            'woocommerce-and-1centerprise-data-exchange/woocommerce-1c.php',
-        );
+        _doing_it_wrong(__FUNCTION__, sprintf('%1$s: %2$s','File is not found', esc_attr($autoloader)), '');
+        return false;
+    }
 
-        if ( ! function_exists( 'is_plugin_active' ) ) {
-            include_once ABSPATH . 'wp-admin/includes/plugin.php';
-        }
-
-        foreach($conflicting_plugins as $plugin)
-        {
-            if(is_plugin_active($plugin))
-            {
-                deactivate_plugins($plugin, true);
-            }
-        }
-    });
+    require_once $autoloader;
 
 	$loader = new \Digiom\Woplucore\Loader(); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
-
-    $loader->addNamespace(__NAMESPACE__, plugin_dir_path(__FILE__) . 'src');
 
 	try
 	{
@@ -113,8 +86,7 @@ namespace Wc1c\Main
 	}
 	catch(\Throwable $e)
 	{
-        // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_trigger_error
-		trigger_error(esc_html($e->getMessage()));
+        _doing_it_wrong(__FUNCTION__, esc_html($e->getMessage()), '');
 		return false;
 	}
 

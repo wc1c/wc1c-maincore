@@ -55,17 +55,11 @@ class Delete
         $cap_check = true;
 
 		$notice_args['type'] = 'error';
-		$notice_args['data'] = __('Error. The configuration to be deleted is active and cannot be deleted.', 'wc1c-maincore');
+		$notice_args['data'] = esc_html__('Error. The configuration to be deleted is active and cannot be deleted.', 'wc1c-maincore');
 
-        if(!current_user_can('manage_woocommerce'))
+        if($configuration->getUserId() !== get_current_user_id() && !current_user_can('delete_others_products'))
         {
-            $notice_args['data'] = __('Error. You do not have permission to delete configurations.', 'wc1c-maincore');
-            $cap_check = false;
-        }
-
-        if($configuration->getUserId() !== get_current_user_id() && !current_user_can('manage_options'))
-        {
-            $notice_args['data'] = __('Error. You do not have permission to delete this configuration.', 'wc1c-maincore');
+            $notice_args['data'] = esc_html__('Error. You do not have permission to delete this configuration.', 'wc1c-maincore');
             $cap_check = false;
         }
 
@@ -120,7 +114,7 @@ class Delete
 				$notice_args =
 				[
 					'type' => 'update',
-					'data' => __('The configuration has been marked as deleted.', 'wc1c-maincore')
+					'data' => esc_html__('The configuration has been marked as deleted.', 'wc1c-maincore')
 				];
 
 				if($force_delete)
@@ -130,14 +124,14 @@ class Delete
 					$notice_args =
 					[
 						'type' => 'update',
-						'data' => __('The configuration has been successfully deleted.', 'wc1c-maincore')
+						'data' => esc_html__('The configuration has been successfully deleted.', 'wc1c-maincore')
 					];
 				}
 
 				if(!$configuration->delete($force_delete))
 				{
 					$notice_args['type'] = 'error';
-					$notice_args['data'] = __('Configuration deleting error. Please retry again.', 'wc1c-maincore');
+					$notice_args['data'] = esc_html__('Configuration deleting error. Please retry again.', 'wc1c-maincore');
 				}
 			}
 		}

@@ -12,25 +12,25 @@ trait SectionsTrait
 	/**
 	 * @var string
 	 */
-	private $section_key = 'section';
+	private string $section_key = 'section';
 
 	/**
 	 * @var array Sections
 	 */
-	private $sections = [];
+	private array $sections = [];
 
 	/**
 	 * @var string Current section
 	 */
-	private $current_section = '';
+	private string $current_section = '';
 
 	/**
 	 * Get current section
 	 *
 	 * @return string
 	 */
-	public function getCurrentSection()
-	{
+	public function getCurrentSection(): string
+    {
 		return $this->current_section;
 	}
 
@@ -39,7 +39,7 @@ trait SectionsTrait
 	 *
 	 * @param string $current_section
 	 */
-	public function setCurrentSection($current_section)
+	public function setCurrentSection(string $current_section)
 	{
 		$final = apply_filters('wc1c_admin_init_sections_current', $current_section);
 
@@ -51,12 +51,12 @@ trait SectionsTrait
 	 *
 	 * @return string
 	 */
-	public function initCurrentSection()
-	{
+	public function initCurrentSection(): string
+    {
 		$section_key = $this->getSectionKey();
 
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$current_section = isset($_GET[$section_key]) ? sanitize_title(wp_unslash($_GET[$section_key])) : '';
+		$current_section = isset($_GET[$section_key]) ? sanitize_key(wp_unslash($_GET[$section_key])) : '';
 
 		if ($current_section !== '') // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		{
@@ -71,7 +71,7 @@ trait SectionsTrait
 	 *
 	 * @param array $sections
 	 */
-	public function initSections($sections = [])
+	public function initSections(array $sections = [])
 	{
 		$default_sections = [];
 
@@ -90,8 +90,8 @@ trait SectionsTrait
 	 *
 	 * @return array
 	 */
-	public function getSections()
-	{
+	public function getSections(): array
+    {
 		return apply_filters('wc1c_admin_get_sections', $this->sections);
 	}
 
@@ -100,7 +100,7 @@ trait SectionsTrait
 	 *
 	 * @param array $sections
 	 */
-	public function setSections($sections)
+	public function setSections(array $sections)
 	{
 		// hook
 		$sections = apply_filters('wc1c_admin_set_sections', $sections);
@@ -111,15 +111,15 @@ trait SectionsTrait
 	/**
 	 * @return string
 	 */
-	public function getSectionKey()
-	{
+	public function getSectionKey(): string
+    {
 		return $this->section_key;
 	}
 
 	/**
 	 * @param string $section_key
 	 */
-	public function setSectionKey($section_key)
+	public function setSectionKey(string $section_key)
 	{
 		$this->section_key = $section_key;
 	}

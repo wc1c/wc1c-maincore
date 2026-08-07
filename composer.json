@@ -5,8 +5,12 @@
   "minimum-stability": "stable",
   "license": "GPL-3.0-or-later",
   "homepage": "https://wc1c.info",
-  "autoload": {
-    "psr-4": {"Wc1c\\Main\\": "src/"}
+  "autoload":
+  {
+    "psr-4":
+    {
+      "Wc1c\\Main\\": "src/"
+    }
   },
   "authors": [
     {
@@ -24,7 +28,8 @@
       "url": "https://wc1c.info/market/code"
     }
   ],
-  "require": {
+  "require":
+  {
     "php": ">=7.4",
     "wc1c/cml": "dev-main",
     "wc1c/wc": "dev-main",

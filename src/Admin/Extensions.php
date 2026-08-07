@@ -17,15 +17,15 @@ final class Extensions
     /**
      * @var array Available actions
      */
-    private $actions =
-        [
-            'all',
-        ];
+    private array $actions =
+    [
+        'all',
+    ];
 
     /**
      * @var string Current action
      */
-    private $current_action = 'all';
+    private string $current_action = 'all';
 
     /**
      * Extensions constructor.
@@ -53,9 +53,9 @@ final class Extensions
      *
      * @return string
      */
-    public function initCurrentAction()
+    public function initCurrentAction(): string
     {
-        $do_action = isset($_GET['do_action']) ? sanitize_text_field(wp_unslash($_GET['do_action'])) : 'all'; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+        $do_action = isset($_GET['do_action']) ? sanitize_key(wp_unslash($_GET['do_action'])) : 'all'; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
         if(in_array($do_action, $this->getActions(), true))
         {
@@ -70,7 +70,7 @@ final class Extensions
      *
      * @return array
      */
-    public function getActions()
+    public function getActions(): array
     {
         return apply_filters('wc1c_admin_extensions_get_actions', $this->actions);
     }
@@ -80,7 +80,7 @@ final class Extensions
      *
      * @param array $actions
      */
-    public function setActions($actions)
+    public function setActions(array $actions)
     {
         // hook
         $actions = apply_filters('wc1c_admin_extensions_set_actions', $actions);
@@ -93,7 +93,7 @@ final class Extensions
      *
      * @return string
      */
-    public function getCurrentAction()
+    public function getCurrentAction(): string
     {
         return apply_filters('wc1c_admin_extensions_get_current_action', $this->current_action);
     }
@@ -103,7 +103,7 @@ final class Extensions
      *
      * @param string $current_action
      */
-    public function setCurrentAction($current_action)
+    public function setCurrentAction(string $current_action)
     {
         // hook
         $current_action = apply_filters('wc1c_admin_extensions_set_current_action', $current_action);

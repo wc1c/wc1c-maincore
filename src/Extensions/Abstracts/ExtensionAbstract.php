@@ -126,7 +126,7 @@ abstract class ExtensionAbstract implements ExtensionContract
 	 * Load meta data by plugin file
 	 *
 	 * @param string $file
-	 * @param string $locale
+	 * @param string $locale deprecated
 	 *
 	 * @return boolean
 	 */
@@ -163,11 +163,6 @@ abstract class ExtensionAbstract implements ExtensionContract
 			return false;
 		}
 
-		if('' === $locale)
-		{
-			$locale = $plugin_data['TextDomain'];
-		}
-
 		$this->setMeta('version', $plugin_data['Version']);
 		$this->setMeta('version_php_min', $plugin_data['RequiresPHP']);
 		$this->setMeta('version_wp_min', $plugin_data['RequiresWP']);
@@ -178,12 +173,9 @@ abstract class ExtensionAbstract implements ExtensionContract
 		$this->setMeta('version_wc1c_min', $plugin_data['RequiresWC1C']);
 		$this->setMeta('version_wc1c_max', $plugin_data['TestedWC1C']);
 
-        // phpcs:ignore WordPress.WP.I18n.LowLevelTranslationFunction,WordPress.WP.I18n.NonSingularStringLiteralText,WordPress.WP.I18n.NonSingularStringLiteralDomain
-        $this->setMeta('author', __($plugin_data['Author'], $locale));
-        // phpcs:ignore WordPress.WP.I18n.LowLevelTranslationFunction,WordPress.WP.I18n.NonSingularStringLiteralText,WordPress.WP.I18n.NonSingularStringLiteralDomain
-        $this->setMeta('name', __($plugin_data['Name'], $locale));
-        // phpcs:ignore WordPress.WP.I18n.LowLevelTranslationFunction,WordPress.WP.I18n.NonSingularStringLiteralText,WordPress.WP.I18n.NonSingularStringLiteralDomain
-        $this->setMeta('description', __($plugin_data['Description'], $locale));
+        $this->setMeta('author', $plugin_data['Author']);
+        $this->setMeta('name', $plugin_data['Name']);
+        $this->setMeta('description', $plugin_data['Description']);
 
 		return true;
 	}

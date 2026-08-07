@@ -354,18 +354,19 @@ class AllTable extends TableAbstract
     {
         $status_links = [];
         // Nonce не требуется, это только чтение параметра фильтрации.
-        $current = !empty($_REQUEST['status']) ? sanitize_text_field(wp_unslash($_REQUEST['status'])) : 'all'; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+        $current = !empty($_REQUEST['status']) ? sanitize_key(wp_unslash($_REQUEST['status'])) : 'all'; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
         // All link
-        $class = $current === 'all' ? ' class="current"' :'';
+        $class = $current === 'all' ? ' class=current' :'';
         $all_url = esc_url(remove_query_arg('status'));
 
-        $status_links['all'] = sprintf(
+        $status_links['all'] = sprintf
+        (
             '<a href="%1$s" %2$s>%3$s <span class="count">(%4$d)</span></a>',
-            $all_url,
-            esc_attr($class),
+            esc_url($all_url),
+            esc_html($class),
             esc_html__('All', 'wc1c-maincore'),
-            (int) $this->storage_configurations->count()
+            absint($this->storage_configurations->count())
         );
 
         $statuses = $this->utilityConfigurationsGetStatuses();
@@ -384,16 +385,16 @@ class AllTable extends TableAbstract
                 continue;
             }
 
-            $class = $current === $status_key ? ' class="current"' :'';
+            $class = $current === $status_key ? ' class=current' : '';
             $sold_url = esc_url(add_query_arg('status', $status_key));
 
             $status_links[$status_key] = sprintf
             (
                 '<a href="%s" %s>%s <span class="count">(%d)</span></a>',
-                $sold_url,
-                $class,
-                $this->utilityConfigurationsGetStatusesFolder($status_key),
-                $count
+                esc_url($sold_url),
+                esc_html($class),
+                esc_html($this->utilityConfigurationsGetStatusesFolder($status_key)),
+                absint($count)
             );
         }
 
@@ -455,12 +456,12 @@ class AllTable extends TableAbstract
         $allowed_orderby = ['configuration_id', 'status', 'date_create', 'date_activity', 'name'];
         // Nonce не требуется, это только параметры сортировки.
         $orderby = (!empty($_REQUEST['orderby']) && in_array($_REQUEST['orderby'], $allowed_orderby, true))
-            ? sanitize_text_field(wp_unslash($_REQUEST['orderby'])) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+            ? sanitize_key(wp_unslash($_REQUEST['orderby'])) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
             : 'configuration_id';
 
         $allowed_order = ['asc', 'desc'];
         $order = (!empty($_REQUEST['order']) && in_array(strtolower($_REQUEST['order']), $allowed_order, true))
-            ? strtolower(sanitize_text_field(wp_unslash($_REQUEST['order']))) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+            ? strtolower(sanitize_key(wp_unslash($_REQUEST['order']))) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
             : 'desc';
 
         $storage_args['orderby'] = $orderby;
@@ -471,18 +472,17 @@ class AllTable extends TableAbstract
 
         if(isset($_GET['status']) && in_array($_GET['status'], $this->utilityConfigurationsGetStatuses(), true))
         {
-            $storage_args['status'] = sanitize_text_field(wp_unslash($_GET['status'])); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+            $storage_args['status'] = sanitize_key(wp_unslash($_GET['status'])); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
         }
 
         if(!empty($_REQUEST['s'])) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
         {
-            // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-            $search_text = wc_clean(wp_unslash($_REQUEST['s']));
+            $search_text = sanitize_text_field(wp_unslash($_REQUEST['s']));
             $storage_args['name'] =
-                [
-                    'value' => $search_text,
-                    'compare_key' => 'LIKE'
-                ];
+            [
+                'value' => $search_text,
+                'compare_key' => 'LIKE'
+            ];
         }
 
         /**
@@ -531,7 +531,7 @@ class AllTable extends TableAbstract
         {
             $this->views();
 
-            $this->searchBox(__('Search', 'wc1c-maincore'), 'code');
+            $this->searchBox(esc_html__('Search', 'wc1c-maincore'), 'code');
         }
     }
 

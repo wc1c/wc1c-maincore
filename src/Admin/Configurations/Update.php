@@ -2,7 +2,6 @@
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Main\Admin\InlineForm;
 use Wc1c\Main\Admin\Traits\ProcessConfigurationTrait;
 use Wc1c\Main\Exceptions\Exception;
 use Wc1c\Main\Traits\DatetimeUtilityTrait;
@@ -32,18 +31,10 @@ class Update
 
 		$default_sections['main'] =
 		[
-			'title' => __('Settings', 'wc1c-maincore'),
+			'title' => esc_html__('Settings', 'wc1c-maincore'),
 			'visible' => true,
 			'callback' => [MainUpdate::class, 'instance']
 		];
-
-        $default_sections['logs'] =
-        [
-            'title' => __('Logs', 'wc1c-maincore'),
-            'visible' => true,
-            'callback' => [\Wc1c\Main\Admin\Promo\Logs::class, 'instance'],
-            'class' => 'promo'
-        ];
 
 		if(has_action('wc1c_admin_configurations_update_sections'))
 		{
@@ -55,8 +46,15 @@ class Update
 
 		$configuration_id = isset($_GET['configuration_id']) ? absint(wp_unslash($_GET['configuration_id'])) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
-		if (false === $this->setConfiguration($configuration_id))
+		if(false === $this->setConfiguration($configuration_id))
 		{
+            if($this->getConfiguration()->getUserId() !== get_current_user_id() && !current_user_can('edit_others_products'))
+            {
+                add_action('wc1c_admin_show', [$this, 'outputError'], 10);
+                wc1c()->log()->notice('Configuration update is not available.', ['configuration_id' => $configuration_id]);
+                return;
+            }
+
 			try
 			{
 				wc1c()->schemas()->init($this->getConfiguration());
@@ -90,9 +88,9 @@ class Update
 	 */
 	public function outputSchemaErrorText($text): string
 	{
-		$new_text = __('The exchange schema based on which the configuration was created is not available.', 'wc1c-maincore');
+		$new_text = esc_html__('The exchange schema based on which the configuration was created is not available.', 'wc1c-maincore');
 
-		$new_text .= '<br /> ' . __('Install the missing schema to work this configuration, change the status and name or delete the configuration.', 'wc1c-maincore');
+		$new_text .= '<br /> ' . esc_html__('Install the missing schema to work this configuration, change the status and name or delete the configuration.', 'wc1c-maincore');
 
 		return $new_text;
 	}
@@ -131,68 +129,28 @@ class Update
 	{
 		$configuration = $this->getConfiguration();
 
-		$fields['name'] =
+		$inline_fields['name'] =
 		[
-			'title' => __('Configuration name', 'wc1c-maincore'),
+			'title' => esc_html__('Configuration name', 'wc1c-maincore'),
 			'type' => 'text',
-			'description' => __('Used for convenient distribution of multiple configurations.', 'wc1c-maincore'),
+			'description' => esc_html__('Used for convenient distribution of multiple configurations.', 'wc1c-maincore'),
 			'default' => '',
 			'class' => 'form-control form-control-sm rounded-0',
             'button_class' => 'rounded-0',
-			'button' => __('Rename', 'wc1c-maincore'),
+			'button' => esc_html__('Rename', 'wc1c-maincore'),
 		];
 
 		$inline_args =
 		[
 			'id' => 'configurations-name',
-			'fields' => $fields
+			'fields' => $inline_fields,
+            'configuration' => $configuration,
 		];
 
 		$inline_form = new InlineForm($inline_args);
+
 		$inline_form->loadSavedData(['name' => $configuration->getName()]);
-
-		$form_id = isset($_GET['form']) ? sanitize_text_field(wp_unslash($_GET['form'])) : '';
-		$nonce_name = '_wc1c-admin-nonce-' . $inline_form->getId();
-
-		$nonce = isset($_POST[$nonce_name]) ? sanitize_text_field(wp_unslash($_POST[$nonce_name])) : '';
-
-		if (
-			$form_id === $inline_form->getId() &&
-			!empty($nonce) &&
-			wp_verify_nonce($nonce, 'wc1c-admin-' . $inline_form->getId() . '-save')
-		)
-		{
-			$configuration_name = $inline_form->save();
-
-			if(isset($configuration_name['name']))
-			{
-				$configuration->setDateModify(time());
-				$configuration->setName($configuration_name['name']);
-
-				$saved = $configuration->save();
-
-				if($saved)
-				{
-					wc1c()->admin()->notices()->create
-					(
-						[
-							'type' => 'update',
-							'data' => __('Configuration name update success.', 'wc1c-maincore')
-						]
-					);
-				}
-				else
-				{
-					wc1c()->admin()->notices()->create
-					(
-						[
-							'type' => 'error',
-							'data' => __('Configuration name update error. Please retry saving or change fields.', 'wc1c-maincore')
-						]
-					);
-				}
-			}
-		}
+        $inline_form->save();
 
 		add_action('wc1c_admin_configurations_update_header_show', [$inline_form, 'output'], 10);
 	}

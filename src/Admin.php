@@ -36,7 +36,7 @@ final class Admin
 	public function __construct()
 	{
 		// hook
-		do_action(wc1c()->context()->getSlug() . '_admin_before_loading');
+		do_action('wc1c_admin_before_loading');
 
 		$this->notices();
 
@@ -59,15 +59,10 @@ final class Admin
 			Admin\Wizards\Init::instance();
 		}
 
-		if(function_exists('is_plugin_active') && is_plugin_active('wc1c/wc1c.php'))
-		{
-			deactivate_plugins( 'wc1c/wc1c.php', true);
-		}
-
 		add_filter('plugin_action_links_' . wc1c()->environment()->get('plugin_basename'), [$this, 'linksLeft']);
 
 		// hook
-		do_action(wc1c()->context()->getSlug() . '_admin_after_loading');
+		do_action('wc1c_admin_after_loading');
 	}
 
 	/**
@@ -79,7 +74,7 @@ final class Admin
 	{
 		if(empty($this->notices))
 		{
-            $admin = isset($_GET['page']) && 'wc1c' === wp_unslash($_GET['page']) && wc1c()->context()->isAdmin(); // phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+            $admin = isset($_GET['page']) && 'wc1c' === sanitize_key(wp_unslash($_GET['page'])) && wc1c()->context()->isAdmin(); // phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 
 			$args =
 			[
@@ -121,7 +116,7 @@ final class Admin
 	public function init(): void
 	{
 		// hook
-		do_action(wc1c()->context()->getSlug() . '_admin_before_init');
+		do_action('wc1c_admin_before_init');
 
 		$default_sections['configurations'] =
 		[
@@ -161,7 +156,7 @@ final class Admin
 		$this->setCurrentSection('configurations');
 
 		// hook
-		do_action(wc1c()->context()->getSlug() . '_admin_after_init');
+		do_action('wc1c_admin_after_init');
 	}
 
 	/**

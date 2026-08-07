@@ -35,18 +35,18 @@ class CreateForm extends FormAbstract
 	 *
 	 * @return array
 	 */
-	public function init_fields_main($fields)
-	{
+	public function init_fields_main($fields): array
+    {
 		$fields['name'] =
         [
-            'title' => __('Name of the configuration', 'wc1c-maincore'),
+            'title' => esc_html__('Name of the configuration', 'wc1c-maincore'),
             'type' => 'text',
             'description' => sprintf
             (
                     '%s %s<hr>%s',
-                    __('Enter any data up to 255 characters.', 'wc1c-maincore'),
-                    __('The name is used to quickly distinguish between multiple configurations that have been created.', 'wc1c-maincore'),
-                    __('Some examples: 1. Exchange data on products, 2. Exchange data on orders, 3. Update prices and stocks, etc.', 'wc1c-maincore')
+                    esc_html__('Enter any data up to 255 characters.', 'wc1c-maincore'),
+                    esc_html__('The name is used to quickly distinguish between multiple configurations that have been created.', 'wc1c-maincore'),
+                    esc_html__('Some examples: 1. Exchange data on products, 2. Exchange data on orders, 3. Update prices and stocks, etc.', 'wc1c-maincore')
             ),
             'default' => '',
             'css' => 'width: 100%;',
@@ -184,7 +184,7 @@ class CreateForm extends FormAbstract
 			return false;
 		}
 
-        $message = __('Configuration creating error. Please retry.', 'wc1c-maincore');
+        $message = esc_html__('Configuration creating error. Please retry.', 'wc1c-maincore');
 
 		if(empty($post_data) || !wp_verify_nonce($post_data['_wc1c-admin-nonce'], 'wc1c-admin-configurations-create-save'))
 		{
@@ -200,6 +200,23 @@ class CreateForm extends FormAbstract
 
 			return false;
 		}
+
+        if(!current_user_can('publish_products') || !current_user_can('manage_options'))
+        {
+            $message = esc_html__('Error. You do not have permission to create new configuration.', 'wc1c-maincore');
+
+            wc1c()->admin()->notices()->create
+            (
+                [
+                    'type' => 'error',
+                    'data' => $message
+                ]
+            );
+
+            wc1c()->log()->warning($message, ['user_id' => get_current_user_id(), 'form_id' => $this->getId()]);
+
+            return false;
+        }
 
 		foreach($this->getFields() as $key => $field)
 		{
@@ -232,7 +249,7 @@ class CreateForm extends FormAbstract
 
 		if(empty($data['name']))
 		{
-            $message = __('Configuration creating error. Name is required.', 'wc1c-maincore');
+            $message = esc_html__('Configuration creating error. Name is required.', 'wc1c-maincore');
 
 			wc1c()->admin()->notices()->create
 			(
@@ -249,7 +266,7 @@ class CreateForm extends FormAbstract
 
 		if(empty($data['schema']))
 		{
-            $message = __('Configuration creating error. Schema select is required.', 'wc1c-maincore');
+            $message = esc_html__('Configuration creating error. Schema select is required.', 'wc1c-maincore');
 
 			wc1c()->admin()->notices()->create
 			(
@@ -270,7 +287,7 @@ class CreateForm extends FormAbstract
 
 		if('yes' === wc1c()->settings()->get('configurations_unique_name', 'yes') && $data_storage->isExistingByName($data['name']))
 		{
-            $message = __('Configuration creating error. Name is exists.', 'wc1c-maincore');
+            $message = esc_html__('Configuration creating error. Name is exists.', 'wc1c-maincore');
 
 			wc1c()->admin()->notices()->create
 			(
@@ -291,23 +308,30 @@ class CreateForm extends FormAbstract
 
 		if($configuration->save())
 		{
-            $message = __('Configuration creating is complete. Configuration ID:', 'wc1c-maincore');
+            $message = esc_html__('Configuration creating is complete. Configuration ID:', 'wc1c-maincore');
 
 			wc1c()->admin()->notices()->create
 			(
 				[
 					'type' => 'update',
-					'data' => $message . ' ' . $configuration->getId() . ' (<a href="' . $this->utilityAdminConfigurationsGetUrl('update', $configuration->getId()) . '">' . __('edit configuration', 'wc1c-maincore') . '</a>)'
-				]
+					'data' => sprintf
+                    (
+                        '%s %d (<a href="%s" target="_blank">%s</a>)',
+                        esc_html($message),
+                        absint($configuration->getId()),
+                        $this->utilityAdminConfigurationsGetUrl('update', $configuration->getId()),
+                        esc_html__('edit configuration', 'wc1c-maincore')
+                    )
+                ]
 			);
 
-            wc1c()->log()->notice($message, ['user_id' => get_current_user_id(), 'form_id' => $this->getId()]);
+            wc1c()->log()->notice(esc_html__('Configuration creating is complete.', 'wc1c-maincore'), ['user_id' => get_current_user_id(), 'form_id' => $this->getId(), 'configuration_id' => $configuration->getId()]);
 
 			$this->setSavedData([]);
 			return true;
 		}
 
-        $message = __('Configuration creating error. Please try saving again or change fields.', 'wc1c-maincore');
+        $message = esc_html__('Configuration creating error. Please try saving again or change fields.', 'wc1c-maincore');
 
 		wc1c()->admin()->notices()->create
 		(

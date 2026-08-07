@@ -33,87 +33,87 @@ class InterfaceForm extends Form
 	 *
 	 * @return array
 	 */
-	public function init_fields_interface($fields)
-	{
+	public function init_fields_interface($fields): array
+    {
 		$fields['admin_interface'] =
 		[
-			'title' => __('Changing the interface', 'wc1c-maincore'),
+			'title' => esc_html__('Changing the interface', 'wc1c-maincore'),
 			'type' => 'checkbox',
-			'label' => __('Allow changes to WordPress and WooCommerce dashboard interface?', 'wc1c-maincore'),
+			'label' => esc_html__('Allow changes to WordPress and WooCommerce dashboard interface?', 'wc1c-maincore'),
 			'description' => sprintf
 			(
 				'%s <hr>%s',
-				__('If enabled, new features will appear in the WordPress and WooCommerce interface according to the interface change settings.', 'wc1c-maincore'),
-				__('If interface modification is enabled, it is possible to change settings for individual features, users, and roles. If disabled, features will be disabled globally for everyone and everything.', 'wc1c-maincore')
+                esc_html__('If enabled, new features will appear in the WordPress and WooCommerce interface according to the interface change settings.', 'wc1c-maincore'),
+                esc_html__('If interface modification is enabled, it is possible to change settings for individual features, users, and roles. If disabled, features will be disabled globally for everyone and everything.', 'wc1c-maincore')
 			),
 			'default' => 'yes'
 		];
 
 		$fields['interface_title_woocommerce'] =
 		[
-			'title' => __('WooCommerce', 'wc1c-maincore'),
+			'title' => esc_html__('WooCommerce', 'wc1c-maincore'),
 			'type' => 'title',
-			'description' => __('Some interface settings for the WooCommerce.', 'wc1c-maincore'),
+			'description' => esc_html__('Some interface settings for the WooCommerce.', 'wc1c-maincore'),
 		];
 
 		$fields['admin_interface_products_column'] =
 		[
-			'title' => __('Column in products list', 'wc1c-maincore'),
+			'title' => esc_html__('Column in products list', 'wc1c-maincore'),
 			'type' => 'checkbox',
-			'label' => __('Enable', 'wc1c-maincore'),
-			'description' => __('Output of a column with information from 1C to the list of products.', 'wc1c-maincore'),
+			'label' => esc_html__('Enable', 'wc1c-maincore'),
+			'description' => esc_html__('Output of a column with information from 1C to the list of products.', 'wc1c-maincore'),
 			'default' => 'yes'
 		];
 
 		$fields['admin_interface_products_edit_metabox'] =
 		[
-			'title' => __('Metabox in edit products', 'wc1c-maincore'),
+			'title' => esc_html__('Metabox in edit products', 'wc1c-maincore'),
 			'type' => 'checkbox',
-			'label' => __('Enable', 'wc1c-maincore'),
-			'description' => __('Output of a Metabox with information from 1C in edit products.', 'wc1c-maincore'),
+			'label' => esc_html__('Enable', 'wc1c-maincore'),
+			'description' => esc_html__('Output of a Metabox with information from 1C in edit products.', 'wc1c-maincore'),
 			'default' => 'yes'
 		];
 
 		$fields['admin_interface_orders_column'] =
 		[
-			'title' => __('Column in orders list', 'wc1c-maincore'),
+			'title' => esc_html__('Column in orders list', 'wc1c-maincore'),
 			'type' => 'checkbox',
-			'label' => __('Enable', 'wc1c-maincore'),
-			'description' => __('Output of a column with information from 1C to the list of orders.', 'wc1c-maincore'),
+			'label' => esc_html__('Enable', 'wc1c-maincore'),
+			'description' => esc_html__('Output of a column with information from 1C to the list of orders.', 'wc1c-maincore'),
 			'default' => 'yes'
 		];
 
 		$fields['admin_interface_orders_edit_metabox'] =
 		[
-			'title' => __('Metabox in edit orders', 'wc1c-maincore'),
+			'title' => esc_html__('Metabox in edit orders', 'wc1c-maincore'),
 			'type' => 'checkbox',
-			'label' => __('Enable', 'wc1c-maincore'),
-			'description' => __('Output of a Metabox with information from 1C in edit orders.', 'wc1c-maincore'),
+			'label' => esc_html__('Enable', 'wc1c-maincore'),
+			'description' => esc_html__('Output of a Metabox with information from 1C in edit orders.', 'wc1c-maincore'),
 			'default' => 'yes'
 		];
 
 		$fields['admin_interface_categories_column'] =
 		[
-			'title' => __('Column in categories list', 'wc1c-maincore'),
+			'title' => esc_html__('Column in categories list', 'wc1c-maincore'),
 			'type' => 'checkbox',
-			'label' => __('Enable', 'wc1c-maincore'),
-			'description' => __('Output of a column with information from 1C to the list of categories.', 'wc1c-maincore'),
+			'label' => esc_html__('Enable', 'wc1c-maincore'),
+			'description' => esc_html__('Output of a column with information from 1C to the list of categories.', 'wc1c-maincore'),
 			'default' => 'yes'
 		];
 
 		$fields['interface_title_wordpress'] =
 		[
-			'title' => __('WordPress', 'wc1c-maincore'),
+			'title' => esc_html__('WordPress', 'wc1c-maincore'),
 			'type' => 'title',
-			'description' => __('Some interface settings for the WordPress.', 'wc1c-maincore'),
+			'description' => esc_html__('Some interface settings for the WordPress.', 'wc1c-maincore'),
 		];
 
 		$fields['admin_interface_media_library_column'] =
 		[
-			'title' => __('Column in media library list', 'wc1c-maincore'),
+			'title' => esc_html__('Column in media library list', 'wc1c-maincore'),
 			'type' => 'checkbox',
-			'label' => __('Enable', 'wc1c-maincore'),
-			'description' => __('Output of a column with information from 1C to the list of media files.', 'wc1c-maincore'),
+			'label' => esc_html__('Enable', 'wc1c-maincore'),
+			'description' => esc_html__('Output of a column with information from 1C to the list of media files.', 'wc1c-maincore'),
 			'default' => 'yes'
 		];
 

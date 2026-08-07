@@ -37,7 +37,7 @@ final class Init
 		(
 			[
 				'id' => 'wc1c_help_tab',
-				'title' => __('Help', 'wc1c-maincore'),
+				'title' => esc_html__('Help', 'wc1c-maincore'),
 				'content' => wc1c()->views()->getViewHtml('/helps/main.php')
 			]
 		);
@@ -46,7 +46,7 @@ final class Init
 		(
 			[
 				'id' => 'wc1c_bugs_tab',
-				'title' => __('Found a bug?', 'wc1c-maincore'),
+				'title' => esc_html__('Found a bug?', 'wc1c-maincore'),
 				'content' => wc1c()->views()->getViewHtml('/helps/bugs.php')
 			]
 		);
@@ -55,7 +55,7 @@ final class Init
 		(
 			[
 				'id' => 'wc1c_features_tab',
-				'title' => __('Not a feature?', 'wc1c-maincore'),
+				'title' => esc_html__('Not a feature?', 'wc1c-maincore'),
 				'content' => wc1c()->views()->getViewHtml('/helps/features.php')
 			]
 		);
