@@ -15,7 +15,7 @@ trait ProcessConfigurationTrait
 	/**
 	 * @var Configuration
 	 */
-	protected $configuration;
+	protected Configuration $configuration;
 
 	/**
 	 * @param $configuration_id
