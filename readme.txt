@@ -66,6 +66,8 @@ A summary of major changes. [View the full changelog here.](https://wc1c.info/ch
 
 = 0.24.3 =
 * Fixed: Miscellaneous bugs and stability improvements.
+* Tested: WooCommerce up to 11.0.
+* Updated: Translation files.
 
 = 0.24.2 =
 * Removed: Promotional materials.
