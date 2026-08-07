@@ -20,7 +20,7 @@ class Configurations
     /**
      * @var array Available actions
      */
-    private $actions =
+    private array $actions =
     [
         'all',
         'create',
@@ -31,7 +31,7 @@ class Configurations
     /**
      * @var string Current action
      */
-    private $current_action = 'all';
+    private string $current_action = 'all';
 
     /**
      * Configurations constructor.
@@ -67,7 +67,7 @@ class Configurations
      */
     public function init_current_action(): string
     {
-        $do_action = isset($_GET['do_action']) ? sanitize_text_field(wp_unslash($_GET['do_action'])) : 'all'; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+        $do_action = isset($_GET['do_action']) ? sanitize_key(wp_unslash($_GET['do_action'])) : 'all'; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
         if(in_array($do_action, $this->get_actions(), true))
         {
