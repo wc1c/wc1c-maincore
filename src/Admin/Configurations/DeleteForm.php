@@ -30,16 +30,17 @@ class DeleteForm extends FormAbstract
 	 *
 	 * @return array
 	 */
-	public function init_fields_main($fields)
-	{
+	public function init_fields_main($fields): array
+    {
 		$fields['accept'] =
 		[
-			'title' => __('Delete confirmation', 'wc1c-maincore'),
+			'title' => esc_html__('Delete confirmation', 'wc1c-maincore'),
 			'type' => 'checkbox',
-			'label' => sprintf(
+			'label' => sprintf
+            (
 				"%s<hr>%s",
-				__('I confirm that Configuration will be permanently and irrevocably deleted from WooCommerce.', 'wc1c-maincore'),
-				__('The directory with files for configuration from the FILE system will be completely removed.', 'wc1c-maincore')
+                esc_html__('I confirm that Configuration will be permanently and irrevocably deleted from WooCommerce.', 'wc1c-maincore'),
+                esc_html__('The directory with files for configuration from the FILE system will be completely removed.', 'wc1c-maincore')
 			),
 			'default' => 'no',
 		];
@@ -65,8 +66,8 @@ class DeleteForm extends FormAbstract
 	 *
 	 * @return bool
 	 */
-	public function save()
-	{
+	public function save(): bool
+    {
 		$post_data = $this->getPostedData();
 
 		if(!isset($post_data['_wc1c-admin-nonce-configurations-delete']))
@@ -74,7 +75,7 @@ class DeleteForm extends FormAbstract
 			return false;
 		}
 
-        $message = __('Configuration deleting error. Please retry.', 'wc1c-maincore');
+        $message = esc_html__('Configuration deleting error. Please retry.', 'wc1c-maincore');
 
 		if(empty($post_data) || !wp_verify_nonce($post_data['_wc1c-admin-nonce-configurations-delete'], 'wc1c-admin-configurations-delete-save'))
 		{
@@ -122,7 +123,7 @@ class DeleteForm extends FormAbstract
 
 		if(!isset($data['accept']) || $data['accept'] !== 'yes')
 		{
-            $message = __('Configuration deleting error. Confirmation of final deletion is required.', 'wc1c-maincore');
+            $message = esc_html__('Configuration deleting error. Confirmation of final deletion is required.', 'wc1c-maincore');
 
 			wc1c()->admin()->notices()->create
 			(
