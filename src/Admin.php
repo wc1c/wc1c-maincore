@@ -49,7 +49,7 @@ final class Admin
 		add_action('admin_menu', [$this, 'addMenu'], 30);
         add_action('admin_enqueue_scripts', [$this, 'initGlobalStyles']);
 
-		if(isset($_GET['page']) && 'wc1c' === $_GET['page'] && wc1c()->context()->isAdmin())
+		if(isset($_GET['page']) && 'wc1c' === sanitize_key(wp_unslash($_GET['page'])) && wc1c()->context()->isAdmin())
 		{
 			add_action('init', [$this, 'init'], 10);
 			add_action('admin_enqueue_scripts', [$this, 'initStyles']);

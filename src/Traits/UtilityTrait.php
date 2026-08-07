@@ -84,7 +84,7 @@ trait UtilityTrait
 	 */
 	public function utilityIsWc1cAdmin()
 	{
-		if(false !== is_admin() && 'wc1c' === (isset($_GET['page']) ? sanitize_text_field(wp_unslash($_GET['page'])) : '')) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if(false !== is_admin() && 'wc1c' === (isset($_GET['page']) ? sanitize_key(wp_unslash($_GET['page'])) : '')) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		{
 			return true;
 		}
@@ -101,7 +101,7 @@ trait UtilityTrait
 	 */
 	public function utilityIsWc1cAdminSectionRequest($section = '')
 	{
-		if((isset($_GET['section']) ? sanitize_text_field(wp_unslash($_GET['section'])) : '') !== $section) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if((isset($_GET['section']) ? sanitize_key(wp_unslash($_GET['section'])) : '') !== $section) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		{
 			return false;
 		}

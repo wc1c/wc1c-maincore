@@ -470,7 +470,7 @@ class AllTable extends TableAbstract
         // Nonce не требуется, это только параметры фильтрации.
         $storage_args = [];
 
-        if(isset($_GET['status']) && in_array($_GET['status'], $this->utilityConfigurationsGetStatuses(), true))
+        if(isset($_GET['status']) && in_array(sanitize_key(wp_unslash($_GET['status'])), $this->utilityConfigurationsGetStatuses(), true))
         {
             $storage_args['status'] = sanitize_key(wp_unslash($_GET['status'])); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
         }
