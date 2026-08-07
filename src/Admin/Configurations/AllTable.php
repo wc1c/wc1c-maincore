@@ -456,12 +456,12 @@ class AllTable extends TableAbstract
         $allowed_orderby = ['configuration_id', 'status', 'date_create', 'date_activity', 'name'];
         // Nonce не требуется, это только параметры сортировки.
         $orderby = (!empty($_REQUEST['orderby']) && in_array($_REQUEST['orderby'], $allowed_orderby, true))
-            ? sanitize_text_field(wp_unslash($_REQUEST['orderby'])) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+            ? sanitize_key(wp_unslash($_REQUEST['orderby'])) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
             : 'configuration_id';
 
         $allowed_order = ['asc', 'desc'];
         $order = (!empty($_REQUEST['order']) && in_array(strtolower($_REQUEST['order']), $allowed_order, true))
-            ? strtolower(sanitize_text_field(wp_unslash($_REQUEST['order']))) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+            ? strtolower(sanitize_key(wp_unslash($_REQUEST['order']))) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
             : 'desc';
 
         $storage_args['orderby'] = $orderby;
@@ -472,7 +472,7 @@ class AllTable extends TableAbstract
 
         if(isset($_GET['status']) && in_array($_GET['status'], $this->utilityConfigurationsGetStatuses(), true))
         {
-            $storage_args['status'] = sanitize_text_field(wp_unslash($_GET['status'])); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+            $storage_args['status'] = sanitize_key(wp_unslash($_GET['status'])); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
         }
 
         if(!empty($_REQUEST['s'])) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
@@ -531,7 +531,7 @@ class AllTable extends TableAbstract
         {
             $this->views();
 
-            $this->searchBox(__('Search', 'wc1c-maincore'), 'code');
+            $this->searchBox(esc_html__('Search', 'wc1c-maincore'), 'code');
         }
     }
 
