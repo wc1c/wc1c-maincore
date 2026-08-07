@@ -57,18 +57,18 @@ abstract class Form extends FormAbstract
 	 *
 	 * @return bool
 	 */
-	public function save()
-	{
-		$post_data = $this->getPostedData();
+	public function save(): bool
+    {
+        $post_data = $this->getPostedData();
 
-		if(!isset($post_data['_wc1c-admin-nonce']))
-		{
-			return false;
-		}
+        if(!isset($post_data['_wc1c-admin-nonce']))
+        {
+            return false;
+        }
 
-        wc1c()->log()->info(__('Saving settings.', 'wc1c-maincore'));
+        wc1c()->log()->info(esc_html__('Saving settings.', 'wc1c-maincore'), ['user_id' => get_current_user_id(), 'form_id' => $this->getId()]);
 
-        $message = __('The settings have not been saved.', 'wc1c-maincore');
+        $message = esc_html__('The settings have not been saved.', 'wc1c-maincore');
 
         if(empty($post_data) || !wp_verify_nonce($post_data['_wc1c-admin-nonce'], 'wc1c-admin-settings-save'))
 		{
@@ -84,6 +84,23 @@ abstract class Form extends FormAbstract
 
 			return false;
 		}
+
+        if(!current_user_can('manage_options'))
+        {
+            $message = esc_html__('Error. You do not have permission to update configurations.', 'wc1c-maincore');
+
+            wc1c()->admin()->notices()->create
+            (
+                [
+                    'type' => 'error',
+                    'data' => $message
+                ]
+            );
+
+            wc1c()->log()->warning($message, ['user_id' => get_current_user_id(), 'form_id' => $this->getId()]);
+
+            return false;
+        }
 
 		/**
 		 * All form fields validate
@@ -135,7 +152,7 @@ abstract class Form extends FormAbstract
 			return false;
 		}
 
-        $message = __('The settings have been successfully saved.', 'wc1c-maincore');
+        $message = esc_html__('The settings have been successfully saved.', 'wc1c-maincore');
 
 		wc1c()->admin()->notices()->create
 		(
