@@ -12,23 +12,14 @@ Donate link: https://wc1c.info/market
 Seamlessly integrate WooCommerce with 1C:Enterprise (various configurations) via CommerceML and other protocols.
 
 == Description ==
-A highly flexible, robust, and optimized data exchange engine bridging 1C:Enterprise and WooCommerce. Designed to handle complex synchronization scenarios while maintaining high performance.
+A highly flexible, robust, and optimized plugin for data exchange, bridging 1C:Enterprise and WooCommerce. Designed to handle complex synchronization scenarios while maintaining high performance.
 
 = Key Features =
-* ✅ **Automated Product Management (Goods & Services)**
-  - Support for various product types, including variable products with attributes.
-  - Bi-directional product data synchronization.
-  - Selective and conditional data updates.
-  - Flexible mapping and synchronization of existing catalog data.
-  - Multiple data source configurations.
-* ✅ **Automated Order Processing**
-  - Bi-directional order data exchange.
-  - Export additional order metadata, including payments and shipping details.
-  - Highly customizable export formats and settings.
-* ✅ **Optimized for Large Catalogs:** Engineered to handle Big Data and high-volume imports without timing out.
-* ✅ **Low Resource Consumption:** Specifically optimized to run smoothly on shared or budget hosting environments.
-* ✅ **Comprehensive Logging:** Multi-level event logging for quick troubleshooting and monitoring.
-* ✅ **Highly Extensible:** Built with developers in mind, offering extensive hooks, filters, and add-on support.
+* **Flexibility and Adaptability** – Allows configuring data transformation, filtering, and mapping rules to fit specific business needs, supporting multiple exchange logics within a single installation.
+* **Reliability** – Built-in error handling, retry mechanisms, and data validation ensure synchronization integrity even under unstable connections or partial failures.
+* **Optimization and Performance** – Batch processing, asynchronous operations, and efficient memory management minimize latency and ensure stable operation with catalogs of any size, including on budget hosting.
+* **Multiple Supported Protocols** – Out-of-the-box support for popular exchange formats (CommerceML, OData, and others), enabling integration with different 1С versions and external systems without rewriting the core.
+* **Extensibility** – Architecture with hooks and integration points allows external extensions to add any additional logic (e.g., order processing, stock export, price synchronization) without modifying the base code, simplifying updates and customization.
 
 Explore all features: [https://wc1c.info/features](https://wc1c.info/features)
 
@@ -48,6 +39,15 @@ The plugin supports any version of 1C:Enterprise that features online store inte
 
 = Is it possible to update only specific product data? =
 Yes. Depending on the exchange schema and installed extensions, you can perform selective updates. For example, you can update only prices or stock levels, or apply conditional logic to update specific product attributes.
+
+= Does this plugin support order synchronization? =
+Order processing is not included in the core but can be added via external extensions using the plugin's hooks and filters.
+
+= Can I export products from WooCommerce to 1C? =
+The core currently handles one-way import from 1C to WooCommerce. Reverse export is available through extensions.
+
+= Which exchange protocols are supported? =
+CommerceML and OData are supported out of the box, with the ability to extend to custom protocols.
 
 = Missing a feature? How can I add it? =
 First, check the official website's extensions directory. If no existing add-on fits your needs, you can develop a custom solution or request professional services. Alternatively, you can submit a feature request for the core plugin or implement custom logic using WordPress actions and filters (the plugin architecture is highly extensible).
