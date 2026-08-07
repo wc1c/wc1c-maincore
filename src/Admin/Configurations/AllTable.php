@@ -354,7 +354,7 @@ class AllTable extends TableAbstract
     {
         $status_links = [];
         // Nonce не требуется, это только чтение параметра фильтрации.
-        $current = !empty($_REQUEST['status']) ? sanitize_text_field(wp_unslash($_REQUEST['status'])) : 'all'; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+        $current = !empty($_REQUEST['status']) ? sanitize_key(wp_unslash($_REQUEST['status'])) : 'all'; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
         // All link
         $class = $current === 'all' ? ' class=current' :'';
