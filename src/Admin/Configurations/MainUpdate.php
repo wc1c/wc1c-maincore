@@ -30,7 +30,8 @@ class MainUpdate
 	public function process()
 	{
 		$configuration = $this->getConfiguration();
-		$form = new UpdateForm();
+		$form = new MainUpdateForm();
+        $cap_check = true;
 
 		$form_data = $configuration->getOptions();
 
@@ -39,59 +40,64 @@ class MainUpdate
 
 		$form->loadSavedData($form_data);
 
-		if
-        (
-            isset($_GET['form']) && isset($_POST['_wc1c-admin-nonce']) &&
-			wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['_wc1c-admin-nonce'])), 'wc1c-admin-configurations-update-save') &&
-			sanitize_text_field(wp_unslash($_GET['form'])) === $form->getId()
-		)
-		{
-			$data = $form->save();
+        $data = $form->save();
 
-			if($data)
-			{
-				// Галка стоит
-				if($data['status'] === 'yes')
-				{
-					if($configuration->isEnabled() === false)
-					{
-						$configuration->setStatus('active');
-					}
-				}
-				// галка не стоит
-				else
-				{
-					$configuration->setStatus('inactive');
-				}
-				unset($data['status']);
+        if($configuration->getUserId() !== get_current_user_id() && !current_user_can('edit_others_products'))
+        {
+            $cap_check = false;
 
-				$configuration->setDateModify(time());
-				$configuration->setOptions($data);
+            wc1c()->admin()->notices()->create
+            (
+                [
+                    'type' => 'error',
+                    'data' => esc_html__('Error. You do not have permission to update this configuration.', 'wc1c-maincore')
+                ]
+            );
+        }
 
-				$saved = $configuration->save();
+        if($cap_check && !empty($data))
+        {
+            // Галка стоит
+            if($data['status'] === 'yes')
+            {
+                if($configuration->isEnabled() === false)
+                {
+                    $configuration->setStatus('active');
+                }
+            }
+            // галка не стоит
+            else
+            {
+                $configuration->setStatus('inactive');
+            }
+            unset($data['status']);
 
-				if($saved)
-				{
-					wc1c()->admin()->notices()->create
-					(
-						[
-							'type' => 'update',
-							'data' => esc_html__('Configuration update success.', 'wc1c-maincore')
-						]
-					);
-				}
-				else
-				{
-					wc1c()->admin()->notices()->create
-					(
-						[
-							'type' => 'error',
-							'data' => esc_html__('Configuration update error. Please retry saving or change fields.', 'wc1c-maincore')
-						]
-					);
-				}
-			}
-		}
+            $configuration->setDateModify(time());
+            $configuration->setOptions($data);
+
+            $saved = $configuration->save();
+
+            if($saved)
+            {
+                wc1c()->admin()->notices()->create
+                (
+                    [
+                        'type' => 'update',
+                        'data' => esc_html__('Configuration update success.', 'wc1c-maincore')
+                    ]
+                );
+            }
+            else
+            {
+                wc1c()->admin()->notices()->create
+                (
+                    [
+                        'type' => 'error',
+                        'data' => esc_html__('Configuration update error. Please retry saving or change fields.', 'wc1c-maincore')
+                    ]
+                );
+            }
+        }
 
 		add_action('wc1c_admin_configurations_update_sidebar_show', [$this, 'outputSidebar'], 10);
 		add_action('wc1c_admin_configurations_update_show', [$form, 'output'], 10);

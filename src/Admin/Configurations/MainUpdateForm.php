@@ -2,7 +2,7 @@
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Main\Exceptions\Exception;
+use Exception;
 use Wc1c\Main\Abstracts\FormAbstract;
 use Wc1c\Main\Traits\ConfigurationsUtilityTrait;
 
@@ -11,7 +11,7 @@ use Wc1c\Main\Traits\ConfigurationsUtilityTrait;
  *
  * @package Wc1c\Main\Admin\Configurations
  */
-class UpdateForm extends FormAbstract
+class MainUpdateForm extends FormAbstract
 {
     use ConfigurationsUtilityTrait;
 
@@ -39,14 +39,14 @@ class UpdateForm extends FormAbstract
 	{
 		$fields['status'] =
         [
-            'title' => __('Status', 'wc1c-maincore'),
+            'title' => esc_html__('Status', 'wc1c-maincore'),
             'type' => 'checkbox',
-            'label' => __('Check the box if you want to enable this configuration. Disabled by default.', 'wc1c-maincore'),
+            'label' => esc_html__('Check the box if you want to enable this configuration. Disabled by default.', 'wc1c-maincore'),
             'default' => 'yes',
             'description' => sprintf
             (
 	            '%s',
-	            __('The configuration is either enabled or disabled. In the off state, all configuration mechanisms will not work.', 'wc1c-maincore')
+                    esc_html__('The configuration is either enabled or disabled. In the off state, all configuration mechanisms will not work.', 'wc1c-maincore')
             ),
         ];
 
@@ -86,7 +86,7 @@ class UpdateForm extends FormAbstract
 			(
 				[
 					'type' => 'error',
-					'data' => __('Update error. Please retry.', 'wc1c-maincore')
+					'data' => esc_html__('Update error. Please retry.', 'wc1c-maincore')
 				]
 			);
 
@@ -132,7 +132,7 @@ class UpdateForm extends FormAbstract
 
 		$args =
         [
-            'header' => '<h3 class="p-0 m-0">' . __('Fast navigation', 'wc1c-maincore') . '</h3>',
+            'header' => '<h3 class="p-0 m-0">' . esc_html__('Fast navigation', 'wc1c-maincore') . '</h3>',
             'object' => $this
         ];
 
