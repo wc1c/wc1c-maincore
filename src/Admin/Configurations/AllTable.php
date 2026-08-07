@@ -357,15 +357,16 @@ class AllTable extends TableAbstract
         $current = !empty($_REQUEST['status']) ? sanitize_text_field(wp_unslash($_REQUEST['status'])) : 'all'; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
         // All link
-        $class = $current === 'all' ? ' class="current"' :'';
+        $class = $current === 'all' ? ' class=current' :'';
         $all_url = esc_url(remove_query_arg('status'));
 
-        $status_links['all'] = sprintf(
+        $status_links['all'] = sprintf
+        (
             '<a href="%1$s" %2$s>%3$s <span class="count">(%4$d)</span></a>',
-            $all_url,
-            esc_attr($class),
+            esc_url($all_url),
+            esc_html($class),
             esc_html__('All', 'wc1c-maincore'),
-            (int) $this->storage_configurations->count()
+            absint($this->storage_configurations->count())
         );
 
         $statuses = $this->utilityConfigurationsGetStatuses();
@@ -384,16 +385,16 @@ class AllTable extends TableAbstract
                 continue;
             }
 
-            $class = $current === $status_key ? ' class="current"' :'';
+            $class = $current === $status_key ? ' class=current' : '';
             $sold_url = esc_url(add_query_arg('status', $status_key));
 
             $status_links[$status_key] = sprintf
             (
                 '<a href="%s" %s>%s <span class="count">(%d)</span></a>',
-                $sold_url,
-                $class,
-                $this->utilityConfigurationsGetStatusesFolder($status_key),
-                $count
+                esc_url($sold_url),
+                esc_html($class),
+                esc_html__($this->utilityConfigurationsGetStatusesFolder($status_key)),
+                absint($count)
             );
         }
 
