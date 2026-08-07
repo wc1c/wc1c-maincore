@@ -49,6 +49,7 @@ namespace
         /**
          * For external use
          *
+         * @deprecated 0.24.2
          * @return Wc1c\Main\Core Main instance of core
          */
 		function wc1c(): Wc1c\Main\Core
