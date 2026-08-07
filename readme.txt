@@ -4,7 +4,7 @@ Tags: commerceml, 1c, cml, wc1c, 1c-enterprise
 Requires at least: 5.3
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 0.24.2
+Stable tag: 0.24.3
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Donate link: https://wc1c.info/market
@@ -63,6 +63,9 @@ First, check the official website's extensions directory. If no existing add-on 
 
 == Changelog ==
 A summary of major changes. [View the full changelog here.](https://wc1c.info/changelogs)
+
+= 0.24.3 =
+* Fixed: Miscellaneous bugs and stability improvements.
 
 = 0.24.2 =
 * Removed: Promotional materials.
