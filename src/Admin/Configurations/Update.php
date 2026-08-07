@@ -46,8 +46,15 @@ class Update
 
 		$configuration_id = isset($_GET['configuration_id']) ? absint(wp_unslash($_GET['configuration_id'])) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
-		if (false === $this->setConfiguration($configuration_id))
+		if(false === $this->setConfiguration($configuration_id))
 		{
+            if($this->getConfiguration()->getUserId() !== get_current_user_id() && !current_user_can('edit_others_products'))
+            {
+                add_action('wc1c_admin_show', [$this, 'outputError'], 10);
+                wc1c()->log()->notice('Configuration update is not available.', ['configuration_id' => $configuration_id]);
+                return;
+            }
+
 			try
 			{
 				wc1c()->schemas()->init($this->getConfiguration());
