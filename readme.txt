@@ -1,15 +1,15 @@
 === WC1C-Maincore ===
 Contributors: WC1C, Frescoref
-Tags: commerceml, 1c, cml, wc1c, 1c-enterprise
+Tags: commerceml, 1c, cml, odata, 1c-enterprise
 Requires at least: 5.3
-Tested up to: 7.0
+Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 0.24.3
+Stable tag: 0.24.4
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Donate link: https://wc1c.info/market
 
-Seamlessly integrate WooCommerce with 1C:Enterprise (various configurations) via CommerceML and other protocols.
+Seamlessly integrate WooCommerce with 1C Company products (various configurations) via CommerceML and other protocols, ensuring flexible data exchange for all business data types.
 
 == Description ==
 A highly flexible, robust, and optimized plugin for data exchange, bridging 1C:Enterprise and WooCommerce. Designed to handle complex synchronization scenarios while maintaining high performance.
@@ -23,9 +23,15 @@ A highly flexible, robust, and optimized plugin for data exchange, bridging 1C:E
 
 Explore all features: [https://wc1c.info/features](https://wc1c.info/features)
 
+= Trademarks =
+"WordPress","Woo", "WooCommerce" and "1C" are trademarks of their respective owners.
+This project is not affiliated with, endorsed by, or sponsored by the trademark holders unless otherwise stated.
+
 == Translations ==
 * English (Default)
 * Russian (Built-in)
+
+Want to help translate WC1C into your language? You can contribute via the [WordPress Translation Platform](https://translate.wordpress.org/projects/wp-plugins/wc1c-maincore).
 
 == Installation ==
 1. Extract the archive and upload the `wc1c-maincore` folder to the `/wp-content/plugins/` directory.
@@ -61,8 +67,18 @@ First, check the official website's extensions directory. If no existing add-on 
 5. Editing a Configuration
 6. Advanced Configuration Settings
 
+== Upgrade Notice ==
+
+= 0.24.0 =
+This version requires PHP 7.4+ and WooCommerce 4.5+. Please verify your environment before updating.
+
 == Changelog ==
 A summary of major changes. [View the full changelog here.](https://wc1c.info/changelogs)
+
+= 0.24.4 =
+* Updated: `readme.txt` formatting.
+* Fixed: Miscellaneous bugs and stability improvements.
+* Tested: WordPress up to 7.1.
 
 = 0.24.3 =
 * Fixed: Miscellaneous bugs and stability improvements.
