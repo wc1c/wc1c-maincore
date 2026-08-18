@@ -140,7 +140,7 @@ A summary of major changes. [View the full changelog here.](https://wc1c.info/ch
 * Updated: ProductsCML to v0.12.0.
 * Updated: Translation files.
 * Updated: Core CML library.
-* Improved: Promotional banners logic.
+* Improved: Promotional banner's logic.
 * Added: Woplucore framework integration.
 * Fixed: Miscellaneous bugs.
 
