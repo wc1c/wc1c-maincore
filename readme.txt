@@ -2,14 +2,14 @@
 Contributors: WC1C, Frescoref
 Tags: commerceml, 1c, cml, wc1c, 1c-enterprise
 Requires at least: 5.3
-Tested up to: 7.0
+Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 0.24.3
+Stable tag: 0.24.4
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Donate link: https://wc1c.info/market
 
-Seamlessly integrate WooCommerce with 1C:Enterprise (various configurations) via CommerceML and other protocols.
+Seamlessly integrate WooCommerce with 1C Company products (various configurations) via CommerceML and other protocols, ensuring flexible data exchange for all business data types.
 
 == Description ==
 A highly flexible, robust, and optimized plugin for data exchange, bridging 1C:Enterprise and WooCommerce. Designed to handle complex synchronization scenarios while maintaining high performance.
@@ -63,6 +63,11 @@ First, check the official website's extensions directory. If no existing add-on 
 
 == Changelog ==
 A summary of major changes. [View the full changelog here.](https://wc1c.info/changelogs)
+
+= 0.24.4 =
+* Updated: `readme.txt` formatting.
+* Fixed: Miscellaneous bugs and stability improvements.
+* Tested: WordPress up to 7.1.
 
 = 0.24.3 =
 * Fixed: Miscellaneous bugs and stability improvements.
