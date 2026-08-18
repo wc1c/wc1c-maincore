@@ -84,7 +84,7 @@ final class Admin
 				'network_admin_notices' => false
 			];
 
-			$this->notices = new Manager(wc1c()->context()->getSlug() . '_admin_notices', $args);
+			$this->notices = new Manager('wc1c_admin_notices', $args);
 		}
 
 		return $this->notices;
@@ -103,7 +103,7 @@ final class Admin
 			__('Integration with 1C', 'wc1c-maincore'),
 			__('Integration with 1C', 'wc1c-maincore'),
 			'manage_woocommerce',
-            wc1c()->context()->getSlug(),
+            'wc1c',
 			[$this, 'route']
 		);
 	}
@@ -239,16 +239,16 @@ final class Admin
 
 		if(!array_key_exists($current_section, $sections) || !isset($sections[$current_section]['callback']))
 		{
-			add_action(wc1c()->context()->getSlug() . '_admin_show', [$this, 'wrapError']);
+			add_action('wc1c_admin_show', [$this, 'wrapError']);
 		}
 		else
 		{
 			if(false === get_option('wc1c_wizard', false))
 			{
-				add_action(wc1c()->context()->getSlug() . '_admin_show', [$this, 'wrapHeader'], 3);
+				add_action('wc1c_admin_show', [$this, 'wrapHeader'], 3);
 			}
 
-			add_action(wc1c()->context()->getSlug() . '_admin_show', [$this, 'wrapSections'], 7);
+			add_action('wc1c_admin_show', [$this, 'wrapSections'], 7);
 
 			$callback = $sections[$current_section]['callback'];
 

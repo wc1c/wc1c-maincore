@@ -124,7 +124,7 @@ final class Receiver
         }
 
         $action = false;
-        $receiver_action = wc1c()->context()->getSlug() . '_receiver_' . $configuration->getSchema();
+        $receiver_action = 'wc1c_receiver_' . $configuration->getSchema();
 
         /**
          * Обработка событий исходя из схемы

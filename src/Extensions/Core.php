@@ -147,11 +147,11 @@ final class Core
 
 		$extensions = [];
 
-		if(has_filter(wc1c()->context()->getSlug() . '_extensions_loading'))
+		if(has_filter('wc1c_extensions_loading'))
 		{
 			try
 			{
-				$extensions = apply_filters(wc1c()->context()->getSlug() . '_extensions_loading', $extensions);
+				$extensions = apply_filters('wc1c_extensions_loading', $extensions);
 			}
 			catch(\Error $e)
 			{
