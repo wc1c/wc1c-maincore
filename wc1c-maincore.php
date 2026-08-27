@@ -2,7 +2,7 @@
 /**
  * Plugin Name: WC1C-Maincore
  * Plugin URI: https://wordpress.org/plugins/wc1c-maincore/
- * Description: Seamlessly integrate WooCommerce with 1C Company products (various configurations) via CommerceML and other protocols, ensuring flexible data exchange for all business data types.
+ * Description: Seamlessly integrate WooCommerce with 1C products via CommerceML and other protocols, ensuring flexible data exchange for all business data.
  * Version: 0.24.4
  * WC requires at least: 4.5
  * WC tested up to: 11.0
