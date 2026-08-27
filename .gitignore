@@ -1,40 +1,40 @@
-```php
-# Configuration backup files
-*.bak
-*.backup
-*.orig
+```
+# Compiled and build artifacts
+*.pyc
+__pycache__/
+
+# Dependencies
+vendor/
+composer.lock
+
+# Logs and temp files
+*.log
 *.tmp
 
-# Log files
-*.log
+# Environment
+.env
+.env.local
+*.env.*
 
-# Environment specific configurations
-.env*
-.config.php.bak
-config/local.php
-config/development.php
-config/staging.php
-config/production.php
-
-# IDE and editor files
+# Editors
 .vscode/
 .idea/
-*.swp
-*.swo
-.DS_Store
-Thumbs.db
-
-# Cache and temporary directories
-.cache/
-tmp/
-temp/
 
 # OS generated files
 .DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
 Thumbs.db
+
+# Coverage reports
+coverage/
+htmlcov/
+.coverage
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+
+# PHP specific
+*.php~
+*.bak
 ```

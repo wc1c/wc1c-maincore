@@ -1,7 +1,12 @@
 <?php defined('ABSPATH') || exit;?>
 
 <form method="post" action="">
-	<?php wp_nonce_field('wc1c-admin-configurations-delete-save', '_wc1c-admin-nonce-configurations-delete'); ?>
+	<?php
+	// Add unique nonce for this specific configuration deletion
+	$configuration_id = $args['object']->getConfiguration()->getId();
+	wp_nonce_field('wc1c_delete_configuration_' . $configuration_id, '_wc1c_nonce');
+	?>
+	<input type="hidden" name="configuration_id" value="<?php echo esc_attr($configuration_id); ?>">
     <div class="pt-2 rounded-3">
         <table class="form-table wc1c-admin-form-table">
             <?php

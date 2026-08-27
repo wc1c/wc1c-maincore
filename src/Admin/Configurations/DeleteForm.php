@@ -70,14 +70,17 @@ class DeleteForm extends FormAbstract
     {
 		$post_data = $this->getPostedData();
 
-		if(!isset($post_data['_wc1c-admin-nonce-configurations-delete']))
+		if(!isset($post_data['_wc1c_nonce']))
 		{
 			return false;
 		}
 
+		// Get configuration_id from POST data
+		$configuration_id = isset($post_data['configuration_id']) ? absint(wp_unslash($post_data['configuration_id'])) : 0;
+		
         $message = esc_html__('Configuration deleting error. Please retry.', 'wc1c-maincore');
 
-		if(empty($post_data) || !wp_verify_nonce(sanitize_text_field(wp_unslash($post_data['_wc1c-admin-nonce-configurations-delete'])), 'wc1c-admin-configurations-delete-save'))
+		if(empty($post_data) || !wp_verify_nonce(sanitize_text_field(wp_unslash($post_data['_wc1c_nonce'])), 'wc1c_delete_configuration_' . $configuration_id))
 		{
 			wc1c()->admin()->notices()->create
 			(

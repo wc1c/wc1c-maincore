@@ -25,13 +25,14 @@ class Delete
 	 */
 	public function __construct()
 	{
-		// Verify nonce and permissions before processing deletion
+		// Verify nonce and permissions BEFORE using any GET parameters
 		if (!$this->verify_nonce_and_permissions()) {
 			add_action('wc1c_admin_show', [$this, 'outputError'], 10);
 			return;
 		}
-
-		$configuration_id = isset($_GET['configuration_id']) ? absint(wp_unslash($_GET['configuration_id'])) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		
+		$configuration_id = isset($_GET['configuration_id']) ? absint(wp_unslash($_GET['configuration_id'])) : 0;
+		
 		$error = $this->setConfiguration($configuration_id);
 
 		if($error)
@@ -51,13 +52,30 @@ class Delete
 	 */
 	private function verify_nonce_and_permissions(): bool
 	{
-		// Check nonce
-		if (!isset($_GET['_wpnonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_GET['_wpnonce'])), 'wc1c_delete_configuration')) {
+		// Check nonce - must be present in GET request
+		if (!isset($_GET['_wc1c_nonce'])) {
+			return false;
+		}
+
+		$nonce = sanitize_text_field(wp_unslash($_GET['_wc1c_nonce']));
+		
+		// Get configuration_id from GET to build nonce action
+		$configuration_id = isset($_GET['configuration_id']) ? absint(wp_unslash($_GET['configuration_id'])) : 0;
+		
+		// If no configuration_id, nonce verification fails
+		if ($configuration_id === 0) {
+			return false;
+		}
+		
+		// Use unique nonce action per configuration for better security
+		$nonce_action = 'wc1c_delete_configuration_' . $configuration_id;
+
+		if (!wp_verify_nonce($nonce, $nonce_action)) {
 			return false;
 		}
 
 		// Check user capability
-		if (!current_user_can('manage_woocommerce')) {
+		if (!current_user_can('edit_others_products')) {
 			return false;
 		}
 
