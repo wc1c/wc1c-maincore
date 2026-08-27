@@ -39,7 +39,7 @@
         <?php esc_html_e('For flexible exchange distribution, an unlimited number of configurations can be created.', 'wc1c-maincore'); ?>
         <?php esc_html_e('It is recommended to create at least two configurations: 1. To exchange nomenclature data, 2. To exchange orders data.', 'wc1c-maincore'); ?>
     </p>
-    <a href="<?php echo esc_url_raw($args['url_create']); ?>" class="mt-2 mx-0 fs-6 btn-lg d-inline-block page-title-action">
+    <a href="<?php echo esc_attr(esc_url($args['url_create'])); ?>" class="mt-2 mx-0 fs-6 btn-lg d-inline-block page-title-action">
         <?php esc_html_e('New configuration', 'wc1c-maincore'); ?>
     </a>
 <?php

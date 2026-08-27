@@ -432,7 +432,7 @@ final class Core extends CoreAbstract
 
 		$default_class_name = Receiver::class;
 
-		$use_class_name = apply_filters(wc1c()->context()->getSlug() . '_receiver_loading_class_name', $default_class_name);
+		$use_class_name = apply_filters('wc1c_receiver_loading_class_name', $default_class_name);
 
 		if(false === class_exists($use_class_name))
 		{

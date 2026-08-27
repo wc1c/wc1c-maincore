@@ -104,9 +104,9 @@ final class Core
 
 		$current_configuration_id = $configuration->getId();
 
-		$init_schema->setPrefix(wc1c()->context()->getSlug() . '_prefix_' . esc_html($schema_id) . '_' . esc_html($current_configuration_id));
+		$init_schema->setPrefix('wc1c_prefix_' . esc_html($schema_id) . '_' . esc_html($current_configuration_id));
 		$init_schema->setConfiguration($configuration);
-		$init_schema->setConfigurationPrefix(wc1c()->context()->getSlug() . '_configuration_' . esc_html($current_configuration_id));
+		$init_schema->setConfigurationPrefix('wc1c_configuration_' . esc_html($current_configuration_id));
 
 		try
 		{
@@ -163,14 +163,14 @@ final class Core
 	{
         wc1c()->log()->debug(esc_html__('Schemas loading.', 'wc1c-maincore'));
 
-		add_action(wc1c()->context()->getSlug() . '_default_schemas_loading', [$this, 'loadProductsCml'], 10, 1);
-		add_action(wc1c()->context()->getSlug() . '_default_schemas_loading', [$this, 'loadProductsCleanerCml'], 10, 1);
+		add_action('wc1c_default_schemas_loading', [$this, 'loadProductsCml'], 10, 1);
+		add_action( 'wc1c_default_schemas_loading', [$this, 'loadProductsCleanerCml'], 10, 1);
 
-		$schemas = apply_filters(wc1c()->context()->getSlug() . '_default_schemas_loading', []);
+		$schemas = apply_filters('wc1c_default_schemas_loading', []);
 
 		if('yes' === wc1c()->settings()->get('extensions_schemas', 'yes'))
 		{
-			$schemas = apply_filters(wc1c()->context()->getSlug() . '_schemas_loading', $schemas);
+			$schemas = apply_filters('wc1c_schemas_loading', $schemas);
 		}
         else
         {

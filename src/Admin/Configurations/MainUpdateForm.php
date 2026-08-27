@@ -75,12 +75,16 @@ class MainUpdateForm extends FormAbstract
 	{
 		$post_data = $this->getPostedData();
 
-		if(!isset($post_data['_wc1c-admin-nonce']))
+		if(!isset($post_data['_wc1c_nonce']))
 		{
 			return false;
 		}
 
-		if(empty($post_data) || !wp_verify_nonce(sanitize_text_field(wp_unslash($post_data['_wc1c-admin-nonce'])), 'wc1c-admin-configurations-update-save'))
+		// Get configuration_id from POST data or URL
+		$configuration_id = isset($post_data['configuration_id']) ? absint(wp_unslash($post_data['configuration_id'])) : 
+			(isset($_GET['configuration_id']) ? absint(wp_unslash($_GET['configuration_id'])) : 0);
+		
+		if(empty($post_data) || !wp_verify_nonce(sanitize_text_field(wp_unslash($post_data['_wc1c_nonce'])), 'wc1c_update_configuration_' . $configuration_id))
 		{
 			wc1c()->admin()->notices()->create
 			(
