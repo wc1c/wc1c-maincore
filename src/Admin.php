@@ -6,6 +6,7 @@ defined('ABSPATH') || exit;
 
 use Digiom\Wotices\Interfaces\ManagerInterface;
 use Digiom\Wotices\Manager;
+use Wc1c\Main\Admin\About;
 use Wc1c\Main\Admin\Configurations;
 use Wc1c\Main\Admin\Extensions;
 use Wc1c\Main\Admin\Settings;
@@ -151,6 +152,13 @@ final class Admin
 				'callback' => [Extensions::class, 'instance']
 			];
 		}
+
+        $default_sections['about'] =
+        [
+            'title' => __('About plugin', 'wc1c-maincore'),
+            'visible' => true,
+            'callback' => [About::class, 'instance']
+        ];
 
 		$this->initSections($default_sections);
 		$this->setCurrentSection('configurations');
