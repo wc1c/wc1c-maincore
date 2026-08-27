@@ -1,5 +1,7 @@
 <?php defined('ABSPATH') || exit;?>
 
+<?php // phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound ?>
+
 <div class="row g-0">
     <div class="col-24 col-lg-17 p-0">
         <div class="pe-0 pe-lg-2">
@@ -8,7 +10,7 @@
                 // Get configuration_id from the object or URL
                 $configuration_id = isset($args['object']) && method_exists($args['object'], 'getConfiguration') 
                     ? $args['object']->getConfiguration()->getId() 
-                    : (isset($_GET['configuration_id']) ? absint(wp_unslash($_GET['configuration_id'])) : 0);
+                    : 0;
                 
                 // Add unique nonce for this specific configuration update
                 wp_nonce_field('wc1c_update_configuration_' . $configuration_id, '_wc1c_nonce');
@@ -29,3 +31,5 @@
 		<?php do_action('wc1c_admin_configurations_update_sidebar_show'); ?>
     </div>
 </div>
+
+<?php // phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound ?>
