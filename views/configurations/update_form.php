@@ -7,13 +7,11 @@
         <div class="pe-0 pe-lg-2">
             <form method="post" action="<?php echo esc_url(add_query_arg('form', $args['object']->getId())); ?>">
                 <?php
-                // Get configuration_id from the object or URL
-                $configuration_id = isset($args['object']) && method_exists($args['object'], 'getConfiguration') 
-                    ? $args['object']->getConfiguration()->getId() 
-                    : 0;
-                
-                // Add unique nonce for this specific configuration update
-                wp_nonce_field('wc1c_update_configuration_' . $configuration_id, '_wc1c_nonce');
+                    // Get configuration_id from the object
+                    $configuration_id = isset($args['object']) && method_exists($args['object'], 'getConfiguration') ? $args['object']->getConfiguration()->getId() : 0;
+
+                    // Add unique nonce for this specific configuration update
+                    wp_nonce_field('wc1c_update_configuration_' . $configuration_id, '_wc1c_nonce');
                 ?>
                 <input type="hidden" name="configuration_id" value="<?php echo esc_attr($configuration_id); ?>">
                 <div class="bg-white p-2 rounded-3 wc1c-toc-container">
