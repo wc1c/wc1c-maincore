@@ -25,7 +25,12 @@ class Delete
 	 */
 	public function __construct()
 	{
-		// Nonce не требуется, так как это только чтение параметра навигации.
+		// Verify nonce and permissions before processing deletion
+		if (!$this->verify_nonce_and_permissions()) {
+			add_action('wc1c_admin_show', [$this, 'outputError'], 10);
+			return;
+		}
+
 		$configuration_id = isset($_GET['configuration_id']) ? absint(wp_unslash($_GET['configuration_id'])) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		$error = $this->setConfiguration($configuration_id);
 
@@ -37,6 +42,26 @@ class Delete
 		{
 			$this->process();
 		}
+	}
+
+	/**
+	 * Verify nonce and user permissions for deletion action
+	 *
+	 * @return bool
+	 */
+	private function verify_nonce_and_permissions(): bool
+	{
+		// Check nonce
+		if (!isset($_GET['_wpnonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_GET['_wpnonce'])), 'wc1c_delete_configuration')) {
+			return false;
+		}
+
+		// Check user capability
+		if (!current_user_can('manage_woocommerce')) {
+			return false;
+		}
+
+		return true;
 	}
 
 	/**
