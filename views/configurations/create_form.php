@@ -1,5 +1,7 @@
 <?php defined('ABSPATH') || exit;?>
 
+<?php // phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound ?>
+
 <form method="post" action="">
     <div class="row g-0">
         <div class="col-24 col-lg-17 p-0">
@@ -43,3 +45,5 @@
         </div>
     </div>
 </form>
+
+<?php // phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound ?>

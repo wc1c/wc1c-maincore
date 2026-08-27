@@ -27,6 +27,49 @@ class Update
 	 */
 	public function __construct()
 	{
+        $cap_check = true;
+
+        // Check nonce - must be present in GET request
+        if (!isset($_GET['_wc1c_nonce']))
+        {
+            $cap_check = false;
+        }
+
+        $nonce = sanitize_text_field(wp_unslash($_GET['_wc1c_nonce']));
+
+        // Get configuration_id from GET to build nonce action
+        $configuration_id = isset($_GET['configuration_id']) ? absint(wp_unslash($_GET['configuration_id'])) : 0;
+
+        // If no configuration_id, nonce verification fails
+        if ($configuration_id === 0)
+        {
+            $cap_check = false;
+        }
+
+        // Use unique nonce action per configuration for better security
+        $nonce_action = 'wc1c_update_configuration_' . $configuration_id;
+
+        if (!wp_verify_nonce($nonce, $nonce_action))
+        {
+            $cap_check = false;
+        }
+
+        // Check user capability
+        if (!current_user_can('edit_others_products'))
+        {
+            $cap_check = false;
+        }
+
+        // Verify nonce and permissions BEFORE using any GET parameters
+        if ($cap_check === false)
+        {
+            add_action('wc1c_admin_show', [$this, 'outputError'], 10);
+            wc1c()->log()->notice('Configuration update nonce or permission check failed.');
+            return;
+        }
+		
+		$configuration_id = isset($_GET['configuration_id']) ? absint(wp_unslash($_GET['configuration_id'])) : 0;
+
 		$this->setSectionKey('update_section');
 
 		$default_sections['main'] =
@@ -43,8 +86,6 @@ class Update
 
 		$this->initSections($default_sections);
 		$this->setCurrentSection('main');
-
-		$configuration_id = isset($_GET['configuration_id']) ? absint(wp_unslash($_GET['configuration_id'])) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 		if(false === $this->setConfiguration($configuration_id))
 		{

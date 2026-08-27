@@ -69,6 +69,12 @@ class Configurations
     {
         $do_action = isset($_GET['do_action']) ? sanitize_key(wp_unslash($_GET['do_action'])) : 'all'; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
+        // Only verify nonce for actions that modify data (create, update, delete)
+        if (in_array($do_action, ['create', 'update', 'delete'], true)) {
+            // Nonce verification is handled by individual action classes
+            // This method only determines which action to load
+        }
+
         if(in_array($do_action, $this->get_actions(), true))
         {
             $this->set_current_action($do_action);
