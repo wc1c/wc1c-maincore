@@ -155,6 +155,13 @@ trait UtilityTrait
 
 		$path .= '&configuration_id=' . $configuration_id;
 
+		// Add nonce for actions that modify data (delete, update, etc.)
+		if(in_array($action, ['delete', 'update'], true))
+		{
+			$nonce_action = 'wc1c_' . $action . '_configuration_' . $configuration_id;
+			$path .= '&_wc1c_nonce=' . wp_create_nonce($nonce_action);
+		}
+
 		return admin_url($path);
 	}
 
