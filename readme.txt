@@ -9,7 +9,7 @@ License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Donate link: https://wc1c.info/market
 
-Integration between WooCommerce and 1C products.
+Integration between WooCommerce and 1C products (via multiple connections, formats, plugin extensions, and protocols).
 
 == Description ==
 Seamlessly integrate WooCommerce with 1C products via CommerceML and other protocols, ensuring flexible data exchange for all business data.
