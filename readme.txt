@@ -1,4 +1,4 @@
-=== WC1C-Maincore ===
+=== WC1C ===
 Contributors: WC1C, Frescoref
 Tags: commerceml, 1c, cml, wc1c, 1c-enterprise
 Requires at least: 5.3
