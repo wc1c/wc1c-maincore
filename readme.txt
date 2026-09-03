@@ -66,12 +66,12 @@ First, check the official website's extensions directory. If no existing add-on 
 
 == Screenshots ==
 
-1. Configuration List
-2. Tools Dashboard
-3. Global Settings
-4. Creating a New Configuration
-5. Editing a Configuration
-6. Advanced Configuration Settings
+1. Configuration list: manage multiple 1C connections from one place.
+2. Tools dashboard: monitor plugin operations and service data.
+3. Global settings: control common plugin behavior.
+4. Creating a new configuration: set up a new 1C exchange scenario.
+5. Editing a configuration: adjust protocol, mapping, and exchange rules.
+6. Advanced settings: fine-tune behavior for complex catalogs.
 
 == Upgrade Notice ==
 
