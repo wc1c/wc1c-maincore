@@ -9,17 +9,23 @@ License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Donate link: https://wc1c.info/market
 
-Seamlessly integrate WooCommerce with 1C products via CommerceML and other protocols, ensuring flexible data exchange for all business data.
+Integration between WooCommerce and the products of the 1C company.
 
 == Description ==
-A highly flexible, robust, and optimized plugin for data exchange, bridging 1C:Enterprise and WooCommerce. Designed to handle complex synchronization scenarios while maintaining high performance.
+Seamlessly integrate WooCommerce with 1C products via CommerceML and other protocols, ensuring flexible data exchange for all business data.
+Designed to handle complex synchronization scenarios while maintaining high performance.
 
-= Key Features =
-* **Flexibility and Adaptability** – Allows configuring data transformation, filtering, and mapping rules to fit specific business needs, supporting multiple exchange logics within a single installation.
-* **Reliability** – Built-in error handling, retry mechanisms, and data validation ensure synchronization integrity even under unstable connections or partial failures.
-* **Optimization and Performance** – Batch processing, asynchronous operations, and efficient memory management minimize latency and ensure stable operation with catalogs of any size, including on budget hosting.
-* **Multiple Supported Protocols** – Out-of-the-box support for popular exchange formats (CommerceML, OData, and others), enabling integration with different 1С versions and external systems without rewriting the core.
-* **Extensibility** – Architecture with hooks and integration points allows external extensions to add any additional logic (e.g., order processing, stock export, price synchronization) without modifying the base code, simplifying updates and customization.
+= Core features =
+* **Flexibility and Adaptability**
+Allows configuring data transformation, filtering, and mapping rules to fit specific business needs, supporting multiple exchange logics within a single installation.
+* **Reliability**
+Built-in error handling, retry mechanisms, and data validation ensure synchronization integrity even under unstable connections or partial failures.
+* **Optimization and Performance**
+Batch processing, asynchronous operations, and efficient memory management minimize latency and ensure stable operation with catalogs of any size, including on budget hosting.
+* **Multiple Supported Protocols**
+Out-of-the-box support for popular exchange formats (CommerceML, OData, and others), enabling integration with different 1С versions and external systems without rewriting the core.
+* **Extensibility**
+Architecture with hooks and integration points allows external extensions to add any additional logic (e.g., order processing, stock export, price synchronization) without modifying the base code, simplifying updates and customization.
 
 Explore all features: [https://wc1c.info/features](https://wc1c.info/features)
 
