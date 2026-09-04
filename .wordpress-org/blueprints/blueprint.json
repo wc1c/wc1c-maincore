@@ -1,12 +1,5 @@
 {
   "landingPage": "/wp-admin/admin.php?page=wc1c",
-  "preferredVersions": {
-    "php": "8.3",
-    "wp": "latest"
-  },
-  "phpExtensionBundles": [
-    "kitchen-sink"
-  ],
   "steps": [
     {
       "step": "defineWpConfigConsts",
@@ -18,6 +11,16 @@
       "step": "login",
       "username": "admin",
       "password": "password"
+    },
+    {
+      "step": "installPlugin",
+      "pluginData": {
+        "resource": "wordpress.org/plugins",
+        "slug": "woocommerce"
+      },
+      "options": {
+        "activate": true
+      }
     },
     {
       "step": "installPlugin",
@@ -35,6 +38,24 @@
         "blogname": "WC1C",
         "blogdescription": "Preview WC1C!"
       }
+    },
+    {
+      "step": "setSiteOptions",
+      "options": {
+        "woocommerce_onboarding_profile": {
+          "completed": true
+        }
+      }
+    },
+    {
+      "step": "mkdir",
+      "path": "/wordpress/wp-content/mu-plugins"
+    },
+    {
+      "step": "writeFile",
+      "path": "/wordpress/wp-content/mu-plugins/addFilter-6.php",
+      "data": "<?php add_filter( 'woocommerce_prevent_automatic_wizard_redirect', '__return_true' );"
     }
-  ]
+  ],
+  "$schema": "https://playground.wordpress.net/blueprint-schema.json"
 }
