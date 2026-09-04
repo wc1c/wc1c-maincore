@@ -15,19 +15,39 @@ Integration between WooCommerce and 1C products (via multiple connections, forma
 Seamlessly integrate WooCommerce with 1C products via CommerceML and other protocols, ensuring flexible data exchange for all business data.
 Designed to handle complex synchronization scenarios while maintaining high performance.
 
-= Core features =
-* **Flexibility and Adaptability**
-Allows configuring data transformation, filtering, and mapping rules to fit specific business needs, supporting multiple exchange logics within a single installation.
-* **Reliability**
-Built-in error handling, retry mechanisms, and data validation ensure synchronization integrity even under unstable connections or partial failures.
-* **Optimization and Performance**
-Batch processing, asynchronous operations, and efficient memory management minimize latency and ensure stable operation with catalogs of any size, including on budget hosting.
-* **Multiple Supported Protocols**
-Out-of-the-box support for popular exchange formats (CommerceML, OData, and others), enabling integration with different 1С versions and external systems without rewriting the core.
-* **Extensibility**
-Architecture with hooks and integration points allows external extensions to add any additional logic (e.g., order processing, stock export, price synchronization) without modifying the base code, simplifying updates and customization.
+> The plugin is absolutely free for everyone under the GPLv3 license or later version.
+> This is a free full-featured version that is maintained by the WC1C team and contributors.
+> The WordPress.org support forum is not affiliated with the WC1C team and is not visited by them; for communication and productive work with the WC1C team, use their services.
+> The WC1C team develops this free plugin based on the needs of users of their services and is the main contributor.
 
-Explore all features: [https://wc1c.info/features](https://wc1c.info/features)
+* **Flexibility and Adaptability** > Allows configuring data transformation, filtering, and mapping rules to fit specific business needs, supporting multiple exchange logics within a single installation.
+* **Reliability** > Built-in error handling, retry mechanisms, and data validation ensure synchronization integrity even under unstable connections or partial failures.
+* **Optimization and Performance** > Batch processing, asynchronous operations, and efficient memory management minimize latency and ensure stable operation with catalogs of any size, including on budget hosting.
+* **Multiple Supported Protocols** > Out-of-the-box support for popular exchange formats (CommerceML, OData, and others), enabling integration with different 1С versions and external systems without rewriting the core.
+* **Extensibility** > Architecture with hooks and integration points allows external extensions to add any additional logic (e.g., order processing, stock export, price synchronization) without modifying the base code, simplifying updates and customization.
+
+Explore all sorted features: [https://wc1c.info/features](https://wc1c.info/features)
+
+= How it works =
+1. Install and activate WC1C.
+2. Create a new configuration for your 1C connection.
+3. Select the required exchange schema.
+4. Configure mapping, filtering, and transformation rules if needed.
+5. Make settings in 1C products on the exchange scheme you have selected on the website.
+6. Monitor the result and adjust settings before regular synchronization.
+
+= Protocols and formats =
+Out of the box, WC1C supports:
+* CommerceML;
+The plugin architecture also allows extending exchange support to custom protocols. Actual compatibility depends on your 1C configuration and exchange schema.
+
+= Extensibility for developers =
+The plugin architecture provides integration points for custom development:
+* use WordPress actions and filters;
+* add external extensions without modifying the core;
+* extend exchange protocols;
+* implement custom order, stock, price, or catalog logic where required.
+This approach keeps the core stable and makes updates safer.
 
 = Trademarks =
 "WordPress","Woo", "WooCommerce" and "1C" are trademarks of their respective owners.
