@@ -1,7 +1,7 @@
 {
   "name": "wc1c/wc1c-maincore",
-  "description": "Integration of WooCommerce with 1C products (different configurations)",
-  "type": "project",
+  "description": "Integration between WooCommerce and 1C products (via multiple connections, formats, plugin extensions, and protocols).",
+  "type": "wordpress-plugin",
   "minimum-stability": "stable",
   "license": "GPL-3.0-or-later",
   "homepage": "https://wc1c.info",
