@@ -77,66 +77,61 @@ Want to help translate WC1C into your language? You can contribute via the [Word
 == Frequently Asked Questions ==
 
 = What versions of 1C are supported? =
-The plugin supports any version of 1C:Enterprise that features integration capabilities with online stores (e.g., CommerceML or OData). The exact level of support depends on the specific exchange scheme selected on the website and the underlying 1C configuration.
+The plugin supports 1C:Enterprise and newer that provide standard online-store exchange (CommerceML). The exact level of support depends on the exchange schema selected on the website and your 1C configuration.
 
-= Does the plugin work with 1C:Uniftrade (UNF), 1C:Trade Management (UT), 1C:Accounting, or 1C:ERP? =
-Yes, the plugin works with any 1C configuration that provides a standard exchange scheme for online stores. Compatibility depends on the schema version exposed by your 1C installation, not on the configuration name.
+= Does the plugin work with 1C:UNF, 1C:UT, 1C:Accounting, or 1C:ERP? =
+Yes. The plugin works with any 1C configuration that provides a standard online-store exchange schema. Compatibility depends on the schema version exposed by your 1C installation, not on the configuration name.
 
 = Is the plugin compatible with WooCommerce High-Performance Order Storage (HPOS)? =
-Yes. WC1C fully supports HPOS in order exchange schemas provided by the WC1C team and is regularly tested against recent WooCommerce versions.
+Yes. WC1C fully supports HPOS in order exchange schemas and is regularly tested against recent WooCommerce versions (up to 11.0). WooCommerce is a required plugin.
 
 = Does the plugin work on shared hosting? =
-It can, but stability depends on your hosting's PHP limits (memory_limit, max_execution_time, max_input_time). For catalogs over several thousand products, we recommend VPS or dedicated hosting with tuned PHP settings.
+It can, but stability depends on your hosting's PHP limits (`memory_limit`, `max_execution_time`, `max_input_time`). For catalogs over several thousand products we recommend VPS or dedicated hosting with tuned PHP settings.
 
 = What PHP settings affect exchange stability? =
-The most important are `memory_limit` (256 MB or higher recommended), `max_execution_time` (at least 120 s for large catalogs), `post_max_size`, `upload_max_filesize`, and available RAM. With excessively low limits, exchange with large catalogs may silently fail.
+The most important are `memory_limit` (256 MB or higher recommended), `max_execution_time` (at least 120 s for large catalogs), `post_max_size`, `upload_max_filesize` (for large CommerceML files), and available RAM. With excessively low limits, exchange may silently fail.
 
 = Are product images synchronized? =
 Image synchronization depends on the exchange schema. Some schemas deliver images out of the box, others require extensions or custom field mapping.
 
 = Are product variations and attributes supported? =
-Yes, variations and attributes can be processed, but support depends on how your 1C configuration exposes them through the selected schema. Complex catalogs may require additional extensions or custom mapping rules.
+Yes, variations and attributes (categories, properties) can be processed, but support depends on how your 1C configuration exposes them through the selected schema. Complex catalogs may require additional extensions or custom mapping rules.
 
-= What happens to products that were deleted in 1C? =
+= What happens to products deleted in 1C? =
 This behavior is configurable. By default, products imported from 1C are not automatically deleted from WooCommerce to prevent accidental data loss. Cleanup logic can be enabled via exchange schema settings or cleanup extensions.
 
-= Can I sync only prices or only stock levels without re-importing the whole catalog? =
-Yes. Depending on the exchange schema and installed extensions, you can perform selective updates. For example, you can update only prices or only stock levels, as well as apply conditional logic to update specific product attributes.
+= Can I sync only prices or only stock levels? =
+Yes. Depending on the exchange schema and installed extensions, you can perform selective updates. For example, update only prices or only stock levels, as well as apply conditional logic to specific product attributes.
 
-= What happens to existing WooCommerce products during the first import? =
-By default, products are matched by their 1C identifier. If a matching identifier exists, the product is updated; otherwise, a new product is created. Mapping rules can be adjusted per configuration.
-For advanced matching of existing products, a dedicated extension is available.
+= How are existing products matched during import? =
+By default, products are matched by their 1C identifier. If a matching identifier exists, the product is updated; otherwise, a new product is created. Mapping rules can be adjusted per configuration. For advanced matching, a dedicated extension is available.
+
+= What CommerceML versions are supported? =
+The core handles CommerceML 2.03 and compatible variants, depending on the exchange schema used. The `ProductsCML` schema is included in the core.
+
+= Which exchange protocols are supported? =
+CommerceML is supported out of the box. OData is planned for future versions. The architecture also allows extending support to custom protocols.
 
 = Where can I view exchange logs? =
-Exchange logs are accessible via FTP on the server. They show each step of the synchronization, errors, and performance statistics.
-For more convenient log viewing without FTP manipulation, you can use the corresponding extension that displays logs in the WordPress admin panel.
+Logs are stored on the server in the WC1C directory and accessible via FTP. They show each step of the synchronization, errors, and performance statistics. A dedicated extension can display logs directly in the WordPress admin panel.
 
 = What should I do if the exchange fails or hangs? =
-Check the logs for error messages. The most common causes are PHP limit issues, unstable connection to 1C, or malformed data from the 1C schema. Most failures can be resolved by adjusting PHP limits or fixing the source data in 1C.
+Check the logs for error messages. The most common causes are PHP limit issues, unstable connection to 1C, or malformed data from the 1C schema. Most failures are resolved by adjusting PHP limits or fixing source data in 1C. The plugin also includes built-in retry and resume mechanisms for transient failures.
 
-= Does the plugin retry failed exchanges? =
-Yes. The plugin includes built-in retry mechanisms for transient failures, such as connection drops or temporary errors on the 1C side. Persistent errors are logged for manual review.
-
-= Can I resume an interrupted exchange? =
-Yes. The plugin supports resumable exchanges where the schema allows. Partial imports are tracked, so restarting does not require reprocessing the entire catalog (depending on the schema used).
-
-= Does this plugin support order synchronization? =
+= Does the plugin support order synchronization? =
 Order processing is not included in the core but can be added via external extensions using the built-in extension capabilities of the core.
 
 = Can I export products from WooCommerce to 1C? =
 The core currently supports one-way import from 1C to WooCommerce. Reverse export is available through extensions. Support for this functionality is planned for future core versions.
 
-= Which exchange protocols are supported? =
-CommerceML is supported out of the box, with the ability to extend to custom protocols. Support for additional protocols is planned for future versions.
-
 = Is the plugin really free? Where is the catch? =
 WC1C is 100% free under GPLv3. The core plugin is fully functional and does not require paid add-ons. The WC1C team offers paid services, extensions, and support for users who need professional help or advanced scenarios.
 
 = Missing a feature? How can I add it? =
-First, check the catalog of ready-made extensions, for example, on the WC1C team's website. If no suitable add-on exists, you can develop a custom solution or order professional services from any provider.
+First, check the [catalog of ready-made extensions](https://wc1c.info/market). If no suitable add-on exists, you can develop a custom solution or order professional services from any provider.
 
 = Where can I get professional support or custom development? =
-The WordPress.org support forum is not affiliated with the WC1C team and is not monitored by them. For direct communication with the core developers, paid support, custom integration, or audit services, use the official website: https://wc1c.info
+The WordPress.org support forum is not affiliated with the WC1C team and is not monitored by them. For direct communication with the core developers, paid support, custom integration, or audit services, use the [official website](https://wc1c.info).
 
 == Screenshots ==
 
