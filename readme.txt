@@ -40,7 +40,8 @@ Explore all sorted features on [wc1c.info/features](https://wc1c.info/features) 
 = Protocols and formats =
 Out of the box, WC1C supports:
 
-* CommerceML;
+* CommerceML — the standard exchange format for online stores.
+* OData — planned for future versions.
 
 The plugin architecture also allows extending exchange support to custom protocols. Actual compatibility depends on your 1C configuration and exchange schema.
 
